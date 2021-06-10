@@ -5,7 +5,28 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
-import { MainslideComponent } from './components/mainslide/mainslide.component';
+import {RouterModule, Routes} from "@angular/router";
+import { ContactComponent } from './components/contact/contact.component';
+import { ProductdetailComponent } from './components/productdetail/productdetail.component';
+
+
+const appRoutes : Routes =[
+  {
+    path: "",
+    component : HomeComponent
+  },
+  {
+    path: "contact",
+    component:ContactComponent
+  },
+  {
+    path:"productdetail",
+    component:ProductdetailComponent
+  }
+
+]
+
+
 
 @NgModule({
   declarations: [
@@ -13,10 +34,12 @@ import { MainslideComponent } from './components/mainslide/mainslide.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    MainslideComponent
+    ContactComponent,
+    ProductdetailComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
