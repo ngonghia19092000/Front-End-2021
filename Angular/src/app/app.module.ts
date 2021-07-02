@@ -8,6 +8,10 @@ import { HomeComponent } from './components/home/home.component';
 import {RouterModule, Routes} from "@angular/router";
 import { ContactComponent } from './components/contact/contact.component';
 import { ProductdetailComponent } from './components/productdetail/productdetail.component';
+import { ProductsComponent } from './components/products/products.component';
+import { CartComponent } from './components/cart/cart.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const appRoutes : Routes =[
@@ -22,7 +26,25 @@ const appRoutes : Routes =[
   {
     path:"productdetail",
     component:ProductdetailComponent
+  },{
+  path:"products",
+    component:ProductsComponent
   }
+  ,
+  {
+    path:"my-account",
+    component:MyAccountComponent
+  },
+  {
+    path:"cart",
+    component:CartComponent
+  }
+  ,
+  {
+    path:"login",
+    component:LoginComponent
+  },
+
 
 ]
 
@@ -36,6 +58,10 @@ const appRoutes : Routes =[
     HomeComponent,
     ContactComponent,
     ProductdetailComponent,
+    ProductsComponent,
+    CartComponent,
+    MyAccountComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
