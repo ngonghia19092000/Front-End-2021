@@ -24,7 +24,7 @@ const appRoutes : Routes =[
     component:ContactComponent
   },
   {
-    path:"productdetail",
+    path:"productdetail/:id",
     component:ProductdetailComponent
   },{
   path:"products",

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Routes} from "@angular/router";
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
