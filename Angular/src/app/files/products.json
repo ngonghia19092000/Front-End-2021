@@ -1,0 +1,11 @@
+
+
+  [
+    {"id": "1","img": "./assets/img/product-1.jpg","name": "Nón Trơn","pricesale": 100000,"price": 150000},
+    {"id": "2","img": "./assets/img/product-2.jpg","name": "Nón Trơn","pricesale": 110000,"price": 160000},
+    {"id": "3","img": "./assets/img/product-3.jpg","name": "Nón Trơn","pricesale": 120000,"price": 170000},
+    {"id": "4","img": "./assets/img/product-4.jpg","name": "Nón Trơn","pricesale": 130000,"price": 180000},
+    {"id": "5","img": "./assets/img/product-5.jpg","name": "Nón Trơn","pricesale": 140000,"price": 190000},
+    {"id": "6","img": "./assets/img/product-6.jpg","name": "Nón Trơn","pricesale": 150000,"price": 200000}
+  ]
+
