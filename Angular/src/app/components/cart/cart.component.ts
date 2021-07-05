@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Product} from "../../models/product";
+import {MessengerService} from "../../services/messenger.service";
+import {CartService} from "../../services/cart.service";
+import {CartItem} from "../../models/cart-item";
 
 @Component({
   selector: 'app-cart',
@@ -6,10 +10,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  cartItems = [];
 
-  constructor() { }
+  cartTotal = 0
 
-  ngOnInit(): void {
+  feeshippcost = 0
+
+  constructor(
+    private msg: MessengerService,
+    private cartService: CartService
+  ) { }
+
+  ngOnInit() {
+    this.handleSubscription();
+    this.loadCartItems();
   }
 
+  handleSubscription() {
+    // @ts-ignore
+    this.msg.getMsg().subscribe((product: Product) => {
+      this.loadCartItems();
+    })
+  }
+
+  loadCartItems() {
+    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      // @ts-ignore
+      this.cartItems = items;
+      this.calcCartTotal();
+      this.shippcost();
+    })
+  }
+
+  calcCartTotal() {
+    this.cartTotal = 0
+    this.cartItems.forEach(item => {
+      // @ts-ignore
+      this.cartTotal += (item.qty * item.price)
+    })
+  }
+  shippcost(){
+    this.feeshippcost=0
+    this.cartItems.forEach(item=>{
+      if(this.cartItems.length>0)
+      this.feeshippcost+=24000
+    })
+  }
 }
