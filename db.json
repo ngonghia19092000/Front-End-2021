@@ -1,0 +1,182 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    },
+    {
+      "id": 2,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    },
+    {
+      "id": 3,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    },
+    {
+      "id": 4,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    },
+    {
+      "id": 5,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    },
+    {
+      "id": 6,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    },
+    {
+      "id": 7,
+      "productname": "Nón bảo hiểm",
+      "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+      "pricesale": 120000,
+      "price": 150000,
+      "description": "",
+      "manufacturer": ""
+    }
+  ],
+  "cart": [
+    {
+      "product": {
+        "id": 1,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 1
+    },
+    {
+      "product": {
+        "id": 2,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 2
+    },
+    {
+      "product": {
+        "id": 1,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 3
+    },
+    {
+      "product": {
+        "id": 2,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 4
+    },
+    {
+      "product": {
+        "id": 1,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 5
+    },
+    {
+      "product": {
+        "id": 1,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 6
+    },
+    {
+      "product": {
+        "id": 3,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 7
+    },
+    {
+      "product": {
+        "id": 1,
+        "productname": "Nón bảo hiểm",
+        "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
+        "pricesale": 120000,
+        "price": 150000,
+        "description": "",
+        "manufacturer": ""
+      },
+      "id": 8
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

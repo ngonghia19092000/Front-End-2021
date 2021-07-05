@@ -1,0 +1,19 @@
+
+
+  <td>
+    <div class="img">
+    <img  alt="Image" [src]="cartItem.img">
+      <p>{{ cartItem.productName }}</p>
+    </div>
+  </td>
+  <td>{{cartItem.price|currency:'VND'}}</td>
+  <td>
+    <div class="qty">
+      <button class="btn-minus"><i class="fa fa-minus"></i></button>
+      <input type="text" value="1">
+      <button class="btn-plus"><i class="fa fa-plus"></i></button>
+    </div>
+  </td>
+  <td>{{cartItem.price*cartItem.qty |currency:'VND'}} </td>
+  <td><button><i class="fa fa-trash"></i></button></td>
+

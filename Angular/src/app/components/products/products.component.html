@@ -48,32 +48,8 @@
             </div>
           </div>
 
-          <div class="col-md-4" *ngFor="let itemPro of productslist">
-            <div class="product-item">
-              <div class="product-title">
-                <a routerLink="/productdetail/{{itemPro.id}}">{{itemPro.name}}</a>
-                <div class="ratting">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <div class="product-image">
-                <a routerLink="/productdetail/{{itemPro.id}}">
-                  <img src="{{itemPro.img}}" alt="Product Image">
-                </a>
-                <div class="product-action">
-                  <a href="#"><i class="fa fa-cart-plus"></i></a>
-                  <a routerLink="/productdetail/{{itemPro.id}}"><i class="fa fa-search"></i></a>
-                </div>
-              </div>
-              <div class="product-price">
-                <h3>{{itemPro.pricesale}}<span>vnđ</span></h3>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-              </div>
-            </div>
+          <div class="col-md-4" *ngFor="let product of productList">
+<app-product-item [productItem]="product"></app-product-item>
           </div>
         </div>
 
