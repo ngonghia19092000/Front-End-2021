@@ -474,8 +474,8 @@ body{
 }
 
 .btn:hover,
-.btn:active,
-.btn:focus {
+.btn:active
+ {
   color: #ffffff;
   background: #00AEC9;
   box-shadow: none;

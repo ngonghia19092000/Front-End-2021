@@ -13,8 +13,9 @@ import { CartComponent } from './components/cart/cart.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { LoginComponent } from './components/login/login.component';
 // import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
-import { ProductItemComponent } from './components/products/product-item/product-item.component';
-import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
+// import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
+
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
@@ -68,15 +69,12 @@ const appRoutes : Routes =[
     CartComponent,
     MyAccountComponent,
     LoginComponent,
-    // CartItemComponent,
-    ProductItemComponent,
-    CartItemComponent,
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
