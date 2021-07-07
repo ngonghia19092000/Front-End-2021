@@ -282,3 +282,110 @@
   margin-right: 5px;
 }
 
+
+/**********************************/
+/******** Pagination CSS ********/
+/**********************************/
+.my-pagination{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.0246rem;
+}
+
+.my-pagination /deep/ .ngx-pagination {
+
+  margin-left: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+  border: 1px solid #353535;
+  border-radius: 0.25rem;
+
+}
+.my-pagination /deep/ .ngx-pagination::before,
+
+.my-pagination /deep/ .ngx-pagination::after {
+  content: ' ';
+  display: table;
+}
+
+.my-pagination /deep/ .ngx-pagination::after {
+  clear: both;
+}
+
+.my-pagination /deep/ .ngx-pagination li {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  margin-right: 0.0625rem;
+  border-radius: 0;
+}
+.my-pagination /deep/ .ngx-pagination li {
+  display: inline-block;
+  margin: 0;
+
+
+}
+
+.my-pagination /deep/ .ngx-pagination a,  .ngx-pagination button {
+  color: #0a0a0a;
+  display: block;
+  padding: .5rem .75rem;
+}
+.my-pagination /deep/ .ngx-pagination a:hover,
+.my-pagination /deep/ .ngx-pagination button:hover {
+  background: #00AEC9;
+  color: white;
+}
+.my-pagination /deep/ .ngx-pagination .current {
+  padding: .5rem .75rem;
+  background: #00AEC9;
+  color: white;
+  cursor: default;
+  margin: 0;
+}
+.my-pagination /deep/ .ngx-pagination .disabled {
+  padding: .5rem .75rem;
+  color: #cacaca;
+  cursor: default;
+
+}
+.my-pagination /deep/ .ngx-pagination .disabled:hover {
+  background: transparent;
+}
+.my-pagination /deep/ .ngx-pagination a, .ngx-pagination button {
+  cursor: pointer;
+}
+
+.my-pagination /deep/ .ngx-pagination .pagination-previous a::before,
+.my-pagination /deep/ .ngx-pagination .pagination-previous.disabled::before {
+  display: inline-block;
+}
+
+.my-pagination /deep/ .ngx-pagination .pagination-next a::after,
+.my-pagination /deep/ .ngx-pagination .pagination-next.disabled::after {
+  display: inline-block;
+  margin-left: 0.5rem;
+  border: 0;
+}
+
+.my-pagination /deep/ .ngx-pagination .show-for-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.my-pagination /deep/ .ngx-pagination .small-screen {
+  display: none; }
+
+@media screen and (max-width: 601px) {
+  .my-pagination /deep/ .ngx-pagination.responsive .small-screen {
+    display: inline-block;
+  }
+  .my-pagination /deep/ .ngx-pagination.responsive li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+    display: none;
+  }
+}
+
+

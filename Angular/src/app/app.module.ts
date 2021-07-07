@@ -16,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 // import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 
 import {NgxPaginationModule} from "ngx-pagination";
+import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -74,7 +76,10 @@ const appRoutes : Routes =[
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    NgxPaginationModule
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

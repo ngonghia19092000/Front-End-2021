@@ -9,7 +9,7 @@ import {Product} from "../../models/product";
 })
 export class ProductsComponent implements OnInit {
   productList:Product[]=[];
-
+  searchedKeyword: string = "";
   totalLength:any;
   page:number = 1;
   constructor(private productService:ProductService) {}
@@ -20,6 +20,8 @@ export class ProductsComponent implements OnInit {
     this.totalLength = this.productList.length;
     })
   }
+
+
 
 
 
