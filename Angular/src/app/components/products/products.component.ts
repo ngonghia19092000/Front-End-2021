@@ -21,6 +21,35 @@ export class ProductsComponent implements OnInit {
     })
   }
 
+  sortByPriceT(){
+    console.log('sort')
+    this.productList.sort((a, b) =>{
+      // @ts-ignore
+      if (a.pricesale < b.pricesale){
+        return 1;
+      }
+      // @ts-ignore
+      if (a.pricesale > b.pricesale){
+        return -1;
+      }
+      return 0
+    });
+  }
+
+  sortByPriceG(){
+    console.log('sort')
+    this.productList.sort((a, b) =>{
+      // @ts-ignore
+      if (a.pricesale > b.pricesale){
+        return 1;
+      }
+      // @ts-ignore
+      if (a.pricesale < b.pricesale){
+        return -1;
+      }
+      return 0
+    });
+  }
 
 
 

@@ -8,7 +8,8 @@
     "pricesale": 100000,
     "price": 150000,
     "description": "Nón xịn của Bảo kaka",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "2",
@@ -17,7 +18,8 @@
     "pricesale": 110000,
     "price": 150000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "3",
@@ -26,7 +28,8 @@
     "pricesale": 120000,
     "price": 160000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "4",
@@ -35,7 +38,8 @@
     "pricesale": 130000,
     "price": 160000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "5",
@@ -44,7 +48,8 @@
     "pricesale": 140000,
     "price": 170000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "6",
@@ -53,7 +58,8 @@
     "pricesale": 150000,
     "price": 190000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "7",
@@ -62,79 +68,88 @@
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "8",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 8",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "9",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 9",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "10",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 10",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "11",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 11",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "12",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 12",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "13",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 13",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "14",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 14",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   },
   {
     "id": "15",
-    "productname": "Nón bảo hiểm - 7",
+    "productname": "Nón bảo hiểm - 15",
     "img": "https://nontrum.vn/wp-content/uploads/2019/03/dsc3850-768x768.jpg",
     "pricesale": 160000,
     "price": 200000,
     "description": "",
-    "manufacturer": ""
+    "manufacturer": "",
+    "listSize": ["S","M","L"]
   }
 ]
 
