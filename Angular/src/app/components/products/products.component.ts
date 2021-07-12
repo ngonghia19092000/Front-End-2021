@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
   totalLength:any;
   page:number = 1;
   constructor(private productService:ProductService) {}
-
+  pricefill:number = 0;
   ngOnInit() {
     this.productService.getProducts().subscribe((products:Product[]) => {
     this.productList=products;

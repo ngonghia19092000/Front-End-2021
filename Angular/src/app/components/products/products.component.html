@@ -16,7 +16,7 @@
                 <div class="col-md-4">
                   <div class="product-short">
                     <div class="dropdown">
-                      <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
+                      <div class="dropdown-toggle" data-toggle="dropdown">Price</div>
                       <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" (click)="sortByPriceG()">Price <i class="fa fa-arrow-circle-up"></i></a>
                         <a class="dropdown-item" (click)="sortByPriceT()">Price <i class="fa fa-arrow-circle-down"></i></a>
@@ -27,11 +27,12 @@
                 <div class="col-md-4">
                   <div class="product-price-range">
                     <div class="dropdown">
-                      <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
+                      <div class="dropdown-toggle" data-toggle="dropdown">Price range</div>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item">0₫ - 200.000₫</a>
-                        <a class="dropdown-item">200.000₫ - 500.000₫</a>
-                        <a class="dropdown-item"> > 500.000₫</a>
+                        <a class="dropdown-item"(click)="pricefill = 0">All</a>
+                        <a class="dropdown-item" (click)="pricefill = 1">0₫ - 200.000₫</a>
+                        <a class="dropdown-item"(click)="pricefill = 2">200.000₫ - 500.000₫</a>
+                        <a class="dropdown-item" (click)="pricefill = 3"> > 500.000₫</a>
                       </div>
                     </div>
                   </div>
@@ -40,7 +41,7 @@
             </div>
           </div>
 
-          <div class="col-md-4" *ngFor="let product of productList | paginate:{itemsPerPage:6,currentPage:page,totalItems:totalLength} | filter:searchedKeyword">
+          <div class="col-md-4" *ngFor="let product of productList  | filter:searchedKeyword |pricefilter:pricefill | paginate:{itemsPerPage:6,currentPage:page,totalItems:totalLength}">
 <!--          <app-product-item [productItem]="product"></app-product-item>-->
             <div class="product-item">
               <div class="product-title">

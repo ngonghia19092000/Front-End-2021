@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {FormsModule} from "@angular/forms";
+import { PricefilterPipe } from './services/filter/pricefilter.pipe';
 
 
 
@@ -71,6 +72,7 @@ const appRoutes : Routes =[
     CartComponent,
     MyAccountComponent,
     LoginComponent,
+    PricefilterPipe,
 
   ],
   imports: [
