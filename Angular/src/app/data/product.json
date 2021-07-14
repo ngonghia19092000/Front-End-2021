@@ -1192,7 +1192,7 @@
   {
     "id": 98,
     "productname": "MŨ NỬA ĐẦU SUNDA 135D ĐEN NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/06/Sunda-135D-6-247x247.jpg",
+    "img": "assets/img/Sunda-135D-6-247x247.jpg",
     "price": 450000 ,
     "pricesale": 350000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1206,7 +1206,7 @@
   {
     "id": 99,
     "productname": "MŨ NỬA ĐẦU SUNDA 135D HỒNG PHẤN",
-    "img": "https://hifa.vn/wp-content/uploads/2021/06/Sunda-135D-3-247x247.jpg",
+    "img": "assets/img/Sunda-135D-3-247x247.jpg",
     "price": 450000 ,
     "pricesale": 350000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1220,7 +1220,7 @@
   {
     "id": 100,
     "productname": "MŨ NỬA ĐẦU NAPOLI PUG VÀNG NGHỆ",
-    "img": "https://hifa.vn/wp-content/uploads/2020/07/Napoli-12-3-247x247.jpg",
+    "img": "assets/img/Napoli-12-3-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1233,7 +1233,7 @@
   {
     "id": 100,
     "productname": "MŨ NỬA ĐẦU NAPOLI PUG ĐEN BÓNG",
-    "img": "https://hifa.vn/wp-content/uploads/2020/09/Napoli-pug-3-247x247.jpg",
+    "img": "assets/img/Napoli-pug-3-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1245,7 +1245,7 @@
   {
     "id": 101,
     "productname": "MŨ NỬA ĐẦU NAPOLI PUG ĐEN NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2020/07/Napoli-12-11-247x247.jpg",
+    "img": "assets/img/Napoli-12-11-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "manufaturer": "Chuẩn QCVN",
@@ -1258,7 +1258,7 @@
   {
     "id": 102,
     "productname": "MŨ NỬA ĐẦU NAPOLI PUG TRẮNG",
-    "img": "https://hifa.vn/wp-content/uploads/2020/07/Napoli-12-8-247x247.jpg",
+    "img": "assets/img/Napoli-12-8-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "manufaturer": "Chuẩn QCVN",
@@ -1271,7 +1271,7 @@
   {
     "id": 103,
     "productname": "NÓN XE ĐẠP POC EVO VÂN CARBON",
-    "img": "https://hifa.vn/wp-content/uploads/2021/03/Non-xe-dap-poc-evo-18-247x247.jpg",
+    "img": "assets/img/Non-xe-dap-poc-evo-18-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Đúng như tên gọi Nón Poc EVO được thiết kế với phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. Và có form nón gọn nhẹ hơn so với người anh POC 02 của nó.",
@@ -1283,7 +1283,7 @@
   {
     "id": 104,
     "productname": "MŨ NỬA ĐẦU ASIA MT-106K RÊU NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/03/asia-106k-1-247x247.jpg",
+    "img": "assets/img/asia-106k-1-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1296,7 +1296,7 @@
   {
     "id": 105,
     "productname": "MŨ NỬA ĐẦU ASIA MT-106K ĐEN NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/03/asia-106k-3-247x247.jpg",
+    "img": "assets/img/asia-106k-3-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1309,7 +1309,7 @@
   {
     "id": 106,
     "productname": "NÓN XE ĐẠP POC FALCON XÁM BÓNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Falcol-17-247x247.jpg",
+    "img": "assets/img/Falcol-17-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Đúng như tên gọi Nón Poc Falcon Xám Bóng có tạo hình được lấy cảm hứng từ chim ưng, cá tính và táo bạo. Poc Falcon là nón bảo hiểm thể thao được sử dụng trong các bộ môn như xe đạp, skateboard, patin… với bộ sưu tập màu sắc phong phú và tem tổ ong độc đáo để bạn lựa chọn.",
@@ -1321,7 +1321,7 @@
   {
     "id": 107,
     "productname": "NÓN XE ĐẠP POC FALCON TEM XÁM BÓNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Falcol-29-247x247.jpg",
+    "img": "assets/img/Falcol-29-247x247.jpg",
     "price": 300000 ,
     "pricesale": 200000 ,
     "description": "Đúng như tên gọi Nón Poc Falcon Tem Xám Bóng có tạo hình được lấy cảm hứng từ chim ưng, cá tính và táo bạo. Poc Falcon là nón bảo hiểm thể thao được sử dụng trong các bộ môn như xe đạp, skateboard, patin… với bộ sưu tập màu sắc phong phú và tem tổ ong độc đáo để bạn lựa chọn.",
@@ -1333,7 +1333,7 @@
   {
     "id": 108,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN XÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0001_POC-P02-43-247x247.jpg",
+    "img": "assets/img/poc-02_0001_POC-P02-43-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Xám với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1345,7 +1345,7 @@
   {
     "id": 109,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN VÀNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0010_POC-P02-31-247x247.jpg",
+    "img": "assets/img/poc-02_0010_POC-P02-31-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Vàng với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1357,7 +1357,7 @@
   {
     "id": 110,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN ĐỎ",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0021_POC-P02-9-247x247.jpg",
+    "img": "assets/img/poc-02_0021_POC-P02-9-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Đỏ với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1369,7 +1369,7 @@
   {
     "id": 111,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN DẠ QUANG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0024_POC-P02-4-247x247.jpg",
+    "img": "assets/img/poc-02_0024_POC-P02-4-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Dạ Quang với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1381,7 +1381,7 @@
   {
     "id": 112,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN CAM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0017_POC-P02-15-247x247.jpg",
+    "img": "assets/img/poc-02_0017_POC-P02-15-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Cam với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1393,7 +1393,7 @@
   {
     "id": 113,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN BÓNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0016_POC-P02-17.1-247x247.jpg",
+    "img": "assets/img/poc-02_0016_POC-P02-17.1-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Bóng với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1405,7 +1405,7 @@
   {
     "id": 114,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN XANH DƯƠNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0007_POC-P02-36-1-247x247.jpg",
+    "img": "assets/img/poc-02_0007_POC-P02-36-1-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Đen Xanh Dương với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1417,7 +1417,7 @@
   {
     "id": 115,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN XÁM XI MĂNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0005_POC-P02-39-247x247.jpg",
+    "img": "assets/img/poc-02_0005_POC-P02-39-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 Xám Xi Măng với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1429,7 +1429,7 @@
   {
     "id": 116,
     "productname": "NÓN XE ĐẠP POC 02 ĐEN XANH NGỌC",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-02_0013_POC-P02-25-247x247.jpg",
+    "img": "assets/img/poc-02_0013_POC-P02-25-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón Xe Đạp Poc 02 với trọng lượng khá lý tưởng, chỉ nhẹ 285 gram. Phần đuôi nón được tạo hình giống như pô ống xả của các moto phân khối lớn, tạo điểm nhấn táo bạo. POC 02 là nón bảo hiểm được sản xuất chuyên dành cho người chơi thể thao.",
@@ -1441,7 +1441,7 @@
   {
     "id": 117,
     "productname": "NÓN XE ĐẠP POC 01 HOA TUYẾT",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-2_0059_z1993526523764_a66faa7106283697d1b6e23e2378578b-247x247.jpg",
+    "img": "assets/img/poc-2_0059_z1993526523764_a66faa7106283697d1b6e23e2378578b-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón bảo hiểm thể thao POC 01 Vàng Đồng là sản phẩm đầu tiên của thương hiệu POC vừa ra mắt ở thị trường Việt Nam với nhiều mẫu mã nón thể thao đang rất được yêu thích hiện nay. Nón POC 01 được sản xuất dành riêng cho người chơi thể thao hoặc đi xe đạp.",
@@ -1453,7 +1453,7 @@
   {
     "id": 118,
     "productname": "NÓN XE ĐẠP POC 01 VÀNG ĐỒNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-2_0024_z1993526724650_130b08914ca7a403b777073875bc0e3c-247x247.jpg",
+    "img": "assets/img/poc-2_0024_z1993526724650_130b08914ca7a403b777073875bc0e3c-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón bảo hiểm thể thao POC 01 Vàng Đồng là sản phẩm đầu tiên của thương hiệu POC vừa ra mắt ở thị trường Việt Nam với nhiều mẫu mã nón thể thao đang rất được yêu thích hiện nay. Nón POC 01 được sản xuất dành riêng cho người chơi thể thao hoặc đi xe đạp.",
@@ -1465,7 +1465,7 @@
   {
     "id": 119,
     "productname": "NÓN XE ĐẠP POC 01 TÍM SPECIAL",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-2_0022_z1993526724658_0e6f768f6f16f10a9151a78fefcb9907-247x247.jpg",
+    "img": "assets/img/poc-2_0022_z1993526724658_0e6f768f6f16f10a9151a78fefcb9907-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón bảo hiểm thể thao POC 01 Tím là sản phẩm đầu tiên của thương hiệu POC vừa ra mắt ở thị trường Việt Nam với nhiều mẫu mã nón thể thao đang rất được yêu thích hiện nay. Nón POC 01 được sản xuất dành riêng cho người chơi thể thao hoặc đi xe đạp.",
@@ -1477,7 +1477,7 @@
   {
     "id": 120,
     "productname": "NÓN XE ĐẠP POC 01 ĐEN NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc_0048_z1993526998090_9589844a33da1485c8333cdc3b51494c-247x247.jpg",
+    "img": "assets/img/poc_0048_z1993526998090_9589844a33da1485c8333cdc3b51494c-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón bảo hiểm thể thao POC 01 Đen Nhám là sản phẩm đầu tiên của thương hiệu POC vừa ra mắt ở thị trường Việt Nam với nhiều mẫu mã nón thể thao đang rất được yêu thích hiện nay. Nón POC 01 được sản xuất dành riêng cho người chơi thể thao hoặc đi xe đạp.",
@@ -1489,7 +1489,7 @@
   {
     "id": 121,
     "productname": "NÓN XE ĐẠP POC 01 XÁM NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/poc-2_0012_z1993526739138_140fd142db4455a9dff52b7acc2aff8c-247x247.jpg",
+    "img": "assets/img/poc-2_0012_z1993526739138_140fd142db4455a9dff52b7acc2aff8c-247x247.jpg",
     "price": 680000 ,
     "pricesale": 650000 ,
     "description": "Nón bảo hiểm thể thao POC 01 Xám Nhám là sản phẩm đầu tiên của thương hiệu POC vừa ra mắt ở thị trường Việt Nam với nhiều mẫu mã nón thể thao đang rất được yêu thích hiện nay. Nón POC 01 được sản xuất dành riêng cho người chơi thể thao hoặc đi xe đạp.",
@@ -1501,7 +1501,7 @@
   {
     "id": 122,
     "productname": "NÓN VỎ SÒ SƠN NHÚNG ĐỎ ĐEN",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Non-vo-so-son-nhung-4-247x247.jpg",
+    "img": "assets/img/Non-vo-so-son-nhung-4-247x247.jpg",
     "price": 300000 ,
     "pricesale": 250000 ,
     "manufaturer": "MT của Việt Nam",
@@ -1512,7 +1512,7 @@
   {
     "id": 123,
     "productname": "NÓN VỎ SÒ SƠN NHÚNG ĐỎ NHÁM",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Non-vo-so-son-nhung-2-247x247.jpg",
+    "img": "assets/img/Non-vo-so-son-nhung-2-247x247.jpg",
     "price": 300000 ,
     "pricesale": 250000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
@@ -1524,7 +1524,7 @@
   {
     "id": 124,
     "productname": "MŨ NỬA ĐẦU BULLDOG PUG XÁM XI MĂNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Bulldog-bug-5-247x247.jpg",
+    "img": "assets/img/Bulldog-bug-5-247x247.jpg",
     "price": 300000 ,
     "pricesale": 250000 ,
     "description": "Với những ai thường xuyên di chuyển trong khu vực nội thành và đang tìm cho mình chiếc mũ bảo hiểm với thiết kế cá tính, thanh thoát và gọn gàng nhưng vẫn đảm bảo an toàn thì mũ bảo hiểm 1/2 Bulldog Pug chính là ứng cử viên sáng giá.",
@@ -1536,7 +1536,7 @@
   {
     "id": 125,
     "productname": "MŨ NỬA ĐẦU BULLDOG PUG VÀNG BÓNG",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Bulldog-bug-2-247x247.jpg",
+    "img": "assets/img/Bulldog-bug-2-247x247.jpg",
     "price": 300000 ,
     "pricesale": 250000 ,
     "description": "Với những ai thường xuyên di chuyển trong khu vực nội thành và đang tìm cho mình chiếc mũ bảo hiểm với thiết kế cá tính, thanh thoát và gọn gàng nhưng vẫn đảm bảo an toàn thì mũ bảo hiểm 1/2 Bulldog Pug chính là ứng cử viên sáng giá.",
@@ -1548,7 +1548,7 @@
   {
     "id": 126,
     "productname": "MŨ NỬA ĐẦU BULLDOG PUG XANH NHẠT",
-    "img": "https://hifa.vn/wp-content/uploads/2021/01/Bulldog-bug-11-247x247.jpg",
+    "img": "assets/img/Bulldog-bug-11-247x247.jpg",
     "price": 300000 ,
     "pricesale": 250000 ,
     "description": "Với những ai thường xuyên di chuyển trong khu vực nội thành và đang tìm cho mình chiếc mũ bảo hiểm với thiết kế cá tính, thanh thoát và gọn gàng nhưng vẫn đảm bảo an toàn thì mũ bảo hiểm 1/2 Bulldog Pug chính là ứng cử viên sáng giá.",
@@ -1561,7 +1561,7 @@
   {
     "id": 127,
     "productname": "MŨ NỬA ĐẦU BULLDOG GANG ĐỒNG XƯỚC",
-    "img": "https://hifa.vn/wp-content/uploads/2019/04/bulldog-gang-8-247x247.jpg",
+    "img": "assets/img/bulldog-gang-8-247x247.jpg",
     "price": 300000 ,
     "pricesale": 250000 ,
     "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
