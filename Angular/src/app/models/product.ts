@@ -7,11 +7,13 @@ export class Product {
   price:number;
   description:string;
   manufacturer:string;
-  listSize:[];
+  listsize:[];
+  listcolor:[];
+  category:string;
 
 
   constructor(id: number, productname: string, img: string, pricesale: number, price: number,
-              description: string, manufacturer: string,listSize:Array<string>) {
+              description: string, manufacturer: string,listsize:Array<string>, listcolor:Array<string>,category:string) {
 
     this.id = id;
     this.productname = productname;
@@ -20,7 +22,10 @@ export class Product {
     this.price = price;
     this.description = description;
     this.manufacturer = manufacturer;
-    this.listSize = [];
+    this.listsize = [];
+    this.listcolor = [];
+    this.category =category;
+
 
   }
 }

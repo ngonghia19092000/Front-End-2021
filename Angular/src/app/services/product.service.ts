@@ -18,8 +18,8 @@ export class ProductService {
     //TODO: Populate products from an API and return an Observable
     return of(listProducts);
   }
-  //lấy sản theo id
+  //lấy sản phẩm theo id
   getProductById(id:any):Observable<Product |undefined>{
-    return of(listProducts.find(product => product.id === id));
+    return of(listProducts.find(product => product.id == id));
   }
 }

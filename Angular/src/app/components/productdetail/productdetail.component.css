@@ -277,6 +277,7 @@ body{
 
 
 
+
 /**********************************/
 /********** Sidebar CSS ***********/
 /**********************************/
@@ -474,7 +475,8 @@ body{
 }
 
 .btn:hover,
-.btn:active
+.btn:active,
+.btn:focus
  {
   color: #ffffff;
   background: #00AEC9;

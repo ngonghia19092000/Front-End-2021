@@ -136,6 +136,7 @@
   text-align: center;
   background: #222930;
   transition: all .3s;
+  height: 106.8px;
 }
 
 .product-item:hover .product-title {
@@ -246,7 +247,9 @@
 }
 
 .product-item .product-price {
-  padding: 20px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background: #222930;
   transition: all .3s;
 }
