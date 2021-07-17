@@ -3,7 +3,6 @@ import { Product } from 'src/app/models/product'
 import {Observable} from "rxjs";
 import {of} from "rxjs";
 import {listProducts} from "../models/listproduct";
-import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @Injectable({
