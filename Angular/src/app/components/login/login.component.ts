@@ -13,10 +13,10 @@ export class LoginComponent implements OnInit {
   pass:string = '';
   listUsers: User[]=[];
   login = false;
+  userId:any = '';
 
 
   constructor(private list:UserService) {
-
   }
 
   ngOnInit(): void {
@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   checkUser(){
-
     for (let i = 0; i <=this.listUsers.length ; i++) {
       if(this.userName == listUser[i].username){
         if(this.pass == listUser[i].pass){
           this.login = true;
-          window.alert("Đăng nhập thành công.")
+          this.userId = listUser[i].id ;
+          window.alert("Đăng nhập thành công.");
         }
         else {
           window.alert('Sai tên tài khoản hoặc mật khẩu.');
@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
         window.alert('Sai tên tài khoản hoặc mật khẩu.');
       }
     }
-
   }
 
   }

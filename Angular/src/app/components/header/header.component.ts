@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginComponent} from "../login/login.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -8,13 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
-  login = false;
 
   ngOnInit(): void {
   }
 
-  checkLogin(){
-
-  }
 
 }
