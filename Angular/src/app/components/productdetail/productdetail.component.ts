@@ -3,7 +3,10 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {Product} from "../../models/product";
 import value from "*.json";
-// import {CartService} from "../../services/cart.service";
+import {listProducts} from "../../models/listproduct";
+import {CartService} from "../../services/cart.service";
+import {ProductsComponent} from "../products/products.component";
+import {MessengerService} from "../../services/messenger.service";
 
 @Component({
   selector: 'app-productdetail',
@@ -20,7 +23,8 @@ export class ProductdetailComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private service:ProductService,
-    // private cart:CartService,
+    private cartSer:CartService,
+   private msg:MessengerService,
   ) { }
 
   ngOnInit(): void {
@@ -56,4 +60,12 @@ export class ProductdetailComponent implements OnInit {
       this.value--;
     }
   }
+AddToCartById(id:number){
+  for (let i = 0; i <listProducts.length ; i++) {
+    if(id===listProducts[i].id){
+  this.cartSer.addProductToCart(listProducts[i]).subscribe(() => {
+    this.msg.sendMsg(listProducts[i])
+  })
+  }    }
+}
 }

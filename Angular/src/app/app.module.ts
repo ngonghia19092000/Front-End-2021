@@ -17,9 +17,10 @@ import { LoginComponent } from './components/login/login.component';
 
 import {NgxPaginationModule} from "ngx-pagination";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PricefilterPipe } from './services/filter/pricefilter.pipe';
 import { CategoryfilterPipe } from './services/filter/categoryfilter.pipe';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -53,6 +54,10 @@ const appRoutes : Routes =[
     path:"login",
     component:LoginComponent
   },
+  {
+    path:"register",
+    component:RegisterComponent
+  },
 
 
 
@@ -75,6 +80,8 @@ const appRoutes : Routes =[
     LoginComponent,
     PricefilterPipe,
     CategoryfilterPipe,
+    RegisterComponent,
+
 
   ],
   imports: [
@@ -82,7 +89,9 @@ const appRoutes : Routes =[
     RouterModule.forRoot(appRoutes),
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
 
   ],
   providers: [],

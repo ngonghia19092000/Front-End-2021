@@ -3,6 +3,7 @@ import {Product} from "../../models/product";
 import {MessengerService} from "../../services/messenger.service";
 import {CartService} from "../../services/cart.service";
 import {CartItem} from "../../models/cart-item";
+import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
 
 @Component({
   selector: 'app-cart',
@@ -22,33 +23,31 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.handleSubscription();
-    this.loadCartItems();
+    // this.handleSubscription();
+    // this.loadCartItems();
   }
 
-  handleSubscription() {
-    // @ts-ignore
-    this.msg.getMsg().subscribe((product: Product) => {
-      this.loadCartItems();
-    })
-  }
+  // handleSubscription() {
+  //
+  //   this.msg.getMsg().subscribe((product: Product) => {
+  //     this.loadCartItems();
+  //   })
+  // }
 
-  loadCartItems() {
-    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
-      // @ts-ignore
-      this.cartItems = items;
-      this.calcCartTotal();
-      this.shippcost();
-    })
-  }
+  // loadCartItems() {
+  //   this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+  //     this.cartItems = items;
+  //     this.calcCartTotal();
+  //     this.shippcost();
+  //   })
+  // }
 
-  calcCartTotal() {
-    this.cartTotal = 0
-    this.cartItems.forEach(item => {
-      // @ts-ignore
-      this.cartTotal += (item.qty * item.price)
-    })
-  }
+  // calcCartTotal() {
+  //   this.cartTotal = 0
+  //   this.cartItems.forEach(item => {
+  //     this.cartTotal += (item.qty * item.price)
+  //   })
+  // }
   shippcost(){
     this.feeshippcost=0
     this.cartItems.forEach(item=>{

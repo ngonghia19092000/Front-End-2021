@@ -59,7 +59,7 @@
                   <img src="{{product.img}}" alt="Product Image">
                 </a>
                 <div class="product-action">
-                  <a><i class="fa fa-cart-plus" ></i></a>
+                  <a><i class="fa fa-cart-plus" (click)="AddToCart(product.id)"></i></a>
                   <a routerLink="/productdetail/{{product.id}}"><i class="fa fa-search"></i></a>
                 </div>
               </div>

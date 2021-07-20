@@ -1,0 +1,74 @@
+
+<div class="page-content">
+  <div class="row">
+
+    <form [formGroup]="form"(submit)="submit()" class="form-register" id="form-register">
+
+    <div class="col-md-6" style="margin: 10px auto ">
+
+      <div id="register-form" class="login-register-form-wrap">
+        <br>
+        <br>
+        <div class="row">
+
+          <div class="md-5 col-md-6">
+            <label  for="fullName">Fullname*</label>
+            <input formControlName="name" type="text" placeholder="Enter fullname" class="form-control" id="fullName"
+                   name="fullName" required  >
+          </div>
+
+          <div class="md-5 col-md-6">
+            <label for="userName">Username*</label>
+            <input formControlName="username" type="text" placeholder=" Enter username" class="form-control" id="userName"
+                   name="userName" required maxlength="20" title="Enter username up to 20 characters">
+
+            <p id="resultName" class="resultName" style="font-weight: bold" ></p>
+          </div>
+
+          <div class="md-5 col-md-6">
+            <label for="email">Email*</label>
+            <input formControlName="email" type="email" placeholder="Enter email" class="form-control" id="email" name="email"
+                   required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" >
+            <p id="resultEmail" style="font-weight: bold" class="resultEmail"></p>
+          </div>
+
+
+          <div class="md-5 col-md-6">
+            <label for="phone"> Phone number*</label>
+            <input formControlName="phone" type="tel" placeholder="Enter phone number" class="form-control" name="phone" id="phone"
+                   required pattern="(\+84|0)\d{9,10}" title="Enter your phone number" >
+            <p id="resultPhone" style="font-weight: bold" class="resultPhone"></p>
+
+          </div>
+
+          <div class="md-5 col-md-6">
+            <label for="password">Password*</label>
+            <input formControlName="password" type="password" placeholder="Enter password" class="form-control" id="password"
+                   name="password" required minlength="6" maxlength="18" title=" Password length from 6 to 18 characters" >
+          </div>
+          <div class="md-5 col-md-6">
+            <label for="confirm_password">Confirm password*</label>
+            <input type="password" placeholder="Enter confirm passwword" class="form-control"
+                   id="confirm_password" name="confirm_password" required minlength="6" maxlength="18" title="Enter the password">
+          </div>
+
+
+          <div class="md-5 col-md-12">
+            <label for="address">Address*</label>
+            <input formControlName="address"type="text" placeholder="Enter adddress" id="address" class="form-control" name="address"
+                   required maxlength="150">
+          </div>
+
+          <div class="col-md-3" style="text-align: center;margin-top: 10px  ;padding-bottom: 20px; margin: 0 auto ">
+            <input type="hidden" value="register" name="action"/>
+            <input id="register" class="col-12" type="submit" value="Đăng ký">
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
