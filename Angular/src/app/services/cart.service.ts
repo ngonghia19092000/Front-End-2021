@@ -5,13 +5,16 @@ import {cartUrl} from "../../config/api";
 import {CartItem} from "../models/cart-item";
 import {map} from "rxjs/operators";
 import {Product} from "../models/product";
+import {listCartItem} from "../models/listproduct";
+import {ProductService} from "./product.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private service: ProductService) { }
 
   getCartItems(): Observable<CartItem[]> {
     //TODO: Mapping the obtained result to our CartItem props. (pipe() and map())
@@ -41,13 +44,15 @@ export class CartService {
   addProductToCart(product: Product): Observable<any> {
     return this.http.post(cartUrl, { product });
   }
+deleteItem(idItem:number):Observable<any>{
+    // console.log(this.http.delete (cartUrl+'/'+idItem ))
+  return this.http.delete (cartUrl+'/'+idItem);
+
+}
 
 
 
   // product: Product | undefined;
-  // constructor(
-  //   private service: ProductService
-  // ) { }
   // items:any[] = [];
   // addToCart(product: Product) {
   //   this.items.push(product);
@@ -73,7 +78,7 @@ export class CartService {
   // getItemById(id: string | undefined):Observable<Product | undefined>{
   //   return of(this.items.find(product => product.id === id));
   // }
-
+  //
 
 }
 
