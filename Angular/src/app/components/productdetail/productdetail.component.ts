@@ -7,6 +7,7 @@ import {listProducts} from "../../models/listproduct";
 import {CartService} from "../../services/cart.service";
 import {ProductsComponent} from "../products/products.component";
 import {MessengerService} from "../../services/messenger.service";
+import {CartItem} from "../../models/cart-item";
 
 @Component({
   selector: 'app-productdetail',
@@ -18,24 +19,23 @@ export class ProductdetailComponent implements OnInit {
   value:number = 1;
   size:string = '';
   color:string = '';
+  cartItem:CartItem[]=[];
 
 
   constructor(
     private route:ActivatedRoute,
     private service:ProductService,
     private cartSer:CartService,
-   private msg:MessengerService,
+   private msg:MessengerService
   ) { }
 
   ngOnInit(): void {
     this.loadProductDetail();
     this.update();
+
   }
   update(){
-    setInterval(()=>{
-      // console.log(this.size);
-      // console.log(this.color);
-    });
+    this.cartSer.getAllCartItems().subscribe((up)=>{this.cartItem = up});
   }
 
   loadProductDetail(){
@@ -60,12 +60,27 @@ export class ProductdetailComponent implements OnInit {
       this.value--;
     }
   }
-AddToCartById(id:number){
-  for (let i = 0; i <listProducts.length ; i++) {
-    if(id===listProducts[i].id){
-  this.cartSer.addProductToCart(listProducts[i]).subscribe(() => {
-    this.msg.sendMsg(listProducts[i])
-  })
-  }    }
-}
+
+  putCart(product:Product){
+    let items = new CartItem(product.id, product, this.value);
+    let check = false;
+    for(let item of this.cartItem){
+      if(item.id == product.id){
+        items.qty= items.qty + item.qty;
+        this.cartSer.updateQtyOfCartItem(items).subscribe(()=> console.log('update'));
+        check = true;
+        this.update();
+        break;
+      }
+    }
+  if(check == false) {
+      this.cartSer.addProductToCart(items).subscribe(()=>console.log(items.product.productname));
+      this.update();
+    }
+  }
+
+  // addToCart(product:Product) {
+  //   let item = new CartItem(product.id, product, this.value);
+  //   this.cartSer.addProductToCart(item).subscribe(()=>console.log(item.product.productname));
+  // }
 }
