@@ -1,20 +1,21 @@
-import {Product} from "./product";
 
 export class User {
   id:number;
   username:string;
-  pass:string;
+  email:string;
+  fullname:string
+  password:string;
+  phone:string;
   adress:string;
-  sdt:string;
-  listPro:[];
 
-  constructor(id:number, username:string, pass:string, adress:string, sdt:string) {
+
+  constructor(id: number, username: string, email: string, fullname: string, password: string, phone: string, adress: string) {
     this.id = id;
     this.username = username;
-    this.pass = pass;
+    this.email = email;
+    this.fullname = fullname;
+    this.password = password;
+    this.phone = phone;
     this.adress = adress;
-    this.sdt = sdt;
-    this.listPro = [];
   }
-
 }

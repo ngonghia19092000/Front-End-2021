@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
-import {listUser} from "../../models/listuser";
 import {User} from "../../models/user";
+import {ControlValueAccessor, Form, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {first} from "rxjs/operators";
+import {BehaviorSubject, Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-login',
@@ -9,43 +13,56 @@ import {User} from "../../models/user";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userName:string ='';
-  pass:string = '';
-  listUsers: User[]=[];
-  login = false;
-  userId:any = '';
+  public listUsers: User[] = [];
+  model: any = {};
+message:string='';
+  form: FormGroup | any;
+  loading = false;
+  submitted = false;
+  returnUrl: string | any;
+  public user: Observable<User> | any;
+  private userSubject: BehaviorSubject<User> | any;
 
 
-  constructor(private list:UserService) {
-  }
-
-  ngOnInit(): void {
-  this.getUser();
-  }
-
-
-  getUser(){
-    this.list.getUser().subscribe(
-      upDate => this.listUsers =upDate
-    );
-  }
-
-  checkUser(){
-    for (let i = 0; i <=this.listUsers.length ; i++) {
-      if(this.userName == listUser[i].username){
-        if(this.pass == listUser[i].pass){
-          this.login = true;
-          this.userId = listUser[i].id ;
-          window.alert("Đăng nhập thành công.");
-        }
-        else {
-          window.alert('Sai tên tài khoản hoặc mật khẩu.');
-        }
-      }
-      else {
-        window.alert('Sai tên tài khoản hoặc mật khẩu.');
-      }
+  constructor(private list: UserService,
+              private route: ActivatedRoute,
+              private api: UserService,
+              private router: Router) {
+    this.getUser();
+    // redirect to home if already logged in
+    if (this.api.userValue) {
+      this.router.navigate(['/']);
     }
   }
 
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
+
+  getUser() {
+    this.api.getAllUser()
+      .subscribe((data) => {
+          this.listUsers = data
+        }
+      )
+  }
+
+  loginAccount() {
+    for (var i = 0; i < this.listUsers.length; i++) {
+      if (this.model.userName === this.listUsers[i].username||this.listUsers.length==0) {
+        if (this.model.password === this.listUsers[i].password) {
+          this.api.addDataLocalStorage(this.listUsers[i])
+          this.router.navigate([this.returnUrl]);
+          window.location.reload();
+          break
+        } else {
+         this.message=('Tài khoản hoặc mật khẩu không chính xác');
+        }
+      } else
+       this.message='Tài khoản không tồn tại'
+    }
+
+
+  }
+
+}

@@ -1,21 +1,58 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, Observable} from "rxjs";
+import {productUrl, searchUser, userUrl} from "../../config/api";
 import {User} from "../models/user";
-import {listUser} from "../models/listuser";
+import {Product} from "../models/product";
+import {Router} from "@angular/router";
+import {map} from "rxjs/operators";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private userSubject: BehaviorSubject<User> | any;
+  public user: Observable<User> | any ;
 
-  constructor() { }
-// lấy danh sách user từ file json
-  getUser():Observable<User[]>{
-    return of(listUser);
+
+  constructor(private http:HttpClient,
+              private router:Router) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('users')));
+    this.user = this.userSubject.asObservable();
   }
-//lấy user từ id
-  getUserById(id:any):Observable<User| undefined>{
-    return of(listUser.find(users => users.id == id));
+
+
+  registerUser(data: any):Observable<any>{
+    return this.http.post(userUrl,data)
   }
+
+
+
+
+  public get userValue(): User {
+    return <User>this.userSubject.getValue();
+  }
+  getUser(username:any):Observable<User> {
+    return this.http.get<User>(searchUser + '' + username);
+
+  }
+  getAllUser():Observable<User[]>{
+    return this.http.get<User[]>(userUrl)
+  }
+  addDataLocalStorage(user:any){
+    localStorage.setItem('users', JSON.stringify(user));
+    this.userSubject.next(user);
+  }
+
+  logout() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('users');
+    this.userSubject.next(null);
+    this.router.navigate(['/login']);
+  }
+  getById(id: string) {
+    return this.http.get<User>(userUrl+'/users/'+id);
+  }
+
 }

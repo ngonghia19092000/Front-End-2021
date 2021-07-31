@@ -2602,13 +2602,22 @@
   ],
   "users": [
     {
-      "id": 1,
-      "username": "baokaka",
-      "email": "baokaka@gmail.com",
-      "pass": "2590",
-      "adress": "Kien-Giang",
-      "sdt": "0326141575",
-      "listPro": []
+      "fullname": "Ngô Minh Nghĩa",
+      "username": "admin1",
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "password": "123456",
+      "address": "Thành phố Thủ Đức,Thành phố Hồ Chí Minh",
+      "phone": "01699491909",
+      "id": 1
+    },
+    {
+      "fullname": "Ngô Minh Nghĩa",
+      "username": "ngonghia1909",
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "password": "123456",
+      "address": "Thành phố Thủ Đức,Thành phố Hồ Chí Minh",
+      "phone": "01699491909",
+      "id": 2
     }
   ],
   "cart": []

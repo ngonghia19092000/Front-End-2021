@@ -25,17 +25,24 @@
 
       <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav mr-auto">
-          <a routerLink="/" class="nav-item nav-link" routerLinkActive="active"  [routerLinkActiveOptions]={exact:true} >Home</a>
+          <a routerLink="/" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Home</a>
           <a routerLink="/products" class="nav-item nav-link" routerLinkActive="active">Products</a>
           <a routerLink="/contact" class="nav-item nav-link" routerLinkActive="active">Contact</a>
         </div>
         <div class="navbar-nav ml-auto">
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+          <div class="nav-item dropdown" *ngIf="user!=null">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> Xin chào, {{' ' + user.fullname}}</a>
             <div class="dropdown-menu">
-              <a routerLink="/login" class="dropdown-item" routerLinkActive="active">Login</a>
-              <a href="#" class="dropdown-item">Logout</a>
+
+              <a routerLink="[/my-account]" class="dropdown-item" routerLinkActive="active">Tài khoản của tôi</a>
+              <a href="#" class="dropdown-item" (click)="logout()">Đăng xuất</a>
             </div>
+          </div>
+          <div class="nav-item" *ngIf="user==null">
+            <a routerLink="/login" class="nav-link" routerLinkActive="active">Đăng nhập</a>
+          </div>
+          <div class="nav-item " *ngIf="user==null">
+            <a routerLink="/register" class="nav-link" routerLinkActive="active">Đăng ký</a>
           </div>
         </div>
       </div>
