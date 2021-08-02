@@ -2602,23 +2602,126 @@
   ],
   "users": [
     {
-      "fullname": "Ngô Minh Nghĩa",
-      "username": "admin1",
-      "email": "18130151@st.hcmuaf.edu.vn",
-      "password": "123456",
-      "address": "Thành phố Thủ Đức,Thành phố Hồ Chí Minh",
-      "phone": "01699491909",
-      "id": 1
+      "username": "TA1",
+      "email": "SADAS@HTMK.COM",
+      "fullname": "SADAS",
+      "password": "1",
+      "phone": "0326141575",
+      "adress": "giang thanh kien giang",
+      "listCartItem": [],
+      "id": 3
     },
     {
-      "fullname": "Ngô Minh Nghĩa",
-      "username": "ngonghia1909",
-      "email": "18130151@st.hcmuaf.edu.vn",
-      "password": "123456",
-      "address": "Thành phố Thủ Đức,Thành phố Hồ Chí Minh",
-      "phone": "01699491909",
-      "id": 2
+      "username": "baokaka",
+      "email": "thebao2590@gmail.com",
+      "fullname": "Pham the bao",
+      "password": "1",
+      "phone": "0326141575",
+      "adress": "giang thanh kien giang",
+      "listCartItem": [],
+      "id": 4
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": 1,
+      "qty": 1,
+      "product": {
+        "id": 1,
+        "productname": "MŨ 3/4 ROYAL M134C",
+        "img": "assets/img/Mu-royal-M134C-2-247x247.jpg",
+        "price": 480000,
+        "pricesale": 450000,
+        "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+        "manufaturer": "ROYAL",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "3/4"
+      }
+    },
+    {
+      "id": 2,
+      "qty": 1,
+      "product": {
+        "id": 2,
+        "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+        "img": "assets/img/KYT-Venom-6-247x247.jpg",
+        "price": 1990000,
+        "pricesale": 1890000,
+        "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+        "manufaturer": "ROYAL",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "3/4"
+      }
+    },
+    {
+      "id": 3,
+      "qty": 1,
+      "product": {
+        "id": 3,
+        "productname": "MŨ 3/4 KYT VENOM THITIPONG",
+        "img": "assets/img/KYT-Venom-3-247x247.jpg",
+        "price": 1990000,
+        "pricesale": 1890000,
+        "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+        "manufaturer": "ROYAL",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "3/4"
+      }
+    },
+    {
+      "id": 5,
+      "qty": 1,
+      "product": {
+        "id": 5,
+        "productname": "MŨ 3/4 ZEUS 205 CAMO XÁM",
+        "img": "assets/img/mu-3-4-zeus-205-6-247x247.jpg",
+        "price": 1600000,
+        "pricesale": 1300000,
+        "description": "Zeus 205 Camo Xám đến từ một thương hiệu trứ danh từ Đài Loan, chiếc mũ bảo hiểm mang trong mình tất cả những gì tinh túy nhất của hãng với thiết kế đẳng cấp cùng công nghệ tiên tiến nhất.",
+        "manufaturer": "ZEUS",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "3/4"
+      }
+    }
+  ]
 }

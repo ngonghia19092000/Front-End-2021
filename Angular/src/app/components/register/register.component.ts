@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {ifStmt} from "@angular/compiler/src/output/output_ast";
 import {UserService} from "../../services/user.service";
+import {CartItem} from "../../models/cart-item";
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
   public model: any = {};
   checkStt: boolean = false;
   validate: any = {mFullname: '', mUser: '', mPass: '', mPhone: '', mEmail: '', mAddress: '', mConfirmPass: ''}
-
+  user:User|undefined;
   constructor(private formBuilder: FormBuilder,
               private httpClient: HttpClient,
               private api: UserService,
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
       address: new FormControl(''),
-      phone: new FormControl(''),
+      phone: new FormControl('')
     })
     this.passForm = new FormGroup({
       confirmpass: new FormControl('')
@@ -45,13 +46,12 @@ export class RegisterComponent implements OnInit {
     this.api.getAllUser().subscribe(((user) => {
       this.listUsers = user;
     }));
+
   }
 
 
   checkuser() {
-
     if (this.validateData() == true&& this.confirmPass()==true) {
-
       let a = this.checkExist();
       console.log(a, this.listUsers.length)
       if (this.count != 0) {
@@ -115,13 +115,13 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.phone != '') {
       return this.checkStt = true;
     }
-
-
     return this.checkStt;
   }
 
   register() {
-    this.api.registerUser(this.registerForm.value).subscribe((result) => {
+    this.user = new User(this.registerForm.value.username,this.registerForm.value.email,
+      this.registerForm.value.fullname,this.registerForm.value.password,this.registerForm.value.phone,this.registerForm.value.address);
+    this.api.registerUser(this.user).subscribe((result) => {
       // console.warn("result",result)
       window.alert("Đăng ký tài khoản thành công")
       this.router.navigate(['login'])

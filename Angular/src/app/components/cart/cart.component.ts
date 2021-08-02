@@ -7,6 +7,7 @@ import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import value from "*.json";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-cart',
@@ -15,12 +16,12 @@ import value from "*.json";
 })
 export class CartComponent implements OnInit {
   cartItems:CartItem[] = [];
-
   constructor(
     private msg: MessengerService,
     private cartService: CartService,
     private route:Router,
-  ) { }
+    private userservice:UserService
+  ) {}
 
 
 
@@ -31,7 +32,14 @@ export class CartComponent implements OnInit {
 
   loadCartItems() {
    // return this.cartItems = this.cartService.getCart();
-    this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
+   //  this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
+    if(!this.userservice.login){
+      this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
+    }
+    else {
+      this.cartItems = this.cartService.getItemsOff();
+    }
+
   }
 
 //tăng số lượng
@@ -63,6 +71,7 @@ export class CartComponent implements OnInit {
       this.loadCartItems();
     });
   }
-
-
+  // thêm tất cả sản phẩm từ cart khi chưa đăng nhập vào giỏ hàng của user
+  putAll(){
+  }
 }

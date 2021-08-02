@@ -14,7 +14,7 @@ import {map} from "rxjs/operators";
 export class UserService {
   private userSubject: BehaviorSubject<User> | any;
   public user: Observable<User> | any ;
-
+  public login = false;
 
   constructor(private http:HttpClient,
               private router:Router) {
@@ -23,23 +23,25 @@ export class UserService {
   }
 
 
-  registerUser(data: any):Observable<any>{
-    return this.http.post(userUrl,data)
+  registerUser(user: any):Observable<any>{
+    return this.http.post(userUrl,user)
   }
-
 
 
 
   public get userValue(): User {
     return <User>this.userSubject.getValue();
   }
+
+
   getUser(username:any):Observable<User> {
     return this.http.get<User>(searchUser + '' + username);
-
   }
+
   getAllUser():Observable<User[]>{
     return this.http.get<User[]>(userUrl)
   }
+
   addDataLocalStorage(user:any){
     localStorage.setItem('users', JSON.stringify(user));
     this.userSubject.next(user);
@@ -49,8 +51,9 @@ export class UserService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('users');
     this.userSubject.next(null);
-    this.router.navigate(['/login']);
+    this.login = false;
   }
+
   getById(id: string) {
     return this.http.get<User>(userUrl+'/users/'+id);
   }

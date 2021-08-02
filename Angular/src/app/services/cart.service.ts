@@ -58,36 +58,36 @@ export class CartService {
     return this.http.put(cartUrl+'/'+cartItem.id,{id:cartItem.id,product:cartItem.product,qty:cartItem.qty+1});
   }
 
+  cartItem:CartItem|undefined;
+  items:CartItem[] = [];
 
+  addToCart(cartI:CartItem){
+    let check = false;
+    for (let i of this.items){
+      if(cartI.id == i.id){
+        this.items.slice(this.items.indexOf(i),1);
+        this.items.push(new CartItem(cartI.id,cartI.product,cartI.qty+i.qty));
+        check = true;
+        break;
+      }
+    }
+    if(!check){
+      this.items.push(cartI);
+    }
+  }
 
+  getItemsOff() {
+    return this.items;
+  }
 
-  // product: Product | undefined;
-  // items:any[] = [];
-  // addToCart(product: Product) {
-  //   this.items.push(product);
-  //
-  // }
-  //
-  // addToCartById(id:string|undefined){
-  //   this.service.getProductById(id).subscribe(pro => this.product = pro)
-  //   this.items.push(this.product);
-  // }
-  // getItems() {
-  //   return this.items;
-  // }
-  // clearCart() {
-  //   this.items = [];
-  //   return this.items;
-  // }
-  //
-  // deleteItemById(id:any){
-  //   this.items.splice(this.items.indexOf(this.getItemById(id),1));
-  // }
-  //
-  // getItemById(id: string | undefined):Observable<Product | undefined>{
-  //   return of(this.items.find(product => product.id === id));
-  // }
-  //
+  clearCart() {
+    this.items = [];
+    return this.items;
+  }
+
+  deleteItemOfOff(it:CartItem){
+    this.items.splice(this.items.indexOf(it,1));
+  }
 
 
 

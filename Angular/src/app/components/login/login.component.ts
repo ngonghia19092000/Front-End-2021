@@ -15,7 +15,6 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class LoginComponent implements OnInit {
   public listUsers: User[] = [];
   model: any = {};
-message:string='';
   form: FormGroup | any;
   loading = false;
   submitted = false;
@@ -48,21 +47,21 @@ message:string='';
   }
 
   loginAccount() {
-    for (var i = 0; i < this.listUsers.length; i++) {
-      if (this.model.userName === this.listUsers[i].username||this.listUsers.length==0) {
-        if (this.model.password === this.listUsers[i].password) {
-          this.api.addDataLocalStorage(this.listUsers[i])
+    for (let i of this.listUsers) {
+      if (this.model.userName === i.username) {
+        if (this.model.password === i.password) {
+          this.api.login = true;
+          this.api.addDataLocalStorage(i);
           this.router.navigate([this.returnUrl]);
           window.location.reload();
-          break
-        } else {
-         this.message=('Tài khoản hoặc mật khẩu không chính xác');
+          break;
         }
-      } else
-       this.message='Tài khoản không tồn tại'
+      }
+      else {
+        window.alert("Tài khoản hoặc mật khẩu không chính xác.")
+        break;
+      }
     }
-
-
   }
 
 }

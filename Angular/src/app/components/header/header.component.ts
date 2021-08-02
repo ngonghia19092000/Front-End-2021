@@ -12,7 +12,7 @@ import {UserService} from "../../services/user.service";
 export class HeaderComponent implements OnInit {
   user: User | undefined;
   constructor(private userApi:UserService) {
-    this.user=this.userApi.userValue;
+    this.user = this.userApi.userValue;
   }
 
   ngOnInit(): void {
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.userApi.logout();
+    window.location.reload();
   }
 
 }
