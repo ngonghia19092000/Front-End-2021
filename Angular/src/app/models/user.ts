@@ -1,6 +1,7 @@
 import {CartItem} from "./cart-item";
 
 export class User {
+  id:number;
   username:string;
   email:string;
   fullname:string
@@ -10,8 +11,9 @@ export class User {
   listCartItem:CartItem[];
 
 
-  constructor(username: string, email: string, fullname: string, password: string, phone: string, adress: string,
+  constructor(id:number,username: string, email: string, fullname: string, password: string, phone: string, adress: string,
               listCartItem:[] = []) {
+    this.id = id;
     this.username = username;
     this.email = email;
     this.fullname = fullname;

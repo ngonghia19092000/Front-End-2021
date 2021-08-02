@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string | any;
+  notification:string= '';
   public user: Observable<User> | any;
   private userSubject: BehaviorSubject<User> | any;
 
@@ -27,15 +28,17 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute,
               private api: UserService,
               private router: Router) {
-    this.getUser();
     // redirect to home if already logged in
     if (this.api.userValue) {
       this.router.navigate(['/']);
     }
+
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
   }
 
   getUser() {
@@ -43,7 +46,8 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
           this.listUsers = data
         }
-      )
+      );
+    console.log(this.listUsers[0]);
   }
 
   loginAccount() {
@@ -56,10 +60,9 @@ export class LoginComponent implements OnInit {
           window.location.reload();
           break;
         }
-      }
-      else {
-        window.alert("Tài khoản hoặc mật khẩu không chính xác.")
-        break;
+        else {
+          window.alert("Sai mật khẩu hoặc tài khoản.")
+        }
       }
     }
   }

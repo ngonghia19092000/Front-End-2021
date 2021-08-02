@@ -33,13 +33,13 @@ export class CartComponent implements OnInit {
   loadCartItems() {
    // return this.cartItems = this.cartService.getCart();
    //  this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
-    if(!this.userservice.login){
-      this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
+    if(this.userservice.userValue){
+      // this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
+      this.userservice.userValue.listCartItem = this.cartItems;
     }
     else {
       this.cartItems = this.cartService.getItemsOff();
     }
-
   }
 
 //tăng số lượng

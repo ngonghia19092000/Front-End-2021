@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
       address: new FormControl(''),
-      phone: new FormControl('')
+      phone: new FormControl(''),
     })
     this.passForm = new FormGroup({
       confirmpass: new FormControl('')
@@ -119,9 +119,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.user = new User(this.registerForm.value.username,this.registerForm.value.email,
-      this.registerForm.value.fullname,this.registerForm.value.password,this.registerForm.value.phone,this.registerForm.value.address);
-    this.api.registerUser(this.user).subscribe((result) => {
+    // this.user = new User(this.registerForm.value.username,this.registerForm.value.email,
+    //   this.registerForm.value.fullname,this.registerForm.value.password,this.registerForm.value.phone,this.registerForm.value.address);
+    this.api.registerUser(this.registerForm).subscribe((result) => {
       // console.warn("result",result)
       window.alert("Đăng ký tài khoản thành công")
       this.router.navigate(['login'])

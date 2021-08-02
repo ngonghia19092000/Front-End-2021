@@ -2602,24 +2602,24 @@
   ],
   "users": [
     {
-      "username": "TA1",
-      "email": "SADAS@HTMK.COM",
-      "fullname": "SADAS",
-      "password": "1",
-      "phone": "0326141575",
-      "adress": "giang thanh kien giang",
-      "listCartItem": [],
-      "id": 3
-    },
-    {
       "username": "baokaka",
       "email": "thebao2590@gmail.com",
-      "fullname": "Pham the bao",
-      "password": "1",
+      "fullname": "sadasda",
+      "password": "123456",
       "phone": "0326141575",
       "adress": "giang thanh kien giang",
       "listCartItem": [],
-      "id": 4
+      "id": 1
+    },
+    {
+      "username": "bester2590",
+      "email": "18130016@st.hcmuaf.edu.vn",
+      "fullname": "Pham the bao",
+      "password": "123456",
+      "phone": "0326141575",
+      "adress": "giang thanh kien giang",
+      "listCartItem": [],
+      "id": 2
     }
   ],
   "cart": [
