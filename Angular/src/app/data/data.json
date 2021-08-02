@@ -1,21 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "products": [
     {
       "id": 1,
@@ -2601,26 +2584,7 @@
     }
   ],
   "users": [
-    {
-      "username": "baokaka",
-      "email": "thebao2590@gmail.com",
-      "fullname": "sadasda",
-      "password": "123456",
-      "phone": "0326141575",
-      "adress": "giang thanh kien giang",
-      "listCartItem": [],
-      "id": 1
-    },
-    {
-      "username": "bester2590",
-      "email": "18130016@st.hcmuaf.edu.vn",
-      "fullname": "Pham the bao",
-      "password": "123456",
-      "phone": "0326141575",
-      "adress": "giang thanh kien giang",
-      "listCartItem": [],
-      "id": 2
-    }
+
   ],
   "cart": [
     {

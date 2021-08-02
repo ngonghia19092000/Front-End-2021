@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   loginAccount() {
     for (let i of this.listUsers) {
       if (this.model.userName === i.username) {
-        if (this.model.password === i.password) {
+        if ('1909'+this.api.encryptMd5(<string>this.model.password)+'1909' === i.password) {
           this.api.login = true;
           this.api.addDataLocalStorage(i);
           this.router.navigate([this.returnUrl]);

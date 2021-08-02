@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
-import {CartItem} from "../../models/cart-item";
+import {ActivatedRoute, Router} from "@angular/router";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-my-account',
@@ -9,22 +9,46 @@ import {CartItem} from "../../models/cart-item";
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
-  user:User|undefined;
-  constructor(
-    private userservice:UserService
-  ) {
-    this.user = this.userservice.userValue;
-    console.log(this.user.listCartItem);
+  user:User|any;
+  is_edit: boolean=true;
+  constructor( private userService:UserService,
+               private router:Router,
+               private activRouter:ActivatedRoute) {
+    this.user=userService.userValue;
+
   }
 
   ngOnInit(): void {
-    // this.getUser();
+
   }
-
-
   logout(){
-    this.userservice.logout();
+    this.userService.logout();
+    this.router.navigate(['/'])
   }
+  updateInfo() {
+    this.is_edit = false;
+// @ts-ignore
+    document.getElementById('btnUpd').style.display = 'none'
+
+    // @ts-ignore
+    document.getElementById('btnExit').style.display = 'inline'
+    // @ts-ignore
+    document.getElementById('btn-updateaccount').style.display = 'inline'
+  }
+  back(){
+    this.is_edit=true;
+    // @ts-ignore
+    document.getElementById('btnUpd').style.display='inline'
+
+    // @ts-ignore
+    document.getElementById('btnExit').style.display='none'
+    // @ts-ignore
+    document.getElementById('btn-updateaccount').style.display='none'
+
+  }
+
+  updateAccount() {
+
+  }
+
 }
-
-

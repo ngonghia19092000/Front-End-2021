@@ -40,7 +40,7 @@ const appRoutes : Routes =[
   }
   ,
   {
-    path:"my-account",
+    path:"my-account/:username",
     component:MyAccountComponent
   },
   {

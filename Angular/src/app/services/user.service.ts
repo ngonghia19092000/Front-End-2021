@@ -6,6 +6,7 @@ import {User} from "../models/user";
 import {Product} from "../models/product";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
+import {Md5} from "ts-md5";
 
 
 @Injectable({
@@ -57,5 +58,8 @@ export class UserService {
   getById(id: string) {
     return this.http.get<User>(userUrl+'/users/'+id);
   }
-
+  encryptMd5(code:string){
+    const md5=new Md5();
+    return md5.appendAsciiStr(code).end();
+  }
 }

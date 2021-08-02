@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {userUrl} from "../../../config/api";
-
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
-import {ifStmt} from "@angular/compiler/src/output/output_ast";
 import {UserService} from "../../services/user.service";
-import {CartItem} from "../../models/cart-item";
+
+
 
 @Component({
   selector: 'app-register',
@@ -17,13 +15,12 @@ import {CartItem} from "../../models/cart-item";
 export class RegisterComponent implements OnInit {
   alert: boolean = false;
   registerForm: FormGroup | any;
-  passForm: FormGroup | any;
   count: number = 0;
+  newUser:any={username:'',email:'',fullname:'',password:'',phone:'',address:'',listCartItem:[],listVoucher:[]};
   listUsers: User[] = [];
-  public model: any = {};
   checkStt: boolean = false;
   validate: any = {mFullname: '', mUser: '', mPass: '', mPhone: '', mEmail: '', mAddress: '', mConfirmPass: ''}
-  user:User|undefined;
+
   constructor(private formBuilder: FormBuilder,
               private httpClient: HttpClient,
               private api: UserService,
@@ -31,6 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.registerForm = new FormGroup({
       fullname: new FormControl(''),
       username: new FormControl(''),
@@ -39,23 +37,21 @@ export class RegisterComponent implements OnInit {
       address: new FormControl(''),
       phone: new FormControl(''),
     })
-    this.passForm = new FormGroup({
-      confirmpass: new FormControl('')
-    })
-
     this.api.getAllUser().subscribe(((user) => {
       this.listUsers = user;
     }));
-
   }
 
 
   checkuser() {
+
     if (this.validateData() == true&& this.confirmPass()==true) {
+
       let a = this.checkExist();
       console.log(a, this.listUsers.length)
       if (this.count != 0) {
         window.alert('Tên tài khoản ' + this.registerForm.value.username + ' đã được tạo');
+        this.count=0;
       } else {
         this.register();
       }
@@ -78,6 +74,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.value.username == '') {
       this.validate.mUser = ('Nhập tên tài khoản đăng nhập');
     } else {
+
       this.validate.mUser = '';
     }
     if (this.registerForm.value.fullname == '') {
@@ -115,13 +112,20 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.phone != '') {
       return this.checkStt = true;
     }
+
+
     return this.checkStt;
   }
 
   register() {
-    // this.user = new User(this.registerForm.value.username,this.registerForm.value.email,
-    //   this.registerForm.value.fullname,this.registerForm.value.password,this.registerForm.value.phone,this.registerForm.value.address);
-    this.api.registerUser(this.registerForm).subscribe((result) => {
+
+    this.newUser.username=this.registerForm.value.username;
+    this.newUser.email=this.registerForm.value.email;
+    this.newUser.fullname=this.registerForm.value.fullname;
+    this.newUser.phone=this.registerForm.value.phone;
+    this.newUser.address=this.registerForm.value.address;
+    this.newUser.password='1909'+this.api.encryptMd5(this.registerForm.value.password)+'1909';
+    this.api.registerUser(this.newUser).subscribe((result) => {
       // console.warn("result",result)
       window.alert("Đăng ký tài khoản thành công")
       this.router.navigate(['login'])
@@ -130,14 +134,14 @@ export class RegisterComponent implements OnInit {
 
   confirmPass() {
     // @ts-ignore
-     if( document.getElementById('password').value !== document.getElementById('confirm_password').value){
+    if( document.getElementById('password').value !== document.getElementById('confirm_password').value){
       this.validate.mConfirmPass=("Mật khẩu không trùng khớp");
       return false;
-       }else {
-       this.validate.mConfirmPass=("");
-       return true;
-     }
-     ;
+    }else {
+      this.validate.mConfirmPass=("");
+      return true;
+    }
+    ;
   }
 
 }
