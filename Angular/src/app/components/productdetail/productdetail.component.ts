@@ -35,7 +35,8 @@ export class ProductdetailComponent implements OnInit {
 
   }
   update(){
-    this.cartSer.getAllCartItems().subscribe((up)=>{this.cartItem = up});
+    this.cartSer.getUserName();
+      this.cartSer.getAllCartItems().subscribe((up)=>{this.cartItem = up});
   }
 
   loadProductDetail(){
@@ -61,8 +62,23 @@ export class ProductdetailComponent implements OnInit {
     }
   }
 
+
+
+  add(product:Product){
+    this.update();
+    if(this.cartSer.getUserName()!=""){
+      this.putCart(product);
+      console.log("Đã đăng nhập");
+    }
+    else {
+      let items = new CartItem(product.id, product, this.value,'');
+      this.cartSer.addToCart(items);
+      console.log("Chưa đăng nhập");
+    }
+  }
+
   putCart(product:Product){
-    let items = new CartItem(product.id, product, this.value);
+    let items = new CartItem(product.id, product, this.value,this.cartSer.getUserName());
     let check = false;
     for(let item of this.cartItem){
       if(item.id == product.id){
@@ -79,8 +95,4 @@ export class ProductdetailComponent implements OnInit {
     }
   }
 
-  // addToCart(product:Product) {
-  //   let item = new CartItem(product.id, product, this.value);
-  //   this.cartSer.addProductToCart(item).subscribe(()=>console.log(item.product.productname));
-  // }
 }

@@ -45,8 +45,7 @@ export class RegisterComponent implements OnInit {
 
   checkuser() {
 
-    if (this.validateData() == true&& this.confirmPass()==true) {
-
+    if (this.validateData() && this.confirmPass()) {
       let a = this.checkExist();
       console.log(a, this.listUsers.length)
       if (this.count != 0) {

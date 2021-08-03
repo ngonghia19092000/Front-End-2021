@@ -30,7 +30,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllProduct();
-    // this.getProduct();
     this.update();
     this.getCart();
   }
@@ -53,6 +52,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getCart(){
+    this.cartService.getUserName();
     this.cartService.getAllCartItems().subscribe((t)=>{
       this.cartItem = t;
     })
@@ -88,13 +88,31 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  public add(id:number){
+    this.getCart();
+    if(this.cartService.getUserName()!=''){
+      this.AddToCart(id);
+      console.log('login.....');
+    }
+    else {
+      console.log('unlogin.....');
+      let it:any;
+      for (let i of this.productList) {
+        if(i.id == id){
+          it = new CartItem(i.id,i,1,'');
+        }
+      }
+      this.cartService.addToCart(it);
+    }
+  }
+
 public AddToCart(productid:number){
   let it:any;
-  let check= false;
+  let check = false;
 
    for (let i of this.productList) {
      if(i.id == productid){
-       it = new CartItem(i.id,i,1);
+       it = new CartItem(i.id,i,1,this.cartService.getUserName());
      }
    }
 

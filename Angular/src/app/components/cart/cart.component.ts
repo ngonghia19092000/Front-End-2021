@@ -8,6 +8,7 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import value from "*.json";
 import {UserService} from "../../services/user.service";
+import {windowWhen} from "rxjs/operators";
 
 @Component({
   selector: 'app-cart',
@@ -32,10 +33,8 @@ export class CartComponent implements OnInit {
 
   loadCartItems() {
    // return this.cartItems = this.cartService.getCart();
-   //  this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
     if(this.userservice.userValue){
-      // this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
-      this.userservice.userValue.listCartItem = this.cartItems;
+      this.cartService.getAllCartItems().subscribe((up)=>{this.cartItems = up});
     }
     else {
       this.cartItems = this.cartService.getItemsOff();
@@ -44,34 +43,49 @@ export class CartComponent implements OnInit {
 
 //tăng số lượng
   clickPluss(id:number){
-    for(let i of this.cartItems){
-      if(id == i.id){
-        i.qty++;
-        this.cartService.putCartItem(i).subscribe(() => console.log("update"));
+    if(this.cartService.getUserName()!=''){
+      for(let i of this.cartItems){
+        if(id == i.id){
+          i.qty++;
+          this.cartService.putCartItem(i).subscribe(() => console.log("update"));
+        }
       }
+    }
+    else {
+      this.cartService.pluss(id);
     }
   }
 
 
 //giảm số lượng
   clickMinus(id:number){
-    for(let i of this.cartItems){
-      if(id == i.id){
-        if(i.qty > 1){
-          i.qty--;
-          this.cartService.putCartItem(i).subscribe(() => console.log("update"));
+    if(this.cartService.getUserName()!=''){
+      for(let i of this.cartItems){
+        if(id == i.id){
+          if(i.qty > 1){
+            i.qty--;
+            this.cartService.putCartItem(i).subscribe(() => console.log("update"));
+          }
         }
       }
+    }
+    else {
+      this.cartService.minus(id);
     }
   }
 
   deleteCartItem(id:number){
-    this.cartService.deleteItem(id).subscribe((s)=>{
-      window.alert("Đã Xóa.")
+    if(this.cartService.getUserName()!=''){
+      this.cartService.deleteItem(id).subscribe((s)=>{
+        window.alert("Đã Xóa.")
+        this.loadCartItems();
+      });
+    }
+    else {
+      this.cartService.deleteItemOfOff(id);
+      window.alert("xóa sp từ cart off");
       this.loadCartItems();
-    });
-  }
-  // thêm tất cả sản phẩm từ cart khi chưa đăng nhập vào giỏ hàng của user
-  putAll(){
+    }
+
   }
 }

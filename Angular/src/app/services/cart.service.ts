@@ -1,43 +1,34 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";
-import {cartUrl, productUrl} from "../../config/api";
+import {baseUrl, cartUrl, productUrl, userUrl} from "../../config/api";
 import {CartItem} from "../models/cart-item";
 import {map} from "rxjs/operators";
 import {Product} from "../models/product";
 import {listCartItem} from "../models/listproduct";
 import {ProductService} from "./product.service";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  constructor(private http: HttpClient,private userService:UserService) {
+  }
 
-  constructor(private http: HttpClient) { }
+  getUserName(){
+    if(this.userService.userValue){
+      return this.userService.userValue.username;
+    }
+    return '';
+  }
+
+  //khi đã dăng nhập thì dùng từ dữ liệu file json
 
   getAllCartItems():Observable<any> {
     // TODO: Mapping the obtained result to our CartItem props. (pipe() and map())
-    return  this.http.get<CartItem[]>(cartUrl)
-    .pipe(
-      map((result: any[]) => {
-        let cartItems: CartItem[] = [];
-        for (let item of result) {
-          let productExists = false;
-            for (let i of cartItems) {
-              if (i.id == item.id) {
-                  i.qty++
-                  productExists = true;
-                break;
-              }
-          }
-          if (!productExists) {
-            cartItems.push(item);
-          }
-        }
-        return cartItems;
-      })
-    );
+    return  this.http.get<CartItem[]>(cartUrl+'?userName='+this.getUserName());
   }
 
 
@@ -47,26 +38,27 @@ export class CartService {
 
   deleteItem(idItem:number):Observable<any>{
     // console.log(this.http.delete (cartUrl+'/'+idItem ))
-    return this.http.delete (cartUrl+'/'+idItem);
+    return this.http.delete (cartUrl+'/'+idItem+'?userName='+this.getUserName());
   }
 
   putCartItem(cartItem:CartItem){
-    return this.http.put(cartUrl+'/'+cartItem.id,{id:cartItem.id,product:cartItem.product,qty:cartItem.qty});
+    return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),{id:cartItem.id,product:cartItem.product,qty:cartItem.qty});
   }
 
   updateQtyOfCartItem(cartItem:CartItem){
-    return this.http.put(cartUrl+'/'+cartItem.id,{id:cartItem.id,product:cartItem.product,qty:cartItem.qty+1});
+    return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),{id:cartItem.id,product:cartItem.product,qty:cartItem.qty+1});
   }
 
+
+  //khi chưa đăng nhập
   cartItem:CartItem|undefined;
   items:CartItem[] = [];
 
   addToCart(cartI:CartItem){
     let check = false;
-    for (let i of this.items){
-      if(cartI.id == i.id){
-        this.items.slice(this.items.indexOf(i),1);
-        this.items.push(new CartItem(cartI.id,cartI.product,cartI.qty+i.qty));
+    for (let i = 0; i < this.items.length ; i++){
+      if(cartI.id == this.items[i].id){
+        this.items[i].qty++;
         check = true;
         break;
       }
@@ -75,18 +67,63 @@ export class CartService {
       this.items.push(cartI);
     }
   }
-
+  // thêm tất cả sản phẩm từ cartoff sang cart online
+  putAllCartItemToUser(){
+    let list:CartItem[] = [];
+    this.getAllCartItems().subscribe((up)=>{
+      list = up;
+    });
+    for (let item of this.items) {
+      let check = false;
+        for(let it of list){
+          if(item.id == it.id){
+            let ite = new CartItem(item.id,item.product,item.qty,this.getUserName());
+            this.putCartItem(ite).subscribe(()=>console.log('><'));
+            check = true;
+            break;
+          }
+        }
+        if(!check){
+          let ite = new CartItem(item.id,item.product,item.qty,this.getUserName());
+          this.addProductToCart(ite).subscribe(()=>console.log('.'));
+        }
+    }
+  }
+  //lay list CartItem tu cartoff
   getItemsOff() {
     return this.items;
   }
 
+  //xoa toan bo
   clearCart() {
     this.items = [];
     return this.items;
   }
 
-  deleteItemOfOff(it:CartItem){
-    this.items.splice(this.items.indexOf(it,1));
+  //xoa CartItem trong cart off
+  deleteItemOfOff(id:number){
+    for (let x=0;x<this.items.length;x++) {
+      if(id == this.items[x].id){
+        this.items.splice(x,1);
+      }
+    }
+  }
+
+  //tăng so luong trong cart off
+  pluss(id:number){
+    for (let i = 0; i < this.items.length ; i++) {
+      if(id == this.items[i].id){
+        this.items[i].qty++;
+      }
+    }
+  }
+//giảm so luong trong cart off
+  minus(id:number){
+    for (let i = 0; i < this.items.length ; i++) {
+      if(id == this.items[i].id){
+        this.items[i].qty--;
+      }
+    }
   }
 
 

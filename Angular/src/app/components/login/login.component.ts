@@ -5,6 +5,7 @@ import {ControlValueAccessor, Form, FormBuilder, FormGroup, NgForm, Validators} 
 import {ActivatedRoute, Router} from "@angular/router";
 import {first} from "rxjs/operators";
 import {BehaviorSubject, Observable} from "rxjs";
+import {CartService} from "../../services/cart.service";
 
 
 @Component({
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(private list: UserService,
               private route: ActivatedRoute,
               private api: UserService,
-              private router: Router) {
+              private router: Router,
+              private cartService:CartService) {
     // redirect to home if already logged in
     if (this.api.userValue) {
       this.router.navigate(['/']);
@@ -56,6 +58,7 @@ export class LoginComponent implements OnInit {
         if ('1909'+this.api.encryptMd5(<string>this.model.password)+'1909' === i.password) {
           this.api.login = true;
           this.api.addDataLocalStorage(i);
+          this.cartService.putAllCartItemToUser();
           this.router.navigate([this.returnUrl]);
           window.location.reload();
           break;
