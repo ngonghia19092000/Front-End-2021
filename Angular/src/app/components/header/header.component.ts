@@ -3,6 +3,8 @@ import {LoginComponent} from "../login/login.component";
 import {Router, RouterLink} from "@angular/router";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
+import {CartService} from "../../services/cart.service";
+import {CartItem} from "../../models/cart-item";
 
 @Component({
   selector: 'app-header',
@@ -12,6 +14,8 @@ import {UserService} from "../../services/user.service";
 export class HeaderComponent implements OnInit {
   public user: User | undefined;
   usernamee:any  ='';
+
+  cartItems:CartItem[] = [];
   constructor(private userApi:UserService,
               private router:Router) {
     this.user = this.userApi.userValue;
@@ -19,6 +23,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
   searchProduct(product:string){
 
@@ -29,17 +34,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
-  // checkRole() {
-  //   const md5 = new Md5();
-  //   var encr= md5.appendAsciiStr(<string>this.user?.username).end();
-  //   // const encr =this.md5.appendAsciiStr(<string>this.user?.username).end();
-  //   if(this.user!== null&&this.router.navigate(['my-account/'+this.user?.username+''])){
-  //     this.router.navigate(['my-account/'+encr+''])
-  //   }else {
-  //     this.router.navigate(['login'])
-  //   }
-  // }
  name(){
  return this.usernamee= this.userApi.encryptMd5(<string>this.user?.username);
  }
+
+
+
 }

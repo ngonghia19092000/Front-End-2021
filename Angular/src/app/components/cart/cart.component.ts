@@ -79,6 +79,7 @@ export class CartComponent implements OnInit {
       this.cartService.deleteItem(id).subscribe((s)=>{
         window.alert("Đã Xóa.")
         this.loadCartItems();
+
       });
     }
     else {

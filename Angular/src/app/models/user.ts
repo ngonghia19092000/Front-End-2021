@@ -8,11 +8,11 @@ export class User {
   password:string;
   phone:string;
   adress:string;
-  listCartItem:CartItem[];
+  listVoucher:[];
 
 
   constructor(id:number,username: string, email: string, fullname: string, password: string, phone: string, adress: string,
-              listCartItem:[] = []) {
+              listVoucher:[] = []) {
     this.id = id;
     this.username = username;
     this.email = email;
@@ -20,6 +20,6 @@ export class User {
     this.password = password;
     this.phone = phone;
     this.adress = adress;
-    this.listCartItem = listCartItem;
+    this.listVoucher = listVoucher;
   }
 }

@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {first} from "rxjs/operators";
 import {BehaviorSubject, Observable} from "rxjs";
 import {CartService} from "../../services/cart.service";
+import {CartItem} from "../../models/cart-item";
 
 
 @Component({
@@ -23,6 +24,8 @@ export class LoginComponent implements OnInit {
   notification:string= '';
   public user: Observable<User> | any;
   private userSubject: BehaviorSubject<User> | any;
+  private lenghtCart: any;
+  private cartList: CartItem[]=[];
 
 
   constructor(private list: UserService,
@@ -33,14 +36,16 @@ export class LoginComponent implements OnInit {
     // redirect to home if already logged in
     if (this.api.userValue) {
       this.router.navigate(['/']);
-    }
 
+
+    }
+    this.lenghtCart=this.lenghtItemWithCart();
   }
 
   ngOnInit(): void {
     this.getUser();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
+this.getAllCart();
   }
 
   getUser() {
@@ -58,7 +63,7 @@ export class LoginComponent implements OnInit {
         if ('1909'+this.api.encryptMd5(<string>this.model.password)+'1909' === i.password) {
           this.api.login = true;
           this.api.addDataLocalStorage(i);
-          this.cartService.putAllCartItemToUser();
+          this.cartService.putAllCartItemToUser(this.lenghtCart);
           this.router.navigate([this.returnUrl]);
           window.location.reload();
           break;
@@ -69,5 +74,12 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
+  getAllCart(){
+    this.cartService.getAllProWithCart().subscribe((data)=>{
+      this.cartList=data;
+    });
+  }
+  lenghtItemWithCart(){
+    return this.cartList.length;
+  }
 }

@@ -13,48 +13,55 @@ import {UserService} from "./user.service";
   providedIn: 'root'
 })
 export class CartService {
-
+lenghtCart:number=0;
   constructor(private http: HttpClient,private userService:UserService) {
   }
 
   getUserName(){
     if(this.userService.userValue){
       return this.userService.userValue.username;
-    }
+    }else
     return '';
   }
 
   //khi đã dăng nhập thì dùng từ dữ liệu file json
-
   getAllCartItems():Observable<any> {
     // TODO: Mapping the obtained result to our CartItem props. (pipe() and map())
     return  this.http.get<CartItem[]>(cartUrl+'?userName='+this.getUserName());
   }
 
 
-  addProductToCart(cartItem:CartItem):Observable<any>{
+  addProductToCart(cartItem:any):Observable<any>{
     return this.http.post(cartUrl,cartItem);
   }
 
   deleteItem(idItem:number):Observable<any>{
     // console.log(this.http.delete (cartUrl+'/'+idItem ))
-    return this.http.delete (cartUrl+'/'+idItem+'?userName='+this.getUserName());
+    return this.http.delete (cartUrl+'/'+idItem+'?username='+this.getUserName());
   }
 
   putCartItem(cartItem:CartItem){
-    return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),{id:cartItem.id,product:cartItem.product,qty:cartItem.qty});
+    return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),
+      {id:cartItem.id,product:cartItem.product,qty:cartItem.qty,userName:this.getUserName()});
   }
 
-  updateQtyOfCartItem(cartItem:CartItem){
-    return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),{id:cartItem.id,product:cartItem.product,qty:cartItem.qty+1});
+  updateQtyOfCartItem(cartItem:any){
+    return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),
+      {id:cartItem.id,product:cartItem.product,qty:cartItem.qty,userName:this.getUserName()});
   }
 
 
   //khi chưa đăng nhập
-  cartItem:CartItem|undefined;
+  cartItem:CartItem|any;
   items:CartItem[] = [];
 
-  addToCart(cartI:CartItem){
+  getAllProWithCart():Observable<CartItem[]>{
+    return this.http.get<CartItem[]>(cartUrl);
+
+  }
+
+
+  addToCart(cartI:any){
     let check = false;
     for (let i = 0; i < this.items.length ; i++){
       if(cartI.id == this.items[i].id){
@@ -64,11 +71,12 @@ export class CartService {
       }
     }
     if(!check){
+
       this.items.push(cartI);
     }
   }
   // thêm tất cả sản phẩm từ cartoff sang cart online
-  putAllCartItemToUser(){
+  putAllCartItemToUser(lenghtCart: any){
     let list:CartItem[] = [];
     this.getAllCartItems().subscribe((up)=>{
       list = up;
@@ -77,14 +85,14 @@ export class CartService {
       let check = false;
         for(let it of list){
           if(item.id == it.id){
-            let ite = new CartItem(item.id,item.product,item.qty,this.getUserName());
+            let ite = new CartItem(lenghtCart,item.product,item.qty,this.getUserName());
             this.putCartItem(ite).subscribe(()=>console.log('><'));
             check = true;
             break;
           }
         }
         if(!check){
-          let ite = new CartItem(item.id,item.product,item.qty,this.getUserName());
+          let ite = new CartItem(lenghtCart,item.product,item.qty,this.getUserName());
           this.addProductToCart(ite).subscribe(()=>console.log('.'));
         }
     }
@@ -125,8 +133,6 @@ export class CartService {
       }
     }
   }
-
-
 
 }
 

@@ -36,7 +36,8 @@ export class UserService {
 
 
   getUser(username:any):Observable<User> {
-    return this.http.get<User>(searchUser + '' + username);
+    return this.http.get<User>(searchUser  + username);
+
   }
 
   getAllUser():Observable<User[]>{
@@ -61,5 +62,17 @@ export class UserService {
   encryptMd5(code:string){
     const md5=new Md5();
     return md5.appendAsciiStr(code).end();
+  }
+  updateInfoAccount(data:any):Observable<any>{
+    return this.http.put(userUrl+'/'+this.userValue.id +'?username='+ this.userValue.username,
+      {email:data.email,phone:data.phone,address:data.address,username:this.userValue.username,
+      id:this.userValue.id,password:this.userValue.password,fullname:this.userValue.fullname,listVoucher:this.userValue.listVoucher });
+
+  }
+  changePassword(data:any):Observable<any>{
+    return this.http.put(userUrl+'/'+this.userValue.id +'?username='+ this.userValue.username,
+      {email:this.userValue.email,phone:this.userValue.phone,address:this.userValue.adress,username:this.userValue.username,
+        id:this.userValue.id,password:data,fullname:this.userValue.fullname,listVoucher:this.userValue.listVoucher });
+
   }
 }
