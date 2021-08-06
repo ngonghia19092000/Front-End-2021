@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 import value from "*.json";
 import {UserService} from "../../services/user.service";
 import {windowWhen} from "rxjs/operators";
+import {OrderService} from "../../services/order.service";
+import {Order} from "../../models/order";
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +23,8 @@ export class CartComponent implements OnInit {
     private msg: MessengerService,
     private cartService: CartService,
     private route:Router,
-    private userservice:UserService
+    private userservice:UserService,
+    private order:OrderService
   ) {}
 
 
@@ -89,4 +92,16 @@ export class CartComponent implements OnInit {
     }
 
   }
+
+  addNewOrder(){
+    let item = new Order(this.cartService.getUserName(),'',"Chờ xử lý",this.cartItems);
+    if(this.cartService.getUserName()!=''){
+        this.order.addNewOrder(item).subscribe(()=>console.log('add New Order'));
+    }
+    else {
+      console.log('Bạn hãy đăng nhập.');
+    }
+  }
+
+
 }

@@ -6,6 +6,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {searchUser} from "../../../config/api";
 import {parseJson} from "@angular/cli/utilities/json-file";
 import {stringify} from "@angular/compiler/src/util";
+import {CartItem} from "../../models/cart-item";
+import {OrderService} from "../../services/order.service";
+import {Order} from "../../models/order";
 
 @Component({
   selector: 'app-my-account',
@@ -19,19 +22,18 @@ export class MyAccountComponent implements OnInit {
   model: any = {phone: 0}
   is_edit: boolean = true;
   check: boolean = false;
-
+  listOrder: Order[]=[];
 
   constructor(private userService: UserService,
               private router: Router,
               private activRouter: ActivatedRoute,
-              private formBuilder: FormBuilder) {
-
-
+              private formBuilder: FormBuilder,
+              private orderService:OrderService) {
   }
 
   ngOnInit(): void {
     this.user = this.userService.userValue;
-
+    this.getOrder();
   }
 
   logout() {
@@ -42,7 +44,6 @@ export class MyAccountComponent implements OnInit {
   loadUser() {
     this.userService.addDataLocalStorage(this.userInfo)
     location.reload();
-
   }
 
   updateInfo() {
@@ -76,8 +77,6 @@ export class MyAccountComponent implements OnInit {
         this.userInfo = data;
         this.loadUser();
         console.log('OK!')
-
-
       })
     } else {
 
@@ -124,6 +123,11 @@ export class MyAccountComponent implements OnInit {
     console.log(mess+ ' check:'+check+ ' lenght:'+lenght)
 
   }
+
+  getOrder(){
+   this.orderService.getOrder().subscribe((t)=>this.listOrder= t);
+  }
+
 
 
 }
