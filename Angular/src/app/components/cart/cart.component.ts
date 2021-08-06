@@ -93,10 +93,23 @@ export class CartComponent implements OnInit {
 
   }
 
+  clearCart(){
+    for (let i = 0; i < this.cartItems.length; i++) {
+      this.cartService.deleteItem(this.cartItems[i].id).subscribe(()=>console.log('clear'));
+    }
+  }
+
   addNewOrder(){
     let item = new Order(this.cartService.getUserName(),'',"Chờ xử lý",this.cartItems);
     if(this.cartService.getUserName()!=''){
-        this.order.addNewOrder(item).subscribe(()=>console.log('add New Order'));
+        if(this.cartItems.length!=0){
+          this.order.addNewOrder(item).subscribe(()=>console.log('add New Order'));
+          this.clearCart();
+          this.loadCartItems();
+        }
+        else {
+          console.log('Hãy chọn sản phẩm.');
+        }
     }
     else {
       console.log('Bạn hãy đăng nhập.');

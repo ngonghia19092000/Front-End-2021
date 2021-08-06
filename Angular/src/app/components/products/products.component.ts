@@ -27,6 +27,8 @@ export class ProductsComponent implements OnInit {
   categoryfill:string = "";
   cartItem:CartItem[]=[];
 
+  itemTaget:any;
+
 
   ngOnInit() {
     this.getAllProduct();
@@ -109,7 +111,6 @@ export class ProductsComponent implements OnInit {
 public AddToCart(productid:number){
   let it:any;
   let check = false;
-
    for (let i of this.productList) {
      if(i.id == productid){
        it = new CartItem(i.id,i,1,this.cartService.getUserName());
@@ -119,7 +120,7 @@ public AddToCart(productid:number){
   for (let item of this.cartItem) {
     if(productid == item.id){
       it.qty = item.qty++;
-      this.cartService.updateQtyOfCartItem(it).subscribe(()=>console.log("update"));
+      this.cartService.updateQtyOfCartItem(it).subscribe();
       this.getCart();
       check = true;
       break;

@@ -3,12 +3,10 @@ import {UserService} from "../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../models/user";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {searchUser} from "../../../config/api";
-import {parseJson} from "@angular/cli/utilities/json-file";
-import {stringify} from "@angular/compiler/src/util";
-import {CartItem} from "../../models/cart-item";
 import {OrderService} from "../../services/order.service";
 import {Order} from "../../models/order";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {CartItem} from "../../models/cart-item";
 
 @Component({
   selector: 'app-my-account',
@@ -23,12 +21,16 @@ export class MyAccountComponent implements OnInit {
   is_edit: boolean = true;
   check: boolean = false;
   listOrder: Order[]=[];
+  isChange:boolean = false;
+  taget:CartItem[]|any;
+
 
   constructor(private userService: UserService,
               private router: Router,
               private activRouter: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private orderService:OrderService) {
+              private orderService:OrderService,
+              ) {
   }
 
   ngOnInit(): void {
@@ -115,7 +117,6 @@ export class MyAccountComponent implements OnInit {
         window.alert('Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại tài khoản!');
         this.userService.logout();
         this.router.navigate(['login'])
-
       })
     } else {
       mess += ' (Old password is incorrect)'
@@ -123,11 +124,66 @@ export class MyAccountComponent implements OnInit {
     console.log(mess+ ' check:'+check+ ' lenght:'+lenght)
 
   }
-
+  // lấy đơn hàng từ data.json
   getOrder(){
    this.orderService.getOrder().subscribe((t)=>this.listOrder= t);
   }
 
+  updateOrder(id:number){
+    if(this.isChange == true){
+      let item:any;
+      for(let i of this.listOrder){
+        if(i.id == id){
+          item = new Order(i.userName,i.discount,i.status,i.cartItem);
+        }
+      }
+      this.getOrder();
+      this.isChange =false;
+      this.orderService.updateOrder(item,id).subscribe();
+    }
+  }
 
+  minus(id:any){
+    for (let item of this.listOrder){
+      for (let i = 0; i <item.cartItem.length ; i++) {
+        if(item.cartItem[i].id == id){
+          if(item.cartItem[i].qty>1){
+            this.isChange = true;
+            item.cartItem[i].qty--;
+          }
+        }
+      }
+    }
+  }
+
+  pluss(id:any){
+    for (let item of this.listOrder){
+      for (let i = 0; i <item.cartItem.length ; i++) {
+        if(item.cartItem[i].id == id){
+            this.isChange = true;
+            item.cartItem[i].qty++;
+          }
+        }
+      }
+    }
+
+    deleteItemInOrder(id:any){
+      for (let item of this.listOrder){
+        for (let i = 0; i <item.cartItem.length ; i++) {
+          if(item.cartItem[i].id == id){
+            item.cartItem.splice(i,1);
+          }
+        }
+      }
+    }
+
+    deleteOrder(id:any){
+    this.orderService.deleteOrder(id).subscribe();
+    this.getOrder();
+    }
 
 }
+
+
+
+

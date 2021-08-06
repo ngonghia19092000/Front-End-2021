@@ -29,9 +29,12 @@ export class OrderService {
     return this.http.post(orderUrl,order);
   }
 
-  updateOrder(listCartItem:CartItem[]):Observable<any>{
-    return this.http.put(orderUrl+'?userName='+this.getUserName(),{cartItem:listCartItem});
+  updateOrder(order:Order,id:any):Observable<any>{
+    return this.http.put(orderUrl+'/'+id+'?userName='+this.getUserName(),{userName:order.userName,discount:order.discount,status:order.status,cartItem:order.cartItem});
   }
 
+  deleteOrder(id:any):Observable<any>{
+   return this.http.delete(orderUrl+'/'+id);
+  }
 
 }

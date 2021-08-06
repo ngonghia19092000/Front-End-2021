@@ -5,6 +5,8 @@ export class Order{
   discount:string;
   status:string;
   cartItem:CartItem[];
+  id:number|any;
+
 
   constructor(userName:string, discount:string, status:string,cartItem:CartItem[]) {
     this.userName = userName;

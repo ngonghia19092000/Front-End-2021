@@ -47,8 +47,9 @@ lenghtCart:number=0;
 
   updateQtyOfCartItem(cartItem:any){
     return this.http.put(cartUrl+'/'+cartItem.id+'?userName='+this.getUserName(),
-      {id:cartItem.id,product:cartItem.product,qty:cartItem.qty,userName:this.getUserName()});
+      {id:cartItem.id,product:cartItem.product,qty:cartItem.qty+1,userName:this.getUserName()});
   }
+
 
 
   //khi chưa đăng nhập

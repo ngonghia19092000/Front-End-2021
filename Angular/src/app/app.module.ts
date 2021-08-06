@@ -19,6 +19,7 @@ import { PricefilterPipe } from './services/filter/pricefilter.pipe';
 import { CategoryfilterPipe } from './services/filter/categoryfilter.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -93,7 +94,8 @@ const appRoutes : Routes =[
     Ng2SearchPipeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
 
   ],
   providers: [],
