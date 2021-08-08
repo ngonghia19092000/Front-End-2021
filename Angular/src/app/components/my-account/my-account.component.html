@@ -3,107 +3,132 @@
     <div class="row">
       <div class="col-md-3">
         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
-          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-          <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
-          <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
-
-          <a class="nav-link" (click)="logout()"><i class="fa fa-sign-out-alt"></i>Logout</a>
+          <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
+            class="fa fa-user"></i>Thông tin tài khoản</a>
+          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
+            class="fa fa-shopping-bag"></i>Đơn hàng</a>
+          <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i
+            class="fa fa-credit-card"></i>Hình thức thanh toán</a>
+          <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
+            class="fa fa-map-marker-alt"></i>Địa chỉ</a>
+          <a class="nav-link" (click)="logout()"><i class="fa fa-sign-out-alt"></i>Đăng xuất</a>
         </div>
       </div>
+      <!--      Account-->
       <div class="col-md-9" *ngIf="user">
         <div class="tab-content">
           <div class="tab-pane fade show active" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
-            <h4>Account Details</h4>
+            <h4>Thông tin tài khoản</h4>
 
-              <div class="row">
-               <div  class="row" *ngIf="check==false" >
-                 <div class="col-md-6">
-                   <input DISABLED class="form-control"   type="text" placeholder="Họ và tên" value="{{user.fullname}}">
-                 </div>
-                 <div class="col-md-6">
-                   <input disabled class="form-control" type="text" placeholder="Tên đăng nhập" value="{{user.username}}">
-                 </div>
-                 <div class="col-md-6">
-                   <input [disabled]="is_edit"  class="form-control" type="text" placeholder="Số điện thoại" value="{{user.phone}}">
-                 </div>
-                 <div class="col-md-6">
-                   <input [disabled]="is_edit"  class="form-control" type="text" placeholder="Email" value="{{user.email}}"   required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
-                 </div>
-                 <div class="col-md-12">
-                   <input [disabled]="is_edit"  class="form-control" type="text" placeholder="Địa chỉ" value="{{user.address}}" >
-                 </div>
-
-
-               </div >
-                <div class="row" *ngIf="check==true" >
-                  <div class="col-md-6" >
-                    <input DISABLED class="form-control"   type="text" placeholder="Họ và tên" value="{{user.fullname}}">
-                  </div>
-                  <div class="col-md-6">
-                    <input disabled class="form-control" type="text" placeholder="Tên đăng nhập" value="{{user.username}}">
-                  </div>
-                  <div class="col-md-6" >
-                    <input [disabled]="is_edit"  class="form-control" type="text" placeholder="{{user.phone}}"  [(ngModel)]="model.phoneup">
-                  </div>
-                  <div class="col-md-6">
-                    <input [disabled]="is_edit"  class="form-control" type="text" placeholder="{{user.email}}"   [(ngModel)]="model.email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
-                  </div>
-                  <div class="col-md-12">
-                    <input [disabled]="is_edit"  class="form-control" type="text" placeholder="{{user.address}}" [(ngModel)]="model.address">
-                  </div>
-
-
+            <div class="row">
+              <div class="row" *ngIf="check==false">
+                <div class="col-md-6">
+                  <input DISABLED class="form-control" type="text" placeholder="Họ và tên" value="{{user.fullname}}">
+                </div>
+                <div class="col-md-6">
+                  <input disabled class="form-control" type="text" placeholder="Tên đăng nhập"
+                         value="{{user.username}}">
+                </div>
+                <div class="col-md-6">
+                  <input [disabled]="is_edit" class="form-control" type="text" placeholder="Số điện thoại"
+                         value="{{user.phone}}">
+                </div>
+                <div class="col-md-6">
+                  <input [disabled]="is_edit" class="form-control" type="text" placeholder="Email"
+                         value="{{user.email}}" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                </div>
+                <div class="col-md-12">
+                  <input [disabled]="is_edit" class="form-control" type="text" placeholder="Địa chỉ"
+                         value="{{user.address}}">
                 </div>
 
+
+              </div>
+              <div class="row" *ngIf="check==true">
+                <div class="col-md-6">
+                  <input DISABLED class="form-control" type="text" placeholder="Họ và tên" value="{{user.fullname}}">
+                </div>
+                <div class="col-md-6">
+                  <input disabled class="form-control" type="text" placeholder="Tên đăng nhập"
+                         value="{{user.username}}">
+                </div>
+                <div class="col-md-6">
+                  <input [disabled]="is_edit" class="form-control" type="text" placeholder="{{user.phone}}"
+                         [(ngModel)]="model.phoneup">
+                </div>
+                <div class="col-md-6">
+                  <input [disabled]="is_edit" class="form-control" type="text" placeholder="{{user.email}}"
+                         [(ngModel)]="model.email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                </div>
+                <div class="col-md-12">
+                  <input [disabled]="is_edit" class="form-control" type="text" placeholder="{{user.address}}"
+                         [(ngModel)]="model.address">
+                </div>
+
+
+              </div>
+
               <div class="col-md-12 btn-update" id="btn-update">
-                <button class="btn"  (click)="updateInfo()" style="display: inline" id="btnUpd">Thay đổi thông tin</button>
-                <button   class="btn" (click)="back()" style="display: none" id="btnExit">Quay lại</button>
-                <button  class="btn" (click)="updateAccount()"  style="display: none ;margin-left: 50px" id="btn-updateaccount">Cập nhật thông tin</button>
+                <button class="btn" (click)="updateInfo()" style="display: inline" id="btnUpd">Thay đổi thông tin
+                </button>
+                <button class="btn" (click)="back()" style="display: none" id="btnExit">Quay lại</button>
+                <button class="btn" (click)="updateAccount()" style="display: none ;margin-left: 50px"
+                        id="btn-updateaccount">Cập nhật thông tin
+                </button>
                 <br><br>
               </div>
             </div>
 
-            <h4>Password change</h4>
+            <h4>Thay đổi mật khẩu</h4>
             <div class="row">
               <div class="col-md-12">
-                <input class="form-control" type="password" placeholder="Current Password" autocomplete="off" [(ngModel)]="model.currentPass">
+                <input class="form-control" type="password" placeholder="Current Password" autocomplete="off"
+                       [(ngModel)]="model.currentPass">
               </div>
               <div class="col-md-6">
                 <input class="form-control" type="password" placeholder="New Password" [(ngModel)]="model.password ">
               </div>
               <div class="col-md-6">
-                <input class="form-control" type="password" placeholder="Confirm Password" [(ngModel)]="model.confirmpass">
+                <input class="form-control" type="password" placeholder="Confirm Password"
+                       [(ngModel)]="model.confirmpass">
               </div>
               <div class="col-md-12">
                 <button class="btn" (click)="changePass()">Save Changes</button>
               </div>
             </div>
           </div>
-
-          <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav" >
-            <div class="table-responsive" >
+          <!--End account-->
+          <!--          Order-->
+          <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+            <div class="center" *ngIf="listOrder.length == 0">
+              <img src="" alt="">
+              <h4>Bạn chưa có đơn hàng nào.</h4>
+              <h6>Tiến hành mua sắm </h6>
+          <a routerLink="/products" routerLinkActive="active">    <button class="btn btn-primary">Shop now</button></a>
+            </div>
+            <div class="table-responsive" *ngIf="listOrder.length != 0">
               <table class="table table-bordered" *ngFor="let items of listOrder">
                 <tbody class="align-middle">
                 <tr>
-                  <td>{{items.userName}}</td>
+                  <td>{{'#' + items.code}}</td>
                   <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppup" (click)="taget = items.cartItem">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppup"
+                            (click)="taget = items.cartItem">
                       View <i class="fa fa-eye"></i>
                     </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade bd-example-modal-lg" id="poppup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade bd-example-modal-lg" id="poppup" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Danh sách sản phẩm</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Danh sách sản phẩm </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <div class="modal-body"  style="height:450px; overflow: scroll " >
+                          <div class="modal-body" style="height:450px; overflow: scroll ">
                             <table class="table">
                               <thead class="thead-dark">
                               <tr>
@@ -123,7 +148,8 @@
                                 </td>
                                 <td class="qtys">
                                   <div class="qty">
-                                    <button class="btn-minus" (click)="minus(it.id)"><i class="fa fa-minus"></i></button>
+                                    <button class="btn-minus" (click)="minus(it.id)"><i class="fa fa-minus"></i>
+                                    </button>
                                     <input type="text" value="{{it.qty}}">
                                     <button class="btn-plus" (click)="pluss(it.id)"><i class="fa fa-plus"></i></button>
                                   </div>
@@ -132,59 +158,337 @@
                                 <td class="order">
                                   <button (click)="deleteItemInOrder(it.id)"><i class="fa fa-trash"></i></button>
                                 </td>
-                            </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateOrder(items.id)">Save changes</button>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    (click)="updateOrder(items.id)">Save changes
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                   </td>
 
                   <td>{{items.status}}</td>
-                  <td><button class="btn" (click)="deleteOrder(items.id)"><i class="fa fa-trash" ></i></button></td>
+                  <td>
+                    <button class="btn" (click)="deleteOrder(items.id)"><i class="fa fa-trash"></i></button>
+                  </td>
                 </tr>
                 </tbody>
               </table>
             </div>
           </div>
+          <!--          End Order-->
+
+          <!--          PaymetMethod-->
           <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-            <h4>Payment Method</h4>
+            <h4>Hình thức thanh toán</h4>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In
+              efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique
+              viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus
+              eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
             </p>
           </div>
+          <!--          End PaymetMethod-->
+
+          <!--          Address-->
           <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-            <h4>Address</h4>
+            <h4>Thông tin địa chỉ</h4>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="address_check==true">
                 <h5>Payment Address</h5>
-                <p>123 Payment Street, Los Angeles, CA</p>
-                <p>Mobile: 012-345-6789</p>
-                <button class="btn">Edit Address</button>
+                <p> {{paymentAddress.apartment + ', ' + paymentAddress.street}}</p>
+                <p>{{paymentAddress.wards + ', ' + paymentAddress.district + ', ' + paymentAddress.province}}</p>
+                <p>SĐT: {{paymentAddress.phoneaddress}}</p>
+                <button type="button" class="btn" data-toggle="modal" data-target="#poppupAdd2">
+                  Sửa
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="poppupAdd2" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Cập nhật địa chỉ thanh toán </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+                        <div class="col">
+                          <div class="row row-50">
+
+                            <div class="col-md-6">
+                              <label>Số điện thoai*</label>
+                              <input type="tel" placeholder="Số điện thoai" value="{{user.paymentAddress.phoneaddress}}"
+                                     [(ngModel)]="address.phoneaddress">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Số nhà*</label>
+                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Đường*</label>
+                              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Tỉnh/Thành phố*</label>
+                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
+                            </div>
+
+
+                            <div class="col-md-6">
+                              <label>Quận/Huyện*</label>
+                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Xã/Phường</label>
+                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress()">Save
+                            changes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
-              <div class="col-md-6">
-                <h5>Shipping Address</h5>
-                <p>123 Shipping Street, Los Angeles, CA</p>
-                <p>Mobile: 012-345-6789</p>
-                <button class="btn">Edit Address</button>
+              <div class="col-md-6" *ngIf="address_check==false">
+                <h5>Địa chỉ thanh toán</h5>
+                <p>Nhấn "Thêm" để thêm địa chỉ thanh toán</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppupAdd1">
+                  Thêm
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="poppupAdd1" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+                        <div class="col">
+                          <div class="row row-50">
+
+                            <div class="col-md-6">
+                              <label>Số điện thoai*</label>
+                              <input type="text" placeholder="Số điện thoai" [(ngModel)]="address.phoneaddress">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Số nhà*</label>
+                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Đường*</label>
+                              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Tỉnh/Thành phố*</label>
+                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
+                            </div>
+
+
+                            <div class="col-md-6">
+                              <label>Quận/Huyện*</label>
+                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Xã/Phường</label>
+                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress()">Save
+                            changes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div class="col-md-6" *ngIf="address_check1==true">
+                <h5>Địa chỉ giao hàng</h5>
+                <p> {{shippingAddress.apartment + ', ' + shippingAddress.street}}</p>
+                <p>{{shippingAddress.wards + ', ' + shippingAddress.district + ', ' + shippingAddress.province}}</p>
+                <p>SĐT: {{shippingAddress.phoneaddress}}</p>
+                <button type="button" class="btn" data-toggle="modal" data-target="#poppupAdd3">
+                  Sửa
+                </button>
+                <div class="modal fade bd-example-modal-lg" id="poppupAdd3" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Cập nhật địa chỉ giao hàng </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+                        <div class="col">
+                          <div class="row row-50">
+
+                            <div class="col-md-6">
+                              <label>Số điện thoai*</label>
+                              <input type="tel" placeholder="Số điện thoai" [(ngModel)]="address.phoneaddress">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Số nhà*</label>
+                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Đường*</label>
+                              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Tỉnh/Thành phố*</label>
+                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
+                            </div>
+
+
+                            <div class="col-md-6">
+                              <label>Quận/Huyện*</label>
+                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Xã/Phường</label>
+                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
+                            Save changes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="address_check1==false">
+                <h5>Địa chỉ giao hàng</h5>
+                <p>Nhấn "Thêm" để thêm địa chỉ giao hàng</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppupAdd4">
+                  Thêm
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="poppupAdd4" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+                        <div class="col">
+                          <div class="row row-50">
+
+                            <div class="col-md-6">
+                              <label>Số điện thoai*</label>
+                              <input type="text" placeholder="Số điện thoai" [(ngModel)]="address.phoneaddress">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Số nhà*</label>
+                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Đường*</label>
+                              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Tỉnh/Thành phố*</label>
+                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
+                            </div>
+
+
+                            <div class="col-md-6">
+                              <label>Quận/Huyện*</label>
+                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>Xã/Phường</label>
+                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
+                            Save changes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
               </div>
             </div>
           </div>
-
         </div>
+        <!--        End address-->
       </div>
     </div>
-  </div>
-  <div class="container-fluid" *ngIf="user == null" style="text-align: center;height: 300px">
-    <div style="margin-top:30px">
-      <i class="fa fa-user" style="color: gray;font-size: 100px;margin-bottom: 20px"></i>
-      <h1>Bạn chưa đăng nhập</h1>
-      <button routerLink="/login" class="btn">Đăng nhập</button>
+    <div class="container-fluid" *ngIf="user == null" style="text-align: center;height: 300px">
+      <div style="margin-top:30px">
+        <i class="fa fa-user" style="color: gray;font-size: 100px;margin-bottom: 20px"></i>
+        <h1>Bạn chưa đăng nhập</h1>
+        <button routerLink="/login" class="btn">Đăng nhập</button>
+      </div>
     </div>
   </div>
 </div>

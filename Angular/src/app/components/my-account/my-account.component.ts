@@ -20,22 +20,27 @@ export class MyAccountComponent implements OnInit {
   model: any = {phone: 0}
   is_edit: boolean = true;
   check: boolean = false;
-  listOrder: Order[]=[];
-  isChange:boolean = false;
-  taget:CartItem[]|any;
-
+  listOrder: Order[] = [];
+  isChange: boolean = false;
+  taget: CartItem[] | any;
+  paymentAddress: string | any;
+  shippingAddress: string | any;
+  address_check: boolean = false;
+  address_check1: boolean = false;
+  address: any = {};
 
   constructor(private userService: UserService,
               private router: Router,
               private activRouter: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private orderService:OrderService,
-              ) {
+              private orderService: OrderService,
+  ) {
   }
 
   ngOnInit(): void {
     this.user = this.userService.userValue;
     this.getOrder();
+    this.loadAddress();
   }
 
   logout() {
@@ -98,21 +103,21 @@ export class MyAccountComponent implements OnInit {
   changePass() {
     let mess = '';
     let check = false;
-    let lenght =false
+    let lenght = false
     if (this.model.password == this.model.confirmpass) {
       check = true;
     } else {
       check = false;
       mess += ('(Password does not match)')
     }
-    if (this.model.password!=undefined&&(this.model.password.length >= 6 && this.model.password.length <= 18)) {
+    if (this.model.password != undefined && (this.model.password.length >= 6 && this.model.password.length <= 18)) {
       lenght = true;
     } else {
       lenght = false;
       mess += (' (New password is more than 6 characters and less than 18 characters) ')
     }
-    if ('1909'+this.userService.encryptMd5(this.model.currentPass)+'1909' == this.user.password && check == true&&lenght==true) {
-      this.userService.changePassword('1909'+this.userService.encryptMd5(this.model.password)+'1909').subscribe((data) => {
+    if ('1909' + this.userService.encryptMd5(this.model.currentPass) + '1909' == this.user.password && check == true && lenght == true) {
+      this.userService.changePassword('1909' + this.userService.encryptMd5(this.model.password) + '1909').subscribe((data) => {
         mess = (' (Change password successful)');
         window.alert('Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại tài khoản!');
         this.userService.logout();
@@ -121,33 +126,35 @@ export class MyAccountComponent implements OnInit {
     } else {
       mess += ' (Old password is incorrect)'
     }
-    console.log(mess+ ' check:'+check+ ' lenght:'+lenght)
+    console.log(mess + ' check:' + check + ' lenght:' + lenght)
 
   }
+
   // lấy đơn hàng từ data.json
-  getOrder(){
-   this.orderService.getOrder().subscribe((t)=>this.listOrder= t);
+
+  getOrder() {
+    this.orderService.getOrder().subscribe((t) => this.listOrder = t);
   }
 
-  updateOrder(id:number){
-    if(this.isChange == true){
-      let item:any;
-      for(let i of this.listOrder){
-        if(i.id == id){
-          item = new Order(i.userName,i.discount,i.status,i.cartItem);
+  updateOrder(id: number) {
+    if (this.isChange == true) {
+      let item: any;
+      for (let i of this.listOrder) {
+        if (i.id == id) {
+          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code,i.paymentAddress,i.shippingAddress);
         }
       }
       this.getOrder();
-      this.isChange =false;
-      this.orderService.updateOrder(item,id).subscribe();
+      this.isChange = false;
+      this.orderService.updateOrder(item, id).subscribe();
     }
   }
 
-  minus(id:any){
-    for (let item of this.listOrder){
-      for (let i = 0; i <item.cartItem.length ; i++) {
-        if(item.cartItem[i].id == id){
-          if(item.cartItem[i].qty>1){
+  minus(id: any) {
+    for (let item of this.listOrder) {
+      for (let i = 0; i < item.cartItem.length; i++) {
+        if (item.cartItem[i].id == id) {
+          if (item.cartItem[i].qty > 1) {
             this.isChange = true;
             item.cartItem[i].qty--;
           }
@@ -156,32 +163,62 @@ export class MyAccountComponent implements OnInit {
     }
   }
 
-  pluss(id:any){
-    for (let item of this.listOrder){
-      for (let i = 0; i <item.cartItem.length ; i++) {
-        if(item.cartItem[i].id == id){
-            this.isChange = true;
-            item.cartItem[i].qty++;
-          }
+  pluss(id: any) {
+    for (let item of this.listOrder) {
+      for (let i = 0; i < item.cartItem.length; i++) {
+        if (item.cartItem[i].id == id) {
+          this.isChange = true;
+          item.cartItem[i].qty++;
         }
       }
     }
+  }
 
-    deleteItemInOrder(id:any){
-      for (let item of this.listOrder){
-        for (let i = 0; i <item.cartItem.length ; i++) {
-          if(item.cartItem[i].id == id){
-            item.cartItem.splice(i,1);
-          }
+  deleteItemInOrder(id: any) {
+    for (let item of this.listOrder) {
+      for (let i = 0; i < item.cartItem.length; i++) {
+        if (item.cartItem[i].id == id) {
+          item.cartItem.splice(i, 1);
         }
       }
     }
+  }
 
-    deleteOrder(id:any){
+  deleteOrder(id: any) {
     this.orderService.deleteOrder(id).subscribe();
     this.getOrder();
+  }
+
+  loadAddress() {
+    this.paymentAddress = this.user.paymentAddress;
+    this.shippingAddress = this.user.shippingAddress;
+    if (this.paymentAddress != undefined) {
+      this.address_check = true;
+    }
+    if (this.shippingAddress != undefined || this.shippingAddress) {
+      this.address_check1 = true;
     }
 
+  }
+
+  putAddress() {
+    if (this.address.value != '') {
+      this.userService.putPaymentAddress(this.address).subscribe((data) => {
+        this.userInfo = data;
+        this.loadUser();
+      })
+    }
+  }
+
+  putAddress1() {
+    console.log(this.address.toString())
+    if (this.address.value != '') {
+      this.userService.putShippingAddress(this.address).subscribe((data) => {
+        this.userInfo = data;
+        this.loadUser();
+      })
+    }
+  }
 }
 
 

@@ -2583,7 +2583,76 @@
       "category": "1/2"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "phone": "01699491909",
+      "username": "ngonghia19091",
+      "id": 1,
+      "password": "1909fcea920f7412b5da7be0cf42b8c937591909",
+      "fullname": "Ngô Minh Nghĩa",
+      "listVoucher": [],
+      "paymentAddress": {
+        "phoneaddress": "0399491909",
+        "apartment": "123",
+        "province": "Lâm Đồng",
+        "street": "Hùng VUơng",
+        "district": "Lâm Hà",
+        "wards": "Đạ Đờn"
+      }
+    },
+    {
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "phone": "01699491909",
+      "username": "ngonghia",
+      "id": 2,
+      "password": "1909e10adc3949ba59abbe56e057f20f883e1909",
+      "fullname": "TRẦN TẤN TÀI",
+      "listVoucher": [],
+      "paymentAddress": {
+        "phoneaddress": "01699491909",
+        "apartment": "123",
+        "street": "Hùng Vương",
+        "province": "Lâm Đồng",
+        "district": "Lâm Hà",
+        "wards": "Đạ Đờn"
+      },
+      "shippingAddress": {
+        "phoneaddress": "12345678",
+        "apartment": "123",
+        "province": "23123",
+        "street": "12323",
+        "district": "123123",
+        "wards": "13123"
+      }
+    },
+    {
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "phone": "ngonghia19091",
+      "username": "admin1",
+      "id": 3,
+      "password": "1909fcea920f7412b5da7be0cf42b8c937591909",
+      "fullname": "Ngô Minh Nghĩa",
+      "listVoucher": [],
+      "paymentAddress": {
+        "phoneaddress": "0399491909",
+        "apartment": "123",
+        "street": "Cầu Đạ Đờn",
+        "province": "Lâm Đồng",
+        "district": "Lâm Hà",
+        "wards": "Đạ Đờn"
+      },
+      "shippingAddress": {
+        "phoneaddress": "sda",
+        "apartment": "dá",
+        "province": "ád",
+        "wards": "ád",
+        "street": "ád",
+        "district": "ád"
+      }
+    }
+  ],
   "cart": [],
-  "orders": []
+  "orders": [
+  ]
 }

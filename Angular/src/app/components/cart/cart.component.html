@@ -1,38 +1,39 @@
-
-
-
 <div class="cart-page">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-8">
         <div class="cart-page-inner">
           <div class="table-responsive">
-              <div class="center" *ngIf="cartItems.length == 0">
-                <img src="" alt="">
-                <h4>Your Cart is Empty.</h4>
-                <h6>Add item to it now</h6>
-                <button class="btn btn-primary">Shop now</button>
-              </div>
+            <div class="center" *ngIf="cartItems.length == 0">
+              <img src="" alt="">
+              <h4>Không có gì trong giỏ hàng</h4>
+              <h6>Tìm kiếm và thêm sản phân ngay bây giờ</h6>
+              <a routerLink="/products" routerLinkActive="active">
+                <button class="btn btn-primary">Shop Now</button>
+              </a>
+            </div>
             <div class="center" *ngIf="cartItems.length > 0">
               <table class="table table-bordered">
-                <tbody class="align-middle"*ngFor="let item of cartItems">
+                <tbody class="align-middle" *ngFor="let item of cartItems">
                 <tr>
-                      <td>
-                        <div class="img">
-                          <img  alt="Image" src="{{item.product.img}}">
-                          <p>{{ item.product.productname}}</p>
-                        </div>
-                      </td>
-                      <td>{{item.product.price|currency:'VND'}}</td>
-                      <td>
-                        <div class="qty">
-                          <button class="btn-minus" (click)="clickMinus(item.id)"><i class="fa fa-minus"></i></button>
-                          <input type="text" value="{{item.qty}}">
-                          <button class="btn-plus" (click)="clickPluss(item.id)"><i class="fa fa-plus"></i></button>
-                        </div>
-                      </td>
-                      <td>{{item.product.price*(item.qty) |currency:'VND'}} </td>
-                      <td><button (click)="deleteCartItem(item.id)"><i class="fa fa-trash" ></i></button></td>
+                  <td>
+                    <div class="img">
+                      <img alt="Image" src="{{item.product.img}}">
+                      <p>{{ item.product.productname}}</p>
+                    </div>
+                  </td>
+                  <td>{{item.product.price|currency:'VND'}}</td>
+                  <td>
+                    <div class="qty">
+                      <button class="btn-minus" (click)="clickMinus(item.id)"><i class="fa fa-minus"></i></button>
+                      <input type="text" value="{{item.qty}}">
+                      <button class="btn-plus" (click)="clickPluss(item.id)"><i class="fa fa-plus"></i></button>
+                    </div>
+                  </td>
+                  <td>{{item.product.price * (item.qty) |currency:'VND'}} </td>
+                  <td>
+                    <button (click)="deleteCartItem(item.id)"><i class="fa fa-trash"></i></button>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -54,13 +55,154 @@
               <div class="cart-summary">
                 <div class="cart-content">
                   <h1>Cart Summary</h1>
-<!--                  <p>Sub Total<span>{{cartTotal|currency:'VND'}}</span></p>-->
-<!--                  <p>Shipping Cost<span>{{feeshippcost|currency:'VND'}}</span></p>-->
-<!--                  <h2>Grand Total<span>{{cartTotal+feeshippcost|currency:'VND'}}</span></h2>-->
+                  <p>Tổng<span>{{getPrice()|currency:'VND'}}</span></p>
+                  <p>Phí vận chuyển<span>{{shipCost()|currency:'VND'}}</span></p>
+                  <h2>Tổng tiền<span>{{getPrice() + shipCost()|currency:'VND'}}</span></h2>
                 </div>
                 <div class="cart-btn">
-                  <button >Update Cart</button>
-                  <button (click)="addNewOrder()">Checkout</button>
+                  <button>Update Cart</button>
+                  <button type="button" data-toggle="modal" data-target="#poppupCheckOut">
+                    Thanh toán
+                  </button>
+
+                  <!--popup thanh toan-->
+                  <div class="modal fade bd-example-modal-lg" id="poppupCheckOut" tabindex="-1" role="dialog"
+                       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Thông tin đơn hàng </h5>
+                          <button type="button" data-dismiss="modal" aria-label="Close"
+                                  style="width: 30px;height: 30px;text-align: center">X
+                          </button>
+                        </div>
+                        <div class="modal-body" style="height:450px; width: 100%;overflow: scroll ">
+                          <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Sản phẩm</th>
+                              <th scope="col">Số lượng</th>
+                              <th scope="col">Giá</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngFor="let it of cartItems">
+                            <tr>
+                              <td>
+                                <div class="img">
+                                  <img src="{{it.product.img}}" alt="Image">
+                                  <p>{{it.product.productname}}</p>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="qtys">
+                                  <button class="btn-minus" (click)="clickMinus(it.id)"><i class="fa fa-minus"></i>
+                                  </button>
+                                  <input type="text" value="{{it.qty}}">
+                                  <button class="btn-plus" (click)="clickPluss(it.id)"><i class="fa fa-plus"></i>
+                                  </button>
+                                </div>
+                              </td>
+                              <td>{{it.product.pricesale * it.qty|currency:'VND'}}</td>
+                              <td class="order">
+                                <button (click)="deleteCartItem(it.id)"><i class="fa fa-trash"></i></button>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                          <br>
+                          <br>
+                          <div class="cart-content">
+
+                            <p>Tổng<span>{{getPrice()|currency:'VND'}}</span></p>
+                            <p>Phí vận chuyển<span>{{shipCost()|currency:'VND'}}</span></p>
+                            <h2>Tổng tiền<span>{{getPrice() + shipCost()|currency:'VND'}}</span></h2>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="col-md-3" data-dismiss="modal">Quay lại</button>
+                          <button type="button" class="col-md-3" data-dismiss="modal" (click)="getAddress()"
+                                  data-toggle="modal" data-target="#poppupAddress">Tiếp tục
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end-->
+
+                  <div class="modal fade bd-example-modal-lg" id="poppupAddress" tabindex="-1" role="dialog"
+                       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Xác nhận địa chỉ </h5>
+                          <button type="button" data-dismiss="modal" aria-label="Close"
+                                  style="width: 30px;height: 30px;text-align: center">X
+                          </button>
+                        </div>
+                        <div class="modal-body" style="height:450px; width: 100% ">
+                          <div class="row">
+                            <div class="col-md-6" *ngIf="address_check==true">
+                              <h5>Địa chỉ thanh toán</h5>
+                              <p> {{paymentAddress.apartment + ', ' + paymentAddress.street}}</p>
+                              <p>{{paymentAddress.wards + ', ' + paymentAddress.district + ', ' + paymentAddress.province}}</p>
+                              <p>SĐT: {{paymentAddress.phoneaddress}}</p>
+                              <button type="button" class="btn" data-toggle="modal" data-target="#popupedit1">
+                                Sửa
+                              </button>
+                            </div>
+                            <div class="col-md-6" *ngIf="address_check==false">
+                              <h5>Địa chỉ thanh toán</h5>
+                              <p>Nhấn "Thêm" để thêm địa chỉ thanh toán</p>
+                              <!-- Button trigger modal -->
+                              <button type="button" class="btn btn-primary" data-toggle="modal"
+                                      data-target="#popupAdd">
+                                Thêm
+                              </button>
+
+
+                            </div>
+                            <div class="col-md-6" *ngIf="address_check1==true">
+                              <h5>Địa chỉ giao hàng</h5>
+                              <p> {{shippingAddress.apartment + ', ' + shippingAddress.street}}</p>
+                              <p>{{shippingAddress.wards + ', ' + shippingAddress.district + ', ' + shippingAddress.province}}</p>
+                              <p>SĐT: {{shippingAddress.phoneaddress}}</p>
+                              <button type="button" class="btn" data-toggle="modal" data-target="#popupEdit2">
+                                Sửa
+                              </button>
+                            </div>
+                            <div class="col-md-6" *ngIf="address_check1==false">
+                              <h5>Địa chỉ giao hàng</h5>
+                              <p>Nhấn "Thêm" để thêm địa chỉ giao hàng</p>
+                              <!-- Button trigger modal -->
+                              <button type="button" class="btn btn-primary" data-toggle="modal"
+                                      data-target="#poppupAdd1">
+                                Thêm
+                              </button>
+
+
+                            </div>
+                          </div>
+                          <br>
+                          <p style="color: red">* Lưu ý kiểm tra địa chỉ giao hàng, địa chỉ thanh toán và thông tin
+                            người gửi trước khi thanh toán. </p>
+                          <p style="color: #359bfa">* Nếu các thông tin đều chính xác thì nhấn nút "Đặt hàng" để đặt
+                            hàng </p>
+
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="col-md-3" data-toggle="modal" data-target="#poppupCheckOut"
+                                  data-dismiss="modal">Quay lại
+                          </button>
+                          <button type="button" class="col-md-3" data-dismiss="modal" data-toggle="modal"
+                                  data-target="#popupOrderSucessfull" (click)="addNewOrder()">Đặt hàng
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -70,5 +212,308 @@
     </div>
   </div>
 </div>
+<!--edit1-->
+<div class="modal fade bd-example-modal-lg" id="popupedit1" tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cập nhật địa chỉ thanh toán </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+        <div class="col">
+          <div class="row row-50">
+
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input type="tel" placeholder="Số điện thoai"
+                     value="{{user.paymentAddress.phoneaddress}}"
+                     [(ngModel)]="address.phoneaddress">
+            </div>
+
+            <div class="col-md-6">
+              <label>Số nhà*</label>
+              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+            </div>
+
+            <div class="col-md-6">
+              <label>Đường*</label>
+              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
+            </div>
+
+            <div class="col-md-6">
+              <label>Tỉnh/Thành phố*</label>
+              <input type="text" placeholder="Tỉnh/Thành phố"
+                     [(ngModel)]="address.province">
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Quận/Huyện*</label>
+              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+            </div>
+
+            <div class="col-md-6">
+              <label>Xã/Phường</label>
+              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"
+                  (click)="putAddress()">Save
+            changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--edit2-->
+<div class="modal fade bd-example-modal-lg" id="popupEdit2" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cập nhật địa chỉ giao hàng </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+        <div class="col">
+          <div class="row row-50">
+
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="address.phoneaddress">
+            </div>
+
+            <div class="col-md-6">
+              <label>Số nhà*</label>
+              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+            </div>
+
+            <div class="col-md-6">
+              <label>Đường*</label>
+              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
+            </div>
+
+            <div class="col-md-6">
+              <label>Tỉnh/Thành phố*</label>
+              <input type="text" placeholder="Tỉnh/Thành phố"
+                     [(ngModel)]="address.province">
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Quận/Huyện*</label>
+              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+            </div>
+
+            <div class="col-md-6">
+              <label>Xã/Phường</label>
+              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                  data-target="#poppupAddress">Close
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"
+                  (click)="putAddress1()" data-toggle="modal" data-target="#poppupAddress">
+            Lưu lại địa chỉ
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--add1-->
+<div class="modal fade bd-example-modal-lg" id="poppupAdd1" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm địa chỉ giao hàng </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+        <div class="col">
+          <div class="row row-50">
+
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input type="text" placeholder="Số điện thoai"
+                     [(ngModel)]="address.phoneaddress">
+            </div>
+
+            <div class="col-md-6">
+              <label>Số nhà*</label>
+              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+            </div>
+
+            <div class="col-md-6">
+              <label>Đường*</label>
+              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
+            </div>
+
+            <div class="col-md-6">
+              <label>Tỉnh/Thành phố*</label>
+              <input type="text" placeholder="Tỉnh/Thành phố"
+                     [(ngModel)]="address.province">
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Quận/Huyện*</label>
+              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+            </div>
+
+            <div class="col-md-6">
+              <label>Xã/Phường</label>
+              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+                  data-target="#poppupAddress"
+                  (click)="putAddress1()">
+            Lưu lại địa chỉ
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--add2-->
+<div class="modal fade bd-example-modal-lg" id="popupAdd" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px;">
+
+        <div class="col">
+          <div class="row row-50">
+
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input type="text" placeholder="Số điện thoai"
+                     [(ngModel)]="address.phoneaddress">
+            </div>
+
+            <div class="col-md-6">
+              <label>Số nhà*</label>
+              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
+            </div>
+
+            <div class="col-md-6">
+              <label>Đường*</label>
+              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
+            </div>
+
+            <div class="col-md-6">
+              <label>Tỉnh/Thành phố*</label>
+              <input type="text" placeholder="Tỉnh/Thành phố"
+                     [(ngModel)]="address.province">
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Quận/Huyện*</label>
+              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+            </div>
+
+            <div class="col-md-6">
+              <label>Xã/Phường</label>
+              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                  data-target="#poppupAddress">Close
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"
+                  (click)="putAddress()">Lưu lại địa chỉ
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--order successfull-->
+<div class="modal fade bd-example-modal-lg" id="popupOrderSucessfull" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document" >
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title">Đặt hàng thành công </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px;width: 100%; margin: 0 auto ;background-color: rgba(120,234,234,0.52);display: block ">
+        <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="a" height="120"
+             style="display: block;margin: 0 auto; border: 0px;"/>
+        <h2>Cảm ơn bạn đã đặt hàng</h2>
+        <h2>Mã đơn hàng {{' #' + code}}</h2>
+
+
+        <div class="cart-content">
+
+          <h5>Tổng: <span>{{getPrice()|currency:'VND'}}</span></h5>
+          <h5>Phí vận chuyển: <span>{{shipCost()|currency:'VND'}}</span></h5>
+          <h5>Tổng tiền: <span>{{getPrice() + shipCost()|currency:'VND'}}</span></h5>
+          <h5>Địa chỉ giao hàng: {{addressSuccess}}
+          </h5>
+        </div>
+
+
+      </div>
+
+      <button type="button" class="btn" style="width: 50%; margin:0 auto;margin-bottom: 20px;border-color: #201600"
+              data-dismiss="modal">Close
+      </button>
+
+
+    </div>
+  </div>
+
+</div>
+
+
 <!-- Cart End -->
 

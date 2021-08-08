@@ -63,16 +63,67 @@ export class UserService {
     const md5=new Md5();
     return md5.appendAsciiStr(code).end();
   }
-  updateInfoAccount(data:any):Observable<any>{
-    return this.http.put(userUrl+'/'+this.userValue.id +'?username='+ this.userValue.username,
-      {email:data.email,phone:data.phone,address:data.address,username:this.userValue.username,
-      id:this.userValue.id,password:this.userValue.password,fullname:this.userValue.fullname,listVoucher:this.userValue.listVoucher });
+  updateInfoAccount(data: any): Observable<any> {
+    return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
+      {
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        username: this.userValue.username,
+        id: this.userValue.id,
+        password: this.userValue.password,
+        fullname: this.userValue.fullname,
+        listVoucher: this.userValue.listVoucher,
+        paymentAddress: this.userValue.paymentAddress,
+        shippingAddress: this.userValue.paymentAddress
+      });
 
   }
-  changePassword(data:any):Observable<any>{
-    return this.http.put(userUrl+'/'+this.userValue.id +'?username='+ this.userValue.username,
-      {email:this.userValue.email,phone:this.userValue.phone,address:this.userValue.adress,username:this.userValue.username,
-        id:this.userValue.id,password:data,fullname:this.userValue.fullname,listVoucher:this.userValue.listVoucher });
 
+  changePassword(data: any): Observable<any> {
+    return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
+      {
+        email: this.userValue.email,
+        phone: this.userValue.phone,
+        address: this.userValue.adress,
+        username: this.userValue.username,
+        id: this.userValue.id,
+        password: data,
+        fullname: this.userValue.fullname,
+        listVoucher: this.userValue.listVoucher,
+        paymentAddress: this.userValue.paymentAddress,
+        shippingAddress: this.userValue.paymentAddress
+      });
+
+  }
+  putPaymentAddress(data: any): Observable<any> {
+    return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
+      {
+        email: this.userValue.email,
+        phone: this.userValue.phone,
+        address: this.userValue.adress,
+        username: this.userValue.username,
+        id: this.userValue.id,
+        password: this.userValue.password,
+        fullname: this.userValue.fullname,
+        listVoucher: this.userValue.listVoucher,
+        paymentAddress: data,
+        shippingAddress: this.userValue.shippingAddress
+      });
+  }
+  putShippingAddress(data: any): Observable<any> {
+    return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
+      {
+        email: this.userValue.email,
+        phone: this.userValue.phone,
+        address: this.userValue.adress,
+        username: this.userValue.username,
+        id: this.userValue.id,
+        password: this.userValue.password,
+        fullname: this.userValue.fullname,
+        listVoucher: this.userValue.listVoucher,
+        paymentAddress: this.userValue.paymentAddress,
+        shippingAddress: data
+      });
   }
 }
