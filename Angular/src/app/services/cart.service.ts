@@ -58,21 +58,19 @@ lenghtCart:number=0;
 
   getAllProWithCart():Observable<CartItem[]>{
     return this.http.get<CartItem[]>(cartUrl);
-
   }
 
 
   addToCart(cartI:any){
     let check = false;
     for (let i = 0; i < this.items.length ; i++){
-      if(cartI.id == this.items[i].id){
+      if(cartI.product.id == this.items[i].product.id){
         this.items[i].qty++;
         check = true;
         break;
       }
     }
     if(!check){
-
       this.items.push(cartI);
     }
   }
@@ -85,15 +83,15 @@ lenghtCart:number=0;
     for (let item of this.items) {
       let check = false;
         for(let it of list){
-          if(item.id == it.id){
-            let ite = new CartItem(lenghtCart,item.product,item.qty,this.getUserName());
+          if(item.product.id == it.product.id){
+            let ite = new CartItem(it.product,it.qty+item.qty,this.getUserName());
             this.putCartItem(ite).subscribe(()=>console.log('><'));
             check = true;
             break;
           }
         }
         if(!check){
-          let ite = new CartItem(lenghtCart,item.product,item.qty,this.getUserName());
+          let ite = new CartItem(item.product,item.qty,this.getUserName());
           this.addProductToCart(ite).subscribe(()=>console.log('.'));
         }
     }
@@ -112,7 +110,7 @@ lenghtCart:number=0;
   //xoa CartItem trong cart off
   deleteItemOfOff(id:number){
     for (let x=0;x<this.items.length;x++) {
-      if(id == this.items[x].id){
+      if(id == this.items[x].product.id){
         this.items.splice(x,1);
       }
     }
@@ -121,7 +119,7 @@ lenghtCart:number=0;
   //tăng so luong trong cart off
   pluss(id:number){
     for (let i = 0; i < this.items.length ; i++) {
-      if(id == this.items[i].id){
+      if(id == this.items[i].product.id){
         this.items[i].qty++;
       }
     }
@@ -129,7 +127,7 @@ lenghtCart:number=0;
 //giảm so luong trong cart off
   minus(id:number){
     for (let i = 0; i < this.items.length ; i++) {
-      if(id == this.items[i].id){
+      if(id == this.items[i].product.id){
         this.items[i].qty--;
       }
     }

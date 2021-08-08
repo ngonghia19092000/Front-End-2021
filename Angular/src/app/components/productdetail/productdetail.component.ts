@@ -78,7 +78,7 @@ itemPro={id:0,product:[],qty:0,userName:''}
       console.log("Đã đăng nhập");
     }
     else {
-      let items = new CartItem( product.id, product, this.value,'');
+      let items = new CartItem(product, this.value,'');
       this.cartSer.addToCart(items);
       console.log("Chưa đăng nhập");
 
@@ -86,44 +86,45 @@ itemPro={id:0,product:[],qty:0,userName:''}
   }
 
   putCart(product:Product){
-    // let items = new CartItem(product.id, product, this.value,this.cartSer.getUserName());
-    // let check = false;
-    // for(let item of this.cartItem){
-    //   if(item.id == product.id){
-    //     items.qty= items.qty + item.qty;
-    //     this.cartSer.updateQtyOfCartItem(items).subscribe(()=> console.log('update'));
-    //     check = true;
-    //     this.update();
-    //     break;
-    //   }
-    // }
-    // if(check == false) {
-    //   this.cartSer.addProductToCart(items).subscribe(()=>console.log(items.product.productname));
-    //   this.update();
-    // }
-
-
-
-    // @ts-ignore
-    this.itemPro.product=product;
-    this.itemPro.userName=this.cartSer.getUserName();
+    let items = new CartItem( product, this.value,this.cartSer.getUserName());
     let check = false;
-    for (let i = 0; i <this.cartItem.length ; i++) {
-      if(this.cartItem[i].product.id==product.id){
-        this.itemPro.id=this.cartItem[i].id;
-        this.itemPro.qty= this.value+this.cartItem[i].qty;
-        this.cartSer.updateQtyOfCartItem(this.itemPro).subscribe(()=> console.log('update'));
+    for(let item of this.cartItem){
+      if(item.product.id == product.id){
+        items = item;
+        item.qty = items.qty + item.qty;
+        this.cartSer.updateQtyOfCartItem(items).subscribe(()=> console.log('update'));
         check = true;
         this.update();
         break;
       }
     }
     if(check == false) {
-      this.itemPro.id=(this.lenghtCart+1)
-      this.itemPro.qty=this.value;
-      this.cartSer.addProductToCart(this.itemPro).subscribe(()=>console.log(this.itemPro.product));
+      this.cartSer.addProductToCart(items).subscribe(()=>console.log(items.product.productname));
       this.update();
     }
+
+
+
+    // // @ts-ignore
+    // this.itemPro.product=product;
+    // this.itemPro.userName=this.cartSer.getUserName();
+    // let check = false;
+    // for (let i = 0; i <this.cartItem.length ; i++) {
+    //   if(this.cartItem[i].product.id==product.id){
+    //     this.itemPro.id=this.cartItem[i].id;
+    //     this.itemPro.qty= this.value+this.cartItem[i].qty;
+    //     this.cartSer.updateQtyOfCartItem(this.itemPro).subscribe(()=> console.log('update'));
+    //     check = true;
+    //     this.update();
+    //     break;
+    //   }
+    // }
+    // if(check == false) {
+    //   this.itemPro.id=(this.lenghtCart+1)
+    //   this.itemPro.qty=this.value;
+    //   this.cartSer.addProductToCart(this.itemPro).subscribe(()=>console.log(this.itemPro.product));
+    //   this.update();
+    // }
 
   }
   lenghtItemWithCart(){

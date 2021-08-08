@@ -101,7 +101,7 @@ export class ProductsComponent implements OnInit {
       let it:any;
       for (let i of this.productList) {
         if(i.id == id){
-          it = new CartItem(i.id,i,1,'');
+          it = new CartItem(i,1,'');
         }
       }
       this.cartService.addToCart(it);
@@ -113,13 +113,13 @@ public AddToCart(productid:number){
   let check = false;
    for (let i of this.productList) {
      if(i.id == productid){
-       it = new CartItem(i.id,i,1,this.cartService.getUserName());
+       it = new CartItem(i,1,this.cartService.getUserName());
      }
    }
 
   for (let item of this.cartItem) {
-    if(productid == item.id){
-      it.qty = item.qty++;
+    if(productid == item.product.id){
+      it = item;
       this.cartService.updateQtyOfCartItem(it).subscribe();
       this.getCart();
       check = true;

@@ -25,14 +25,14 @@
                   <td>{{item.product.price|currency:'VND'}}</td>
                   <td>
                     <div class="qty">
-                      <button class="btn-minus" (click)="clickMinus(item.id)"><i class="fa fa-minus"></i></button>
+                      <button class="btn-minus" (click)="clickMinus(item.product.id)"><i class="fa fa-minus"></i></button>
                       <input type="text" value="{{item.qty}}">
-                      <button class="btn-plus" (click)="clickPluss(item.id)"><i class="fa fa-plus"></i></button>
+                      <button class="btn-plus" (click)="clickPluss(item.product.id)"><i class="fa fa-plus"></i></button>
                     </div>
                   </td>
                   <td>{{item.product.price * (item.qty) |currency:'VND'}} </td>
                   <td>
-                    <button (click)="deleteCartItem(item.id)"><i class="fa fa-trash"></i></button>
+                    <button (click)="deleteCartItem(item.product.id)"><i class="fa fa-trash"></i></button>
                   </td>
                 </tr>
                 </tbody>
@@ -232,7 +232,6 @@
             <div class="col-md-6">
               <label>Số điện thoai*</label>
               <input type="tel" placeholder="Số điện thoai"
-                     value="{{user.paymentAddress.phoneaddress}}"
                      [(ngModel)]="address.phoneaddress">
             </div>
 

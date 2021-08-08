@@ -64,7 +64,7 @@ btn:boolean=false;
   clickPluss(id: number) {
     if (this.cartService.getUserName() != '') {
       for (let i of this.cartItems) {
-        if (id == i.id) {
+        if (id == i.product.id) {
           i.qty++;
           this.cartService.putCartItem(i).subscribe(() => console.log("update"));
         }
@@ -79,7 +79,7 @@ btn:boolean=false;
   clickMinus(id: number) {
     if (this.cartService.getUserName() != '') {
       for (let i of this.cartItems) {
-        if (id == i.id) {
+        if (id == i.product.id) {
           if (i.qty > 1) {
             i.qty--;
             this.cartService.putCartItem(i).subscribe(() => console.log("update"));
@@ -93,11 +93,13 @@ btn:boolean=false;
 
   deleteCartItem(id: number) {
     if (this.cartService.getUserName() != '') {
-      this.cartService.deleteItem(id).subscribe((s) => {
-        window.alert("Đã Xóa.")
-        this.loadCartItems();
-
-      });
+      for(let i of this.cartItems){
+        if(i.product.id == id)
+          this.cartService.deleteItem(i.id).subscribe((s) => {
+            window.alert("Đã Xóa.")
+            this.loadCartItems();
+          });
+      }
     } else {
       this.cartService.deleteItemOfOff(id);
       window.alert("xóa sp từ cart off");
