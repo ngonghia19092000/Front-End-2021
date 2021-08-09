@@ -7,6 +7,8 @@ import {first} from "rxjs/operators";
 import {BehaviorSubject, Observable} from "rxjs";
 import {CartService} from "../../services/cart.service";
 import {CartItem} from "../../models/cart-item";
+import {Product} from "../../models/product";
+import {cartUrl} from "../../../config/api";
 
 
 @Component({
@@ -21,31 +23,39 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string | any;
-  notification:string= '';
+  notification: string = '';
   public user: Observable<User> | any;
-  private userSubject: BehaviorSubject<User> | any;
-  private lenghtCart: any;
-  private cartList: CartItem[]=[];
-
+  userSubject: BehaviorSubject<User> | any;
+  lenghtCart: any;
+  cartList: CartItem[] = [];
+  listcartData: any= [];
+  check1: boolean = false;
 
   constructor(private list: UserService,
               private route: ActivatedRoute,
               private api: UserService,
               private router: Router,
-              private cartService:CartService) {
+              private cartService: CartService) {
+
     // redirect to home if already logged in
     if (this.api.userValue) {
       this.router.navigate(['/']);
 
-
     }
-    this.lenghtCart=this.lenghtItemWithCart();
+
+    this.lenghtCart = this.lenghtItemWithCart();
+
+
+
+
   }
 
   ngOnInit(): void {
     this.getUser();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-this.getAllCart();
+    this.getAllCart();
+
+
   }
 
   getUser() {
@@ -54,32 +64,71 @@ this.getAllCart();
           this.listUsers = data
         }
       );
-    console.log(this.listUsers[0]);
+  }
+
+  getItemData(username:any) {
+   this.cartService.getAllCartItems(username).subscribe((data) => {
+      this.listcartData = data;
+    });
+return this.listcartData;
   }
 
   loginAccount() {
     for (let i of this.listUsers) {
       if (this.model.userName === i.username) {
-        if ('1909'+this.api.encryptMd5(<string>this.model.password)+'1909' === i.password) {
+        if ('1909' + this.api.encryptMd5(<string>this.model.password) + '1909' === i.password) {
           this.api.login = true;
-          this.api.addDataLocalStorage(i);
-          this.cartService.putAllCartItemToUser(this.lenghtCart);
-          this.router.navigate([this.returnUrl]);
-          window.location.reload();
+          this.api.addDataLocalStorage(i); this.router.navigate([this.returnUrl]);
+          this.putAllCartItemToUser(this.model.userName);
+
+          // window.location.reload();
           break;
-        }
-        else {
+        } else {
           window.alert("Sai mật khẩu hoặc tài khoản.")
         }
       }
     }
+
   }
-  getAllCart(){
-    this.cartService.getAllProWithCart().subscribe((data)=>{
-      this.cartList=data;
+
+  // thêm tất cả sản phẩm từ cartoff sang cart online
+  putAllCartItemToUser(username:any) {
+      let list:CartItem[] = [];
+      this.cartService.getAllCartItems(username).subscribe((up)=>{
+        list = up;
+        for (let i= 0; i<this.cartService.getItemsOff().length;i++) {
+          let check = false;
+          for(let j=0; j<list.length;j++){
+            if(this.cartService.getItemsOff()[i].product.id == list[j].product.id){
+              let ite = list[j];
+              ite.qty = ite.qty + this.cartService.getItemsOff()[i].qty;
+              this.cartService.putCartItem(ite).subscribe(()=>console.log('><'));
+              check = true;
+              break;
+            }
+          }
+          if(!check){
+            let ite = new CartItem(this.cartService.getItemsOff()[i].product,this.cartService.getItemsOff()[i].qty,this.cartService.getUserName());
+            this.cartService.addProductToCart(ite).subscribe(()=>console.log('.'));
+          }
+
+        }
+      });
+
+  }
+
+  getAllCart() {
+    this.cartService.getAllProWithCart().subscribe((data) => {
+      this.cartList = data;
     });
   }
-  lenghtItemWithCart(){
+
+  lenghtItemWithCart() {
     return this.cartList.length;
+
   }
+
+
+
+
 }

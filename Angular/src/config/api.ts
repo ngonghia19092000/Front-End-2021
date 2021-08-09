@@ -5,4 +5,5 @@ export const cartUrl= baseUrl+'/cart'
 export const searchUser= baseUrl+'/users?username='
 export const userUrl= baseUrl+'/users'
 export const orderUrl= baseUrl+'/orders'
+export const cartCache= baseUrl+'/cartcache'
 

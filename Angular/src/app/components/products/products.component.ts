@@ -55,7 +55,7 @@ export class ProductsComponent implements OnInit {
 
   getCart(){
     this.cartService.getUserName();
-    this.cartService.getAllCartItems().subscribe((t)=>{
+    this.cartService.getAllCartItems( this.cartService.getUserName()).subscribe((t)=>{
       this.cartItem = t;
     })
   }

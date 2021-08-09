@@ -52,7 +52,7 @@ btn:boolean=false;
   loadCartItems() {
     // return this.cartItems = this.cartService.getCart();
     if (this.userservice.userValue) {
-      this.cartService.getAllCartItems().subscribe((up) => {
+      this.cartService.getAllCartItems(this.userservice.userValue.username).subscribe((up) => {
         this.cartItems = up
       });
     } else {

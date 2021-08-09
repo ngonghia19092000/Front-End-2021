@@ -42,7 +42,7 @@ itemPro={id:0,product:[],qty:0,userName:''}
   }
   update(){
     this.cartSer.getUserName();
-      this.cartSer.getAllCartItems().subscribe((up)=>{this.cartItem = up});
+      this.cartSer.getAllCartItems(this.cartSer.getUserName()).subscribe((up)=>{this.cartItem = up});
   }
 
   loadProductDetail(){
@@ -87,14 +87,17 @@ itemPro={id:0,product:[],qty:0,userName:''}
 
   putCart(product:Product){
     let items = new CartItem( product, this.value,this.cartSer.getUserName());
+    let idup=0;
+    console.log('this.value'+ this.value)
     let check = false;
     for(let item of this.cartItem){
       if(item.product.id == product.id){
-        items = item;
-        item.qty = items.qty + item.qty;
+        items.qty += item.qty;
+        items.id=item.id
         this.cartSer.updateQtyOfCartItem(items).subscribe(()=> console.log('update'));
         check = true;
         this.update();
+        console.log(item.product.id +''+ product.id)
         break;
       }
     }
