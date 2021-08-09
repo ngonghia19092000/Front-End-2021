@@ -80,8 +80,6 @@ return this.listcartData;
           this.api.login = true;
           this.api.addDataLocalStorage(i); this.router.navigate([this.returnUrl]);
           this.putAllCartItemToUser(this.model.userName);
-
-          // window.location.reload();
           break;
         } else {
           window.alert("Sai mật khẩu hoặc tài khoản.")

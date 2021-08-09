@@ -16,21 +16,23 @@ export class HeaderComponent implements OnInit {
   usernamee:any  ='';
 
   cartItems:CartItem[] = [];
-  constructor(private userApi:UserService,
-              private router:Router) {
-    this.user = this.userApi.userValue;
-
+  constructor(private userApi:UserService, private router:Router) {
+  this.update();
   }
 
   ngOnInit(): void {
 
+  }
+    update(){
+    setInterval(()=>{
+      this.user = this.userApi.userValue;
+    });
   }
   searchProduct(product:string){
 
   }
   logout() {
     this.userApi.logout();
-    window.location.reload()
     this.router.navigate(['/'])
   }
 

@@ -3,10 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {baseUrl, cartUrl, productUrl, userUrl} from "../../config/api";
 import {CartItem} from "../models/cart-item";
-import {map} from "rxjs/operators";
-import {Product} from "../models/product";
-import {listCartItem} from "../models/listproduct";
-import {ProductService} from "./product.service";
 import {UserService} from "./user.service";
 
 @Injectable({
@@ -77,57 +73,6 @@ export class CartService {
   }
 
 
-
-  //off sang onl
-  putAllCartItemToUser(username:any) {
-    let list:CartItem[] = [];
-    this.getAllCartItems(username).subscribe((up)=>{
-      list = up;
-      for (let i= 0; i<this.getItemsOff().length;i++) {
-        let check = false;
-        for(let j=0; j<list.length;j++){
-          if(this.getItemsOff()[i].product.id == list[j].product.id){
-            let ite = list[j];
-            ite.qty = ite.qty + this.getItemsOff()[i].qty;
-            this.putCartItem(ite).subscribe(()=>console.log('><'));
-            check = true;
-            break;
-          }
-        }
-        if(!check){
-          let ite = new CartItem(this.getItemsOff()[i].product,this.getItemsOff()[i].qty,this.getUserName());
-          this.addProductToCart(ite).subscribe(()=>console.log('.'));
-        }
-
-      }
-    });
-
-    // this.listcartData= this.getItemData(username);
-    // console.log( this.listcartData )
-    // let ite: any = {id: 0, product: Product, qty: 0, userName: ''}
-    // for (let item of this.cartService.getItemsOff()) {
-    //   let check=false;
-    //   for (let i = 0; i < this.listcartData.length; i++) {
-    //     if (item.product.id === this.listcartData[i].product.id) {
-    //       ite.id = this.listcartData[i].product.id;
-    //       ite.product = this.listcartData[i].product;
-    //       ite.qty = this.listcartData[i].qty + item.qty;
-    //       ite.userName = this.user.userName;
-    //       this.cartService.putCartItem(ite).subscribe(() => console.log('><'));
-    //       check = true;
-    //       break;
-    //
-    //     }
-    //     if (!check) {
-    //       let ite1 = new CartItem(item.product, item.qty, this.user.userName);
-    //       this.cartService.addProductToCart(ite1).subscribe(() => console.log('.'));
-    //     }
-    //
-    //
-    //   }
-    // }
-  }
-
 //lay list CartItem tu cartoff
   getItemsOff() {
     return this.items;
@@ -140,10 +85,7 @@ export class CartService {
   }
 
 //xoa CartItem trong cart off
-  deleteItemOfOff(id
-                    :
-                    number
-  ) {
+  deleteItemOfOff(id: number) {
     for (let x = 0; x < this.items.length; x++) {
       if (id == this.items[x].product.id) {
         this.items.splice(x, 1);
@@ -152,10 +94,7 @@ export class CartService {
   }
 
 //tăng so luong trong cart off
-  pluss(id
-          :
-          number
-  ) {
+  pluss(id: number) {
     for (let i = 0; i < this.items.length; i++) {
       if (id == this.items[i].product.id) {
         this.items[i].qty++;
@@ -164,10 +103,7 @@ export class CartService {
   }
 
 //giảm so luong trong cart off
-  minus(id
-          :
-          number
-  ) {
+  minus(id: number) {
     for (let i = 0; i < this.items.length; i++) {
       if (id == this.items[i].product.id) {
         this.items[i].qty--;
