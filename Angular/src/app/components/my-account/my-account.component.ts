@@ -7,6 +7,7 @@ import {OrderService} from "../../services/order.service";
 import {Order} from "../../models/order";
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {CartItem} from "../../models/cart-item";
+import {StatusPipe} from "../../services/filter/status.pipe";
 
 @Component({
   selector: 'app-my-account',
@@ -29,18 +30,28 @@ export class MyAccountComponent implements OnInit {
   address_check1: boolean = false;
   address: any = {};
 
+  //lọc và chia order theo trạng thái
+  orderStatus:string = '';
+  orderStatus_1:Order[]=[];//cho xac nhan
+  orderStatus_2:Order[]=[];//dang giao
+  orderStatus_3:Order[]=[];//da giao
+  orderStatus_4:Order[]=[];//da huy
+
+
   constructor(private userService: UserService,
               private router: Router,
               private activRouter: ActivatedRoute,
               private formBuilder: FormBuilder,
               private orderService: OrderService,
   ) {
+
   }
 
   ngOnInit(): void {
     this.user = this.userService.userValue;
     this.getOrder();
     this.loadAddress();
+    this.fillOrderStatus();
   }
 
   logout() {
@@ -151,26 +162,20 @@ export class MyAccountComponent implements OnInit {
   }
 
   minus(id: any) {
-    for (let item of this.listOrder) {
-      for (let i = 0; i < item.cartItem.length; i++) {
-        if (item.cartItem[i].id == id) {
-          if (item.cartItem[i].qty > 1) {
-            this.isChange = true;
-            item.cartItem[i].qty--;
-          }
-        }
+    for (let i = 0; i < this.taget.length; i++) {
+      if (this.taget[i].id == id) {
+        this.isChange = true;
+        this.taget[i].qty--;
       }
     }
   }
 
   pluss(id: any) {
-    for (let item of this.listOrder) {
-      for (let i = 0; i < item.cartItem.length; i++) {
-        if (item.cartItem[i].id == id) {
+      for (let i = 0; i < this.taget.length; i++) {
+        if (this.taget[i].id == id) {
           this.isChange = true;
-          item.cartItem[i].qty++;
+          this.taget[i].qty++;
         }
-      }
     }
   }
 
@@ -185,8 +190,13 @@ export class MyAccountComponent implements OnInit {
   }
 
   deleteOrder(id: any) {
-    this.orderService.deleteOrder(id).subscribe();
+    for (let item of this.listOrder) {
+      if(item.id == id){
+        this.orderService.updateOrderStatus(item).subscribe();
+      }
+    }
     this.getOrder();
+    this.fillOrderStatus();
   }
 
   loadAddress() {
@@ -219,6 +229,38 @@ export class MyAccountComponent implements OnInit {
       })
     }
   }
+
+  //loc order theo trạng thái
+  public fillOrderStatus() {
+    this.orderStatus_1=[];//cho xac nhan
+    this.orderStatus_2=[];//dang giao
+    this.orderStatus_3=[];//da giao
+    this.orderStatus_4=[];//da huy
+
+    for (const item of this.listOrder) {
+      if (item.status == 'Chờ xác nhận') {
+        this.orderStatus_1.push(item);
+      } else if (item.status == 'Đang Giao') {
+        this.orderStatus_2.push(item);
+      } else if (item.status == 'Đã Giao') {
+        this.orderStatus_3.push(item);
+      } else {
+        this.orderStatus_4.push(item);
+      }
+    }
+  }
+
+  //tổng tiền cho đơn hàng
+  totalPrice(cart:CartItem[],discount:number){
+    let total:number = 0;
+      for(let i of cart){
+        total = total + (i.qty*i.product.pricesale);
+      }
+      return total * discount;
+
+  }
+
+
 }
 
 

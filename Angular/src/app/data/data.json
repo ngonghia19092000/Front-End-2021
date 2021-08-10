@@ -2584,7 +2584,76 @@
     }
   ],
   "users": [
+    {
+      "email": "thebao2590@gmail.com",
+      "phone": "0326141575",
+      "username": "baokaka",
+      "id": 1,
+      "password": "1909c4ca4238a0b923820dcc509a6f75849b1909",
+      "fullname": "Phạm Thế Bảo",
+      "listVoucher": [
+        {
+          "codeDiscount": "232314",
+          "rate": 0.05
+        }
+      ],
+      "paymentAddress": {
+        "phoneaddress": "0326141575",
+        "apartment": "231",
+        "street": "32",
+        "district": "Q3",
+        "province": "HCM",
+        "wards": "P3"
+      }
+    }
   ],
   "cart": [],
-  "orders": []
+  "orders": [
+    {
+      "code": "848931",
+      "userName": "baokaka",
+      "discount": {
+        "codeDiscount": "",
+        "rate": 1
+      },
+      "status": "Chờ xác nhận",
+      "cartItem": [
+        {
+          "qty": 5,
+          "product": {
+            "id": 2,
+            "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+            "img": "assets/img/KYT-Venom-6-247x247.jpg",
+            "price": 1990000,
+            "pricesale": 1890000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "userName": "baokaka",
+          "id": 2
+        }
+      ],
+      "paymentAddress": {
+        "phoneaddress": "0326141575",
+        "apartment": "231",
+        "street": "32",
+        "district": "Q3",
+        "province": "HCM",
+        "wards": "P3"
+      },
+      "id": 1
+    }
+  ]
 }

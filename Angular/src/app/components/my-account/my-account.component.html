@@ -5,8 +5,8 @@
         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
             class="fa fa-user"></i>Thông tin tài khoản</a>
-          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
-            class="fa fa-shopping-bag"></i>Đơn hàng</a>
+          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab" (click)="fillOrderStatus()"><i
+            class="fa fa-shopping-bag" ></i>Đơn hàng</a>
           <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i
             class="fa fa-credit-card"></i>Hình thức thanh toán</a>
           <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
@@ -99,88 +99,515 @@
           </div>
           <!--End account-->
           <!--          Order-->
+
           <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
-            <div class="center" *ngIf="listOrder.length == 0">
+            <div class="center" *ngIf="listOrder.length == 0" style="text-align: center">
               <img src="" alt="">
               <h4>Bạn chưa có đơn hàng nào.</h4>
               <h6>Tiến hành mua sắm </h6>
-          <a routerLink="/products" routerLinkActive="active">    <button class="btn btn-primary">Shop now</button></a>
+              <a routerLink="/products" routerLinkActive="active">    <button class="btn btn-primary">Shop now</button></a>
             </div>
-            <div class="table-responsive" *ngIf="listOrder.length != 0">
-              <table class="table table-bordered" *ngFor="let items of listOrder">
-                <tbody class="align-middle">
-                <tr>
-                  <td>{{'#' + items.code}}</td>
-                  <td>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppup"
-                            (click)="taget = items.cartItem">
-                      View <i class="fa fa-eye"></i>
-                    </button>
-
-                    <div class="modal fade bd-example-modal-lg" id="poppup" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Danh sách sản phẩm </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body" style="height:450px; overflow: scroll ">
-                            <table class="table">
-                              <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">Sản phẩm</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Action</th>
-                              </tr>
-                              </thead>
-                              <tbody *ngFor="let it of taget">
-                              <tr>
-                                <td>
-                                  <div class="img">
-                                    <img src="{{it.product.img}}" alt="Image">
-                                    <p>{{it.product.productname}}</p>
-                                  </div>
-                                </td>
-                                <td class="qtys">
-                                  <div class="qty">
-                                    <button class="btn-minus" (click)="minus(it.id)"><i class="fa fa-minus"></i>
+            <ul class="nav nav-pills mb-3 order-tracking" id="pills-tab" role="tablist" *ngIf="listOrder.length != 0">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-tab-1" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true" (click)="orderStatus = ''">Tất cả({{listOrder.length}})</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-tab-2" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Chờ xác nhận'">Chờ xác nhận({{orderStatus_1.length}})</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-tab-3" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đang giao'">Đang giao({{orderStatus_2.length}})</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-tab-4" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đã giao'">Đã giao({{orderStatus_3.length}})</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-tab-5" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đã hủy'">Đã hủy({{orderStatus_4.length}})</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-tab-1">
+<!--                Cho xac nhan-->
+                <div *ngIf="orderStatus_1.length >0">
+                  <div class="order-list"  >
+                    <div class="order-list-content" >
+                      <div class="lable">
+                        <h5>Trạng thái | </h5>
+                        <h5 class="status">Chờ xác nhận</h5>
+                      </div>
+                      <div class="order-content" *ngFor="let i of orderStatus_1">
+                        <div class="content-1">
+                          <div class="infor">
+                            <h5>Mã đơn hàng : #{{i.code}}</h5>
+                            <p *ngIf="i.discount.codeDiscount==''">Mã giảm giá: Không</p>
+                            <p *ngIf="i.discount.codeDiscount !=''">Mã giảm giá: {{i.discount.codeDiscount}}</p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppup" (click)="taget = i.cartItem;"> Xem chi tiết</a></p>
+                            <div class="modal fade bd-example-modal-lg" id="poppup" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Danh sách sản phẩm </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <input type="text" value="{{it.qty}}">
-                                    <button class="btn-plus" (click)="pluss(it.id)"><i class="fa fa-plus"></i></button>
                                   </div>
-                                </td>
-                                <td>{{it.product.pricesale * it.qty|currency:'VND'}}</td>
-                                <td class="order">
-                                  <button (click)="deleteItemInOrder(it.id)"><i class="fa fa-trash"></i></button>
-                                </td>
-                              </tr>
-                              </tbody>
-                            </table>
+                                  <div class="modal-body" style="height:450px; overflow: scroll ">
+                                    <table class="table">
+                                      <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody *ngFor="let ii of taget">
+                                      <tr>
+                                        <td>
+                                          <div class="img">
+                                            <img src="{{ii.product.img}}" alt="Image">
+                                            <p>{{ii.product.productname}}</p>
+                                          </div>
+                                        </td>
+                                        <td class="qtys">
+                                          <div class="qty">
+                                            <button class="btn-minus" (click)="minus(ii.id)"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <input type="text" value="{{ii.qty}}">
+                                            <button class="btn-plus" (click)="pluss(ii.id)"><i class="fa fa-plus"></i></button>
+                                          </div>
+                                        </td>
+                                        <td>{{ii.product.pricesale * ii.qty|currency:'VND'}}</td>
+                                        <td class="order">
+                                          <button (click)="deleteItemInOrder(ii.id)"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            (click)="updateOrder(i.id)">Save changes
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                    (click)="updateOrder(items.id)">Save changes
-                            </button>
+                          <div class="address">
+                            <div class="ct-1">
+                              <p>Người nhận:</p>
+                              <p>Số điện thoại:</p>
+                              <p>Địa chỉ:</p>
+                            </div>
+                            <div class="ct-2">
+                              <p>Baokaka</p>
+                              <p>{{i.paymentAddress.phoneaddress}}</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                            </div>
                           </div>
+                        </div>
+                        <hr>
+                        <div class="content-2">
+                          <p> Tổng số tiền |</p>
+                          <p class="price">{{totalPrice(i.cartItem, i.discount.rate)|currency:'VND'}} </p>
+                          <button class="btn" (click)="deleteOrder(i.id)">Hủy</button>
                         </div>
                       </div>
                     </div>
-                  </td>
 
-                  <td>{{items.status}}</td>
-                  <td>
-                    <button class="btn" (click)="deleteOrder(items.id)"><i class="fa fa-trash"></i></button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+                  </div>
+                </div>
+<!--                Dang giao-->
+                <div *ngIf="orderStatus_2.length >0">
+                  <div class="order-list"  >
+                    <div class="order-list-content" >
+                      <div class="lable">
+                        <h5>Trạng thái | </h5>
+                        <h5 class="status">Đang giao</h5>
+                      </div>
+                      <div class="order-content" *ngFor="let i1 of orderStatus_2">
+                        <div class="content-1">
+                          <div class="infor">
+                            <h5>Mã đơn hàng : #{{i1.code}}</h5>
+                            <p *ngIf="i1.discount.codeDiscount==''">Mã giảm giá : Không</p>
+                            <p *ngIf="i1.discount.codeDiscount!=''">Mã giảm giá :{{i1.discount}}</p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupq" (click)="taget = i1.cartItem"> Xem chi tiết</a></p>
+                            <div class="modal fade bd-example-modal-lg" id="poppupq" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitleq" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitleq">Danh sách sản phẩm </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body" style="height:450px; overflow: scroll ">
+                                    <table class="table">
+                                      <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody *ngFor="let ii1 of taget">
+                                      <tr>
+                                        <td>
+                                          <div class="img">
+                                            <img src="{{ii1.product.img}}" alt="Image">
+                                            <p>{{ii1.product.productname}}</p>
+                                          </div>
+                                        </td>
+                                        <td class="qtys">
+                                          <div class="qty">
+                                            <button class="btn-minus" (click)="minus(ii1.id)"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <input type="text" value="{{ii1.qty}}">
+                                            <button class="btn-plus" (click)="pluss(ii1.id)"><i class="fa fa-plus"></i></button>
+                                          </div>
+                                        </td>
+                                        <td>{{ii1.product.pricesale * ii1.qty|currency:'VND'}}</td>
+                                        <td class="order">
+                                          <button (click)="deleteItemInOrder(ii1.id)"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            (click)="updateOrder(i1.id)">Save changes
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="address">
+                            <div class="ct-1">
+                              <p>Người nhận:</p>
+                              <p>Số điện thoại:</p>
+                              <p>Địa chỉ:</p>
+                            </div>
+                            <div class="ct-2">
+                              <p>Baokaka</p>
+                              <p>{{i1.paymentAddress.phoneaddress}}</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="content-2">
+                          <p> Tổng số tiền |</p>
+                          <p class="price">{{totalPrice(i1.cartItem,i1.discount.rate)|currency:'VND'}} </p>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+<!--                Da giao-->
+                <div *ngIf="orderStatus_3.length >0">
+                  <div class="order-list"  >
+                    <div class="order-list-content" >
+                      <div class="lable">
+                        <h5>Trạng thái | </h5>
+                        <h5 class="status">Đã Giao</h5>
+                      </div>
+                      <div class="order-content" *ngFor="let i2 of orderStatus_3">
+                        <div class="content-1">
+                          <div class="infor">
+                            <h5>Mã đơn hàng : #{{i2.code}}</h5>
+                            <p *ngIf="i2.discount.codeDiscount==''">Mã giảm giá : Không</p>
+                            <p *ngIf="i2.discount.codeDiscount!=''">Mã giảm giá :{{i2.discount}}</p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupe" (click)="taget = i2.cartItem"> Xem chi tiết</a></p>
+                            <div class="modal fade bd-example-modal-lg" id="poppupe" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitleq" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitlee">Danh sách sản phẩm </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body" style="height:450px; overflow: scroll ">
+                                    <table class="table">
+                                      <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody *ngFor="let ii2 of taget">
+                                      <tr>
+                                        <td>
+                                          <div class="img">
+                                            <img src="{{ii2.product.img}}" alt="Image">
+                                            <p>{{ii2.product.productname}}</p>
+                                          </div>
+                                        </td>
+                                        <td class="qtys">
+                                          <div class="qty">
+                                            <button class="btn-minus" (click)="minus(ii2.id)"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <input type="text" value="{{ii2.qty}}">
+                                            <button class="btn-plus" (click)="pluss(ii2.id)"><i class="fa fa-plus"></i></button>
+                                          </div>
+                                        </td>
+                                        <td>{{ii2.product.pricesale * ii2.qty|currency:'VND'}}</td>
+                                        <td class="order">
+                                          <button (click)="deleteItemInOrder(ii2.id)"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            (click)="updateOrder(i2.id)">Save changes
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="address">
+                            <div class="ct-1">
+                              <p>Người nhận:</p>
+                              <p>Số điện thoại:</p>
+                              <p>Địa chỉ:</p>
+                            </div>
+                            <div class="ct-2">
+                              <p>Baokaka</p>
+                              <p>0326141575</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="content-2">
+                          <p> Tổng số tiền |</p>
+                          <p class="price">{{totalPrice(i2.cartItem,i2.discount.rate)|currency:'VND'}}</p>
+                          <button class="btn" (click)="deleteOrder(i2.id)">Hủy</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+<!--                DaHuy-->
+                <div *ngIf="orderStatus_4.length >0">
+                  <div class="order-list"  >
+                    <div class="order-list-content" >
+                      <div class="lable">
+                        <h5>Trạng thái | </h5>
+                        <h5 class="status">Đã hủy</h5>
+                      </div>
+                      <div class="order-content" *ngFor="let i3 of orderStatus_4">
+                        <div class="content-1">
+                          <div class="infor">
+                            <h5>Mã đơn hàng : #{{i3.code}}</h5>
+                            <p *ngIf="i3.discount.codeDiscount==''">Mã giảm giá :Không</p>
+                            <p *ngIf="i3.discount.codeDiscount!=''">Mã giảm giá :{{i3.discount}}</p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupw" (click)="taget = i3.cartItem"> Xem chi tiết</a></p>
+                            <div class="modal fade bd-example-modal-lg" id="poppupw" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitleq" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitlew">Danh sách sản phẩm </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body" style="height:450px; overflow: scroll ">
+                                    <table class="table">
+                                      <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody *ngFor="let ii3 of taget">
+                                      <tr>
+                                        <td>
+                                          <div class="img">
+                                            <img src="{{ii3.product.img}}" alt="Image">
+                                            <p>{{ii3.product.productname}}</p>
+                                          </div>
+                                        </td>
+                                        <td class="qtys">
+                                          <div class="qty">
+                                            <button class="btn-minus" (click)="minus(ii3.id)"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <input type="text" value="{{ii3.qty}}">
+                                            <button class="btn-plus" (click)="pluss(ii3.id)"><i class="fa fa-plus"></i></button>
+                                          </div>
+                                        </td>
+                                        <td>{{ii3.product.pricesale * ii3.qty|currency:'VND'}}</td>
+                                        <td class="order">
+                                          <button (click)="deleteItemInOrder(ii3.id)"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            (click)="updateOrder(i3.id)">Save changes
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="address">
+                            <div class="ct-1">
+                              <p>Người nhận:</p>
+                              <p>Số điện thoại:</p>
+                              <p>Địa chỉ:</p>
+                            </div>
+                            <div class="ct-2">
+                              <p>Baokaka</p>
+                              <p>0326141575</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                              <p>GT KG</p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="content-2">
+                          <p> Tổng số tiền |</p>
+                          <p class="price">{{totalPrice(i3.cartItem,i3.discount.rate)|currency:"VND"}}</p>
+                          <button class="btn" (click)="deleteOrder(i3.id)">Hủy</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade " id="pills-2" role="tabpanel" aria-labelledby="pills-tab-2">
+                <div class="order-list">
+                  <div class="order-list-content" *ngIf="listOrder.length > 0">
+                    <div class="order-content" *ngFor="let x of listOrder|status:orderStatus">
+                      <div class="content-1">
+                        <div class="infor">
+                          <h5>Mã đơn hàng : #{{x.code}}</h5>
+                          <p *ngIf="x.discount.codeDiscount == ''">Mã giảm giá: Không</p>
+                          <p *ngIf="x.discount.codeDiscount != ''">Mã giảm giá: {{x.discount.codeDiscount}}</p>
+                          <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupx" (click)="taget = x.cartItem"> Xem chi tiết</a></p>
+                          <div class="modal fade bd-example-modal-lg" id="poppupx" tabindex="-1" role="dialog"
+                               aria-labelledby="exampleModalCenterTitlex" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitlex">Danh sách sản phẩm </h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body" style="height:450px; overflow: scroll ">
+                                  <table class="table">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                      <th scope="col">Sản phẩm</th>
+                                      <th scope="col">Số lượng</th>
+                                      <th scope="col">Giá</th>
+                                      <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody *ngFor="let xl of taget">
+                                    <tr>
+                                      <td>
+                                        <div class="img">
+                                          <img src="{{xl.product.img}}" alt="Image">
+                                          <p>{{xl.product.productname}}</p>
+                                        </div>
+                                      </td>
+                                      <td class="qtys">
+                                        <div class="qty">
+                                          <button class="btn-minus" (click)="minus(xl.id)"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <input type="text" value="{{xl.qty}}">
+                                          <button class="btn-plus" (click)="pluss(xl.id)"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                      </td>
+                                      <td>{{xl.product.pricesale * xl.qty|currency:'VND'}}</td>
+                                      <td class="order">
+                                        <button (click)="deleteItemInOrder(xl.id)"><i class="fa fa-trash"></i></button>
+                                      </td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            (click)="updateOrder(x.id)" >Save changes
+                                    </button>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="address">
+                          <div class="ct-1">
+                            <p>Người nhận:</p>
+                            <p>Số điện thoại:</p>
+                            <p>Địa chỉ:</p>
+                          </div>
+                          <div class="ct-2">
+                            <p>Bảo kaka</p>
+                            <p>{{x.paymentAddress.phoneaddress}}</p>
+                            <p>GT KG</p>
+                            <p>GT KG</p>
+                            <p>GT KG</p>
+                            <p>GT KG</p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="content-2">
+                        <p> Tổng số tiền |</p>
+                        <p class="price">{{totalPrice(x.cartItem,x.discount.rate)|currency:'VND'}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
+
           </div>
           <!--          End Order-->
 

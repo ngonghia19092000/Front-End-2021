@@ -19,6 +19,7 @@ import { PricefilterPipe } from './services/filter/pricefilter.pipe';
 import { CategoryfilterPipe } from './services/filter/categoryfilter.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { StatusPipe } from './services/filter/status.pipe';
 
 
 
@@ -84,6 +85,7 @@ const appRoutes : Routes =[
     CategoryfilterPipe,
     RegisterComponent,
     PageNotFoundComponent,
+    StatusPipe,
 
 
   ],

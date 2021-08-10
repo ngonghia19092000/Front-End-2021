@@ -13,6 +13,7 @@ import {OrderService} from "../../services/order.service";
 import {Order} from "../../models/order";
 import {MyAccountComponent} from "../my-account/my-account.component";
 import {User} from "../../models/user";
+import {Discount} from "../../models/discount";
 
 @Component({
   selector: 'app-cart',
@@ -128,7 +129,7 @@ btn:boolean=false;
       }
     }
     if (!check||this.listOrder.length==0) {
-      let item = new Order(this.cartService.getUserName(), '', "Chờ xử lý", this.cartItems,this.code,this.paymentAddress,this.shippingAddress);
+      let item = new Order(this.cartService.getUserName(), new Discount("",1), "Chờ xác nhận", this.cartItems,this.code,this.paymentAddress,this.shippingAddress);
       if (this.cartService.getUserName() != '') {
         if (this.cartItems.length != 0) {
           this.order.addNewOrder(item).subscribe(() => console.log('add New Order'));

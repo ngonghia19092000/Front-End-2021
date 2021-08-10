@@ -65,3 +65,100 @@
   border: none;
 }
 
+.order-tracking {
+  background-color: white !important;
+  border-bottom: 5px solid #48515d;
+  padding: 0;
+}
+.order-tracking .nav-item a{
+  padding: 10px 56.062496px;
+}
+
+.order-list .order-list-content{
+  height: 300px;
+  overflow: auto;
+}
+.order-list .order-list-content .lable{
+  display: flex;
+  border-bottom: 3px solid;
+}
+.order-list hr{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.order-list .status{
+  color: #00AEC9;
+  margin-left: 10px;
+}
+
+.order-list .order-content{
+  margin-top: 20px;
+  border-bottom: 3px solid ;
+}
+.order-list .order-content .content-1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.order-list .order-content .content-1 .infor{
+  margin: 10px;
+}
+.order-list .order-content .content-1 .infor a{
+  color: #00AEC9;
+}
+
+.order-list .order-content .content-1 .infor a:hover{
+  color: #c80000;
+}
+
+.order-list .order-content .content-1 .address{
+  margin-right: 20%;
+  display: flex;
+}
+.address .ct-1{
+  margin-right: 10px;
+  text-align: right;
+}
+
+.address .ct-1 p{
+  margin: 0;
+}
+
+.address .ct-2 p{
+  margin: 0;
+}
+
+.order-list .order-content .content-2{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+
+.content-2 .price{
+  color: #00AEC9;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.content-2 p{
+  margin: 0;
+}
+
+.content-2 .btn{
+  padding: 5px 40px;
+  outline: 0;
+  background-color: #FB383B;
+  border: 0;
+  color: white;
+}
+.content-2 .btn:hover{
+  color: white;
+  background-color: #af2021;
+}
+
+
+

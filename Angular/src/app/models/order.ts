@@ -1,9 +1,10 @@
 import {CartItem} from "./cart-item";
 import {Address} from "./address";
+import {Discount} from "./discount";
 
 export class Order{
   userName:string;
-  discount:string;
+  discount:Discount;
   status:string;
   cartItem:CartItem[];
   id:number|any;
@@ -12,7 +13,7 @@ export class Order{
   shippingAddress:Address;
 
 
-  constructor(userName: string, discount: string, status: string, cartItem: CartItem[], code: string, paymentAddress: Address, shippingAddress: Address) {
+  constructor(userName: string, discount: Discount, status: string, cartItem: CartItem[], code: string, paymentAddress: Address, shippingAddress: Address) {
     this.userName = userName;
     this.discount = discount;
     this.status = status;

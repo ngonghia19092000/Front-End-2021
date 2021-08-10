@@ -94,7 +94,7 @@ itemPro={id:0,product:[],qty:0,userName:''}
       if(item.product.id == product.id){
         items.qty += item.qty;
         items.id=item.id
-        this.cartSer.updateQtyOfCartItem(items).subscribe(()=> console.log('update'));
+        this.cartSer.putCartItem(items).subscribe(()=> console.log('update'));
         check = true;
         this.update();
         console.log(item.product.id +''+ product.id)
