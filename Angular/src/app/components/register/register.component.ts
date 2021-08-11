@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
-import {Address} from "../../models/address";
 
 
 
@@ -17,7 +16,7 @@ export class RegisterComponent implements OnInit {
   alert: boolean = false;
   registerForm: FormGroup | any;
   count: number = 0;
-  newUser:any={username:'',email:'',fullname:'',password:'',phone:'',address:'',paymentAddress:Address,shippingAddress:Address,listVoucher:[]};
+  newUser:any={username:'',email:'',fullname:'',password:'',phone:'',address:'',shippingAddress:[],listVoucher:[]};
   listUsers: User[] = [];
   checkStt: boolean = false;
   validate: any = {mFullname: '', mUser: '', mPass: '', mPhone: '', mEmail: '', mAddress: '', mConfirmPass: ''}
@@ -124,7 +123,6 @@ export class RegisterComponent implements OnInit {
     this.newUser.fullname=this.registerForm.value.fullname;
     this.newUser.phone=this.registerForm.value.phone;
     this.newUser.address=this.registerForm.value.address;
-    let address = new Address('','','','','','')
     this.newUser.password='1909'+this.api.encryptMd5(this.registerForm.value.password)+'1909';
     this.api.registerUser(this.newUser).subscribe((result) => {
       // console.warn("result",result)

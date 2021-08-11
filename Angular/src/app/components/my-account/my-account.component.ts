@@ -8,6 +8,9 @@ import {Order} from "../../models/order";
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {CartItem} from "../../models/cart-item";
 import {StatusPipe} from "../../services/filter/status.pipe";
+import {Provinces} from "../../models/provinces";
+import {Districts} from "../../models/districts";
+import {Wards} from "../../models/wards";
 
 @Component({
   selector: 'app-my-account',
@@ -25,10 +28,16 @@ export class MyAccountComponent implements OnInit {
   isChange: boolean = false;
   taget: CartItem[] | any;
   paymentAddress: string | any;
-  shippingAddress: string | any;
+  shippingAddress: []| any;
   address_check: boolean = false;
   address_check1: boolean = false;
-  address: any = {};
+  address: any = {phone: '', province: '', districts: '', wards: '', addressDetails: '',name:''};
+  province: Provinces[] = [];
+  listdistricts: Districts[] = [];
+  districts: Districts[] = [];
+  wards: Wards[] = [];
+  listWards: Wards[] = [];
+
 
   //lọc và chia order theo trạng thái
   orderStatus:string = '';
@@ -50,8 +59,8 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.userValue;
     this.getOrder();
-    this.loadAddress();
     this.fillOrderStatus();
+    this.loadAddressVietNam();
   }
 
   logout() {
@@ -152,7 +161,7 @@ export class MyAccountComponent implements OnInit {
       let item: any;
       for (let i of this.listOrder) {
         if (i.id == id) {
-          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code,i.paymentAddress,i.shippingAddress);
+          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code,i.shippingAddress);
         }
       }
       this.getOrder();
@@ -199,35 +208,98 @@ export class MyAccountComponent implements OnInit {
     this.fillOrderStatus();
   }
 
+
   loadAddress() {
-    this.paymentAddress = this.user.paymentAddress;
     this.shippingAddress = this.user.shippingAddress;
-    if (this.paymentAddress != undefined) {
-      this.address_check = true;
-    }
-    if (this.shippingAddress != undefined || this.shippingAddress) {
+    if (this.shippingAddress.province != undefined) {
       this.address_check1 = true;
     }
 
   }
 
-  putAddress() {
-    if (this.address.value != '') {
-      this.userService.putPaymentAddress(this.address).subscribe((data) => {
-        this.userInfo = data;
-        this.loadUser();
-      })
-    }
-  }
-
   putAddress1() {
-    console.log(this.address.toString())
+
     if (this.address.value != '') {
+      this.address.phone = this.model.phoneup;
+      this.address.province = this.findNameProvince(this.model.province)
+      this.address.districts = this.findNameDistricts(this.model.district_code);
+      this.address.wards = this.findNameWards(this.model.wards);
+      this.address.name=this.model.name;
       this.userService.putShippingAddress(this.address).subscribe((data) => {
         this.userInfo = data;
         this.loadUser();
       })
     }
+  }
+  loadAddressVietNam(){
+    this.loadAddress();
+    this.loadProvince();
+    this.loadDistricts(1)
+    this.loadWards(1);
+    this.model.province = 1;
+    this.model.district_code = 1;
+    this.model.wards = 1
+  }
+  loadProvince() {
+    this.userService.getProvince().subscribe((data) => {
+      this.province = data;
+    })
+  }
+
+  loadDistricts(code: any) {
+    this.listdistricts = []
+    this.userService.getDistricts().subscribe((data) => {
+      this.districts = data;
+      for (let districtsKey of this.districts) {
+        if (districtsKey.province_code == code) {
+          this.listdistricts.push(districtsKey);
+
+        }
+      }
+    })
+  }
+
+  loadWards(code: any) {
+    this.listWards = []
+    this.userService.getWards().subscribe((data) => {
+      this.wards = data;
+      for (let item of this.wards) {
+        if (item.district_code == code) {
+          this.listWards.push(item);
+
+        }
+      }
+    })
+  }
+
+  findNameDistricts(code: any) {
+    let name = '';
+    for (const item of this.listdistricts) {
+      if (item.code == code) {
+        name = item.name
+      }
+    }
+    return name;
+  }
+
+  findNameProvince(code: any) {
+    let name = '';
+    for (const item of this.province) {
+      if (item.code == code) {
+        name = item.name
+      }
+    }
+    return name;
+  }
+
+  findNameWards(code: any) {
+    let name = '';
+    for (const item of this.listWards) {
+      if (item.code == code) {
+        name = item.name
+      }
+    }
+    return name;
   }
 
   //loc order theo trạng thái
@@ -260,7 +332,15 @@ export class MyAccountComponent implements OnInit {
 
   }
 
+deleteAddress(){
+    this.shippingAddress='';
+    this.userService.putShippingAddress(this.shippingAddress).subscribe((data)=>{
+      this.userInfo=data;
+      this.loadUser();
+    })
 
+
+}
 }
 
 

@@ -5,8 +5,9 @@
         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
             class="fa fa-user"></i>Thông tin tài khoản</a>
-          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab" (click)="fillOrderStatus()"><i
-            class="fa fa-shopping-bag" ></i>Đơn hàng</a>
+          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"
+             (click)="fillOrderStatus()"><i
+            class="fa fa-shopping-bag"></i>Đơn hàng</a>
           <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i
             class="fa fa-credit-card"></i>Hình thức thanh toán</a>
           <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
@@ -105,31 +106,43 @@
               <img src="" alt="">
               <h4>Bạn chưa có đơn hàng nào.</h4>
               <h6>Tiến hành mua sắm </h6>
-              <a routerLink="/products" routerLinkActive="active">    <button class="btn btn-primary">Shop now</button></a>
+              <a routerLink="/products" routerLinkActive="active">
+                <button class="btn btn-primary">Shop now</button>
+              </a>
             </div>
             <ul class="nav nav-pills mb-3 order-tracking" id="pills-tab" role="tablist" *ngIf="listOrder.length != 0">
               <li class="nav-item">
-                <a class="nav-link active" id="pills-tab-1" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true" (click)="orderStatus = ''">Tất cả({{listOrder.length}})</a>
+                <a class="nav-link active" id="pills-tab-1" data-toggle="pill" href="#pills-1" role="tab"
+                   aria-controls="pills-1" aria-selected="true" (click)="orderStatus = ''">Tất cả({{listOrder.length}}
+                  )</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-tab-2" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Chờ xác nhận'">Chờ xác nhận({{orderStatus_1.length}})</a>
+                <a class="nav-link" id="pills-tab-2" data-toggle="pill" href="#pills-2" role="tab"
+                   aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Chờ xác nhận'">Chờ xác
+                  nhận({{orderStatus_1.length}})</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-tab-3" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đang giao'">Đang giao({{orderStatus_2.length}})</a>
+                <a class="nav-link" id="pills-tab-3" data-toggle="pill" href="#pills-2" role="tab"
+                   aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đang giao'">Đang
+                  giao({{orderStatus_2.length}})</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-tab-4" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đã giao'">Đã giao({{orderStatus_3.length}})</a>
+                <a class="nav-link" id="pills-tab-4" data-toggle="pill" href="#pills-2" role="tab"
+                   aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đã giao'">Đã
+                  giao({{orderStatus_3.length}})</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-tab-5" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đã hủy'">Đã hủy({{orderStatus_4.length}})</a>
+                <a class="nav-link" id="pills-tab-5" data-toggle="pill" href="#pills-2" role="tab"
+                   aria-controls="pills-2" aria-selected="false" (click)="orderStatus = 'Đã hủy'">Đã
+                  hủy({{orderStatus_4.length}})</a>
               </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-tab-1">
-<!--                Cho xac nhan-->
+                <!--                Cho xac nhan-->
                 <div *ngIf="orderStatus_1.length >0">
-                  <div class="order-list"  >
-                    <div class="order-list-content" >
+                  <div class="order-list">
+                    <div class="order-list-content">
                       <div class="lable">
                         <h5>Trạng thái | </h5>
                         <h5 class="status">Chờ xác nhận</h5>
@@ -140,7 +153,8 @@
                             <h5>Mã đơn hàng : #{{i.code}}</h5>
                             <p *ngIf="i.discount.codeDiscount==''">Mã giảm giá: Không</p>
                             <p *ngIf="i.discount.codeDiscount !=''">Mã giảm giá: {{i.discount.codeDiscount}}</p>
-                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppup" (click)="taget = i.cartItem;"> Xem chi tiết</a></p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppup"
+                                                      (click)="taget = i.cartItem;"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppup" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -174,12 +188,14 @@
                                             <button class="btn-minus" (click)="minus(ii.id)"><i class="fa fa-minus"></i>
                                             </button>
                                             <input type="text" value="{{ii.qty}}">
-                                            <button class="btn-plus" (click)="pluss(ii.id)"><i class="fa fa-plus"></i></button>
+                                            <button class="btn-plus" (click)="pluss(ii.id)"><i class="fa fa-plus"></i>
+                                            </button>
                                           </div>
                                         </td>
                                         <td>{{ii.product.pricesale * ii.qty|currency:'VND'}}</td>
                                         <td class="order">
-                                          <button (click)="deleteItemInOrder(ii.id)"><i class="fa fa-trash"></i></button>
+                                          <button (click)="deleteItemInOrder(ii.id)"><i class="fa fa-trash"></i>
+                                          </button>
                                         </td>
                                       </tr>
                                       </tbody>
@@ -204,7 +220,7 @@
                             </div>
                             <div class="ct-2">
                               <p>Baokaka</p>
-                              <p>{{i.paymentAddress.phoneaddress}}</p>
+                              <!--                              <p>{{i.shippingAddress.phone}}</p>-->
                               <p>GT KG</p>
                               <p>GT KG</p>
                               <p>GT KG</p>
@@ -223,10 +239,10 @@
 
                   </div>
                 </div>
-<!--                Dang giao-->
+                <!--                Dang giao-->
                 <div *ngIf="orderStatus_2.length >0">
-                  <div class="order-list"  >
-                    <div class="order-list-content" >
+                  <div class="order-list">
+                    <div class="order-list-content">
                       <div class="lable">
                         <h5>Trạng thái | </h5>
                         <h5 class="status">Đang giao</h5>
@@ -237,7 +253,8 @@
                             <h5>Mã đơn hàng : #{{i1.code}}</h5>
                             <p *ngIf="i1.discount.codeDiscount==''">Mã giảm giá : Không</p>
                             <p *ngIf="i1.discount.codeDiscount!=''">Mã giảm giá :{{i1.discount}}</p>
-                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupq" (click)="taget = i1.cartItem"> Xem chi tiết</a></p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupq"
+                                                      (click)="taget = i1.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupq" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalCenterTitleq" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -268,15 +285,18 @@
                                         </td>
                                         <td class="qtys">
                                           <div class="qty">
-                                            <button class="btn-minus" (click)="minus(ii1.id)"><i class="fa fa-minus"></i>
+                                            <button class="btn-minus" (click)="minus(ii1.id)"><i
+                                              class="fa fa-minus"></i>
                                             </button>
                                             <input type="text" value="{{ii1.qty}}">
-                                            <button class="btn-plus" (click)="pluss(ii1.id)"><i class="fa fa-plus"></i></button>
+                                            <button class="btn-plus" (click)="pluss(ii1.id)"><i class="fa fa-plus"></i>
+                                            </button>
                                           </div>
                                         </td>
                                         <td>{{ii1.product.pricesale * ii1.qty|currency:'VND'}}</td>
                                         <td class="order">
-                                          <button (click)="deleteItemInOrder(ii1.id)"><i class="fa fa-trash"></i></button>
+                                          <button (click)="deleteItemInOrder(ii1.id)"><i class="fa fa-trash"></i>
+                                          </button>
                                         </td>
                                       </tr>
                                       </tbody>
@@ -301,7 +321,7 @@
                             </div>
                             <div class="ct-2">
                               <p>Baokaka</p>
-                              <p>{{i1.paymentAddress.phoneaddress}}</p>
+                              <!--                              <p>{{i1.shippingAddress.phone}}</p>-->
                               <p>GT KG</p>
                               <p>GT KG</p>
                               <p>GT KG</p>
@@ -312,7 +332,7 @@
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i1.cartItem,i1.discount.rate)|currency:'VND'}} </p>
+                          <p class="price">{{totalPrice(i1.cartItem, i1.discount.rate)|currency:'VND'}} </p>
 
                         </div>
                       </div>
@@ -320,10 +340,10 @@
 
                   </div>
                 </div>
-<!--                Da giao-->
+                <!--                Da giao-->
                 <div *ngIf="orderStatus_3.length >0">
-                  <div class="order-list"  >
-                    <div class="order-list-content" >
+                  <div class="order-list">
+                    <div class="order-list-content">
                       <div class="lable">
                         <h5>Trạng thái | </h5>
                         <h5 class="status">Đã Giao</h5>
@@ -334,7 +354,8 @@
                             <h5>Mã đơn hàng : #{{i2.code}}</h5>
                             <p *ngIf="i2.discount.codeDiscount==''">Mã giảm giá : Không</p>
                             <p *ngIf="i2.discount.codeDiscount!=''">Mã giảm giá :{{i2.discount}}</p>
-                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupe" (click)="taget = i2.cartItem"> Xem chi tiết</a></p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupe"
+                                                      (click)="taget = i2.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupe" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalCenterTitleq" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -365,15 +386,18 @@
                                         </td>
                                         <td class="qtys">
                                           <div class="qty">
-                                            <button class="btn-minus" (click)="minus(ii2.id)"><i class="fa fa-minus"></i>
+                                            <button class="btn-minus" (click)="minus(ii2.id)"><i
+                                              class="fa fa-minus"></i>
                                             </button>
                                             <input type="text" value="{{ii2.qty}}">
-                                            <button class="btn-plus" (click)="pluss(ii2.id)"><i class="fa fa-plus"></i></button>
+                                            <button class="btn-plus" (click)="pluss(ii2.id)"><i class="fa fa-plus"></i>
+                                            </button>
                                           </div>
                                         </td>
                                         <td>{{ii2.product.pricesale * ii2.qty|currency:'VND'}}</td>
                                         <td class="order">
-                                          <button (click)="deleteItemInOrder(ii2.id)"><i class="fa fa-trash"></i></button>
+                                          <button (click)="deleteItemInOrder(ii2.id)"><i class="fa fa-trash"></i>
+                                          </button>
                                         </td>
                                       </tr>
                                       </tbody>
@@ -408,7 +432,7 @@
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i2.cartItem,i2.discount.rate)|currency:'VND'}}</p>
+                          <p class="price">{{totalPrice(i2.cartItem, i2.discount.rate)|currency:'VND'}}</p>
                           <button class="btn" (click)="deleteOrder(i2.id)">Hủy</button>
                         </div>
                       </div>
@@ -416,10 +440,10 @@
 
                   </div>
                 </div>
-<!--                DaHuy-->
+                <!--                DaHuy-->
                 <div *ngIf="orderStatus_4.length >0">
-                  <div class="order-list"  >
-                    <div class="order-list-content" >
+                  <div class="order-list">
+                    <div class="order-list-content">
                       <div class="lable">
                         <h5>Trạng thái | </h5>
                         <h5 class="status">Đã hủy</h5>
@@ -430,7 +454,8 @@
                             <h5>Mã đơn hàng : #{{i3.code}}</h5>
                             <p *ngIf="i3.discount.codeDiscount==''">Mã giảm giá :Không</p>
                             <p *ngIf="i3.discount.codeDiscount!=''">Mã giảm giá :{{i3.discount}}</p>
-                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupw" (click)="taget = i3.cartItem"> Xem chi tiết</a></p>
+                            <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupw"
+                                                      (click)="taget = i3.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupw" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalCenterTitleq" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -461,15 +486,18 @@
                                         </td>
                                         <td class="qtys">
                                           <div class="qty">
-                                            <button class="btn-minus" (click)="minus(ii3.id)"><i class="fa fa-minus"></i>
+                                            <button class="btn-minus" (click)="minus(ii3.id)"><i
+                                              class="fa fa-minus"></i>
                                             </button>
                                             <input type="text" value="{{ii3.qty}}">
-                                            <button class="btn-plus" (click)="pluss(ii3.id)"><i class="fa fa-plus"></i></button>
+                                            <button class="btn-plus" (click)="pluss(ii3.id)"><i class="fa fa-plus"></i>
+                                            </button>
                                           </div>
                                         </td>
                                         <td>{{ii3.product.pricesale * ii3.qty|currency:'VND'}}</td>
                                         <td class="order">
-                                          <button (click)="deleteItemInOrder(ii3.id)"><i class="fa fa-trash"></i></button>
+                                          <button (click)="deleteItemInOrder(ii3.id)"><i class="fa fa-trash"></i>
+                                          </button>
                                         </td>
                                       </tr>
                                       </tbody>
@@ -492,19 +520,18 @@
                               <p>Địa chỉ:</p>
                             </div>
                             <div class="ct-2">
-                              <p>Baokaka</p>
-                              <p>0326141575</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
+                              <p>{{shippingAddress.name}}</p>
+                              <p>{{shippingAddress.phone}}</p>
+                              <p>{{this.shippingAddress.wards}}</p>
+                              <p>{{this.shippingAddress.districts}}</p>
+                              <p> {{this.shippingAddress.province}}</p>
                             </div>
                           </div>
                         </div>
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i3.cartItem,i3.discount.rate)|currency:"VND"}}</p>
+                          <p class="price">{{totalPrice(i3.cartItem, i3.discount.rate)|currency:"VND"}}</p>
                           <button class="btn" (click)="deleteOrder(i3.id)">Hủy</button>
                         </div>
                       </div>
@@ -523,7 +550,8 @@
                           <h5>Mã đơn hàng : #{{x.code}}</h5>
                           <p *ngIf="x.discount.codeDiscount == ''">Mã giảm giá: Không</p>
                           <p *ngIf="x.discount.codeDiscount != ''">Mã giảm giá: {{x.discount.codeDiscount}}</p>
-                          <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupx" (click)="taget = x.cartItem"> Xem chi tiết</a></p>
+                          <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupx"
+                                                    (click)="taget = x.cartItem"> Xem chi tiết</a></p>
                           <div class="modal fade bd-example-modal-lg" id="poppupx" tabindex="-1" role="dialog"
                                aria-labelledby="exampleModalCenterTitlex" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -557,7 +585,8 @@
                                           <button class="btn-minus" (click)="minus(xl.id)"><i class="fa fa-minus"></i>
                                           </button>
                                           <input type="text" value="{{xl.qty}}">
-                                          <button class="btn-plus" (click)="pluss(xl.id)"><i class="fa fa-plus"></i></button>
+                                          <button class="btn-plus" (click)="pluss(xl.id)"><i class="fa fa-plus"></i>
+                                          </button>
                                         </div>
                                       </td>
                                       <td>{{xl.product.pricesale * xl.qty|currency:'VND'}}</td>
@@ -571,9 +600,9 @@
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                            (click)="updateOrder(x.id)" >Save changes
-                                    </button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                          (click)="updateOrder(x.id)">Save changes
+                                  </button>
 
                                 </div>
                               </div>
@@ -588,7 +617,7 @@
                           </div>
                           <div class="ct-2">
                             <p>Bảo kaka</p>
-                            <p>{{x.paymentAddress.phoneaddress}}</p>
+                            <p></p>
                             <p>GT KG</p>
                             <p>GT KG</p>
                             <p>GT KG</p>
@@ -599,7 +628,7 @@
                       <hr>
                       <div class="content-2">
                         <p> Tổng số tiền |</p>
-                        <p class="price">{{totalPrice(x.cartItem,x.discount.rate)|currency:'VND'}}</p>
+                        <p class="price">{{totalPrice(x.cartItem, x.discount.rate)|currency:'VND'}}</p>
                       </div>
                     </div>
                   </div>
@@ -625,283 +654,53 @@
 
           <!--          Address-->
           <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-            <h4>Thông tin địa chỉ</h4>
-            <div class="row">
-              <div class="col-md-6" *ngIf="address_check==true">
-                <h5>Payment Address</h5>
-                <p> {{paymentAddress.apartment + ', ' + paymentAddress.street}}</p>
-                <p>{{paymentAddress.wards + ', ' + paymentAddress.district + ', ' + paymentAddress.province}}</p>
-                <p>SĐT: {{paymentAddress.phoneaddress}}</p>
-                <button type="button" class="btn" data-toggle="modal" data-target="#poppupAdd2">
-                  Sửa
-                </button>
+            <div style="height: auto">
+              <h3 style="float: left;width: 70%">Thông tin địa chỉ</h3>
+             <button type="button" class="btn" style="width: 30%" data-toggle="modal" data-target="#poppupAdd4"><i
+              class="fas fa-plus" ></i> Thêm địa chỉ</button>
+            </div>
+            <div class="row"style="width:100%">
+              <div class="col-md-12" *ngIf="address_check1==true">
+                <hr>
+                <div style="float: left;width:80%">
 
-                <!-- Modal -->
-                <div class="modal fade bd-example-modal-lg" id="poppupAdd2" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Cập nhật địa chỉ thanh toán </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body" style="height:450px; overflow: scroll ">
-
-                        <div class="col">
-                          <div class="row row-50">
-
-                            <div class="col-md-6">
-                              <label>Số điện thoai*</label>
-                              <input type="tel" placeholder="Số điện thoai" value="{{user.paymentAddress.phoneaddress}}"
-                                     [(ngModel)]="address.phoneaddress">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Số nhà*</label>
-                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Đường*</label>
-                              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Tỉnh/Thành phố*</label>
-                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
-                            </div>
-
-
-                            <div class="col-md-6">
-                              <label>Quận/Huyện*</label>
-                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Xã/Phường</label>
-                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress()">Save
-                            changes
-                          </button>
-                        </div>
-                      </div>
+                    <div style="width: 20%;float: left; text-align: right; margin-right: 2%">
+                      <p>Người nhận: </p>
+                      <p>Số điện thoại: </p>
+                      <p>Địa chỉ: </p>
+                      <p>Địa chỉ cụ thể: </p>
                     </div>
-                  </div>
+                    <div style="width: 78%;float: right; text-align: left;font-weight: bold">
+
+                      <p>{{shippingAddress.name}}</p>
+                      <p> {{shippingAddress.phone}}</p>
+                      <p>{{shippingAddress.wards + ', ' + shippingAddress.districts + ', ' + shippingAddress.province}}</p>
+                      <p>{{' ' + shippingAddress.addressDetails}}</p>
+                    </div>
+
+
 
                 </div>
+                <div style="float: right;width:20%">
+                  <button type="button" style="margin: 0 auto ; width:50%;height: 50%" class="btn" data-toggle="modal"
+                          data-target="#poppupAdd3">
+                    Sửa
+                  </button>
+                  <br>
+                  <br>
+                  <button type="button" style="margin:0 auto;width: 50%;height: 50%" class="btn" (click)="deleteAddress()">Xóa</button>
+                </div>
+
+
+
               </div>
-              <div class="col-md-6" *ngIf="address_check==false">
-                <h5>Địa chỉ thanh toán</h5>
-                <p>Nhấn "Thêm" để thêm địa chỉ thanh toán</p>
+              <div class="col-md-12" *ngIf="address_check1==false" style="width: 100%;height:300px">
+
+               <hr>
+
+                <p style="font-size: 25px;color: rgba(32,22,0,0.82);margin-top:10%;text-align: center" >Bạn chưa có địa chỉ</p>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppupAdd1">
-                  Thêm
-                </button>
-
                 <!-- Modal -->
-                <div class="modal fade bd-example-modal-lg" id="poppupAdd1" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body" style="height:450px; overflow: scroll ">
-
-                        <div class="col">
-                          <div class="row row-50">
-
-                            <div class="col-md-6">
-                              <label>Số điện thoai*</label>
-                              <input type="text" placeholder="Số điện thoai" [(ngModel)]="address.phoneaddress">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Số nhà*</label>
-                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Đường*</label>
-                              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Tỉnh/Thành phố*</label>
-                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
-                            </div>
-
-
-                            <div class="col-md-6">
-                              <label>Quận/Huyện*</label>
-                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Xã/Phường</label>
-                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress()">Save
-                            changes
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-
-              </div>
-              <div class="col-md-6" *ngIf="address_check1==true">
-                <h5>Địa chỉ giao hàng</h5>
-                <p> {{shippingAddress.apartment + ', ' + shippingAddress.street}}</p>
-                <p>{{shippingAddress.wards + ', ' + shippingAddress.district + ', ' + shippingAddress.province}}</p>
-                <p>SĐT: {{shippingAddress.phoneaddress}}</p>
-                <button type="button" class="btn" data-toggle="modal" data-target="#poppupAdd3">
-                  Sửa
-                </button>
-                <div class="modal fade bd-example-modal-lg" id="poppupAdd3" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Cập nhật địa chỉ giao hàng </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body" style="height:450px; overflow: scroll ">
-
-                        <div class="col">
-                          <div class="row row-50">
-
-                            <div class="col-md-6">
-                              <label>Số điện thoai*</label>
-                              <input type="tel" placeholder="Số điện thoai" [(ngModel)]="address.phoneaddress">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Số nhà*</label>
-                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Đường*</label>
-                              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Tỉnh/Thành phố*</label>
-                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
-                            </div>
-
-
-                            <div class="col-md-6">
-                              <label>Quận/Huyện*</label>
-                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Xã/Phường</label>
-                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
-                            Save changes
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="col-md-6" *ngIf="address_check1==false">
-                <h5>Địa chỉ giao hàng</h5>
-                <p>Nhấn "Thêm" để thêm địa chỉ giao hàng</p>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poppupAdd4">
-                  Thêm
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade bd-example-modal-lg" id="poppupAdd4" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body" style="height:450px; overflow: scroll ">
-
-                        <div class="col">
-                          <div class="row row-50">
-
-                            <div class="col-md-6">
-                              <label>Số điện thoai*</label>
-                              <input type="text" placeholder="Số điện thoai" [(ngModel)]="address.phoneaddress">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Số nhà*</label>
-                              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Đường*</label>
-                              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Tỉnh/Thành phố*</label>
-                              <input type="text" placeholder="Tỉnh/Thành phố" [(ngModel)]="address.province">
-                            </div>
-
-
-                            <div class="col-md-6">
-                              <label>Quận/Huyện*</label>
-                              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
-                            </div>
-
-                            <div class="col-md-6">
-                              <label>Xã/Phường</label>
-                              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
-                            Save changes
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
 
               </div>
             </div>
@@ -919,3 +718,146 @@
     </div>
   </div>
 </div>
+<div class="modal fade bd-example-modal-lg" id="poppupAdd3" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cập nhật địa chỉ giao hàng </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+        <div class="col">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Người nhân*</label>
+              <input class="form-control" type="tel" placeholder="Người nhận"
+                     [(ngModel)]="model.name">
+            </div>
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input class="form-control" type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="model.phoneup">
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Tỉnh/Thành phố*</label>
+              <select class="form-control" [(ngModel)]="model.province"
+                      (change)="loadDistricts(model.province)">
+                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
+              </select>
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Quận/Huyện*</label>
+              <select class="form-control" [(ngModel)]="model.district_code"
+                      (change)="loadWards(model.district_code)">
+                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label>Xã/Phường</label>
+              <select class="form-control" [(ngModel)]="model.wards">
+                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
+              </select>
+
+            </div>
+
+            <div class="col-md-12">
+              <label>Địa chỉ cụ thể*</label>
+              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
+                     [(ngModel)]="address.addressDetails">
+            </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal fade bd-example-modal-lg" id="poppupAdd4" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+        <div class="col">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Người nhận*</label>
+              <input class="form-control" type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="model.name">
+            </div>
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input class="form-control" type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="model.phoneup">
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Tỉnh/Thành phố*</label>
+              <select class="form-control" [(ngModel)]="model.province"
+                      (change)="loadDistricts(model.province)">
+                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
+              </select>
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Quận/Huyện*</label>
+              <select class="form-control" [(ngModel)]="model.district_code"
+                      (change)="loadWards(model.district_code)">
+                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label>Xã/Phường</label>
+              <select class="form-control" [(ngModel)]="model.wards">
+                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
+              </select>
+
+            </div>
+
+            <div class="col-md-12">
+              <label>Địa chỉ cụ thể*</label>
+              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
+                     [(ngModel)]="address.addressDetails">
+            </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
+            Lưu thay đổi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

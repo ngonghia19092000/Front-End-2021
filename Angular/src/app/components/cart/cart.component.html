@@ -61,7 +61,10 @@
                 </div>
                 <div class="cart-btn">
                   <button>Update Cart</button>
-                  <button type="button" data-toggle="modal" data-target="#poppupCheckOut">
+                  <button type="button" *ngIf="cartItems.length!=0" data-toggle="modal" data-target="#poppupCheckOut">
+                    Thanh toán
+                  </button>
+                  <button type="button" *ngIf="cartItems.length==0">
                     Thanh toán
                   </button>
 
@@ -142,31 +145,12 @@
                         </div>
                         <div class="modal-body" style="height:450px; width: 100% ">
                           <div class="row">
-                            <div class="col-md-6" *ngIf="address_check==true">
-                              <h5>Địa chỉ thanh toán</h5>
-                              <p> {{paymentAddress.apartment + ', ' + paymentAddress.street}}</p>
-                              <p>{{paymentAddress.wards + ', ' + paymentAddress.district + ', ' + paymentAddress.province}}</p>
-                              <p>SĐT: {{paymentAddress.phoneaddress}}</p>
-                              <button type="button" class="btn" data-toggle="modal" data-target="#popupedit1">
-                                Sửa
-                              </button>
-                            </div>
-                            <div class="col-md-6" *ngIf="address_check==false">
-                              <h5>Địa chỉ thanh toán</h5>
-                              <p>Nhấn "Thêm" để thêm địa chỉ thanh toán</p>
-                              <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-primary" data-toggle="modal"
-                                      data-target="#popupAdd">
-                                Thêm
-                              </button>
-
-
-                            </div>
                             <div class="col-md-6" *ngIf="address_check1==true">
                               <h5>Địa chỉ giao hàng</h5>
-                              <p> {{shippingAddress.apartment + ', ' + shippingAddress.street}}</p>
-                              <p>{{shippingAddress.wards + ', ' + shippingAddress.district + ', ' + shippingAddress.province}}</p>
-                              <p>SĐT: {{shippingAddress.phoneaddress}}</p>
+                              <h6>Người nhận: {{shippingAddress.name}}</h6>
+                              <h6>SĐT: {{shippingAddress.phone}}</h6>
+                              <h6>{{shippingAddress.wards + ', ' + shippingAddress.districts + ', ' + shippingAddress.province}}</h6>
+                              <h6>Địa chỉ cụ thể: {{' '+shippingAddress.addressDetails}}</h6>
                               <button type="button" class="btn" data-toggle="modal" data-target="#popupEdit2">
                                 Sửa
                               </button>
@@ -184,7 +168,7 @@
                             </div>
                           </div>
                           <br>
-                          <p style="color: red">* Lưu ý kiểm tra địa chỉ giao hàng, địa chỉ thanh toán và thông tin
+                          <p style="color: red">* Lưu ý kiểm tra địa chỉ giao hàng và thông tin
                             người gửi trước khi thanh toán. </p>
                           <p style="color: #359bfa">* Nếu các thông tin đều chính xác thì nhấn nút "Đặt hàng" để đặt
                             hàng </p>
@@ -195,8 +179,10 @@
                           <button type="button" class="col-md-3" data-toggle="modal" data-target="#poppupCheckOut"
                                   data-dismiss="modal">Quay lại
                           </button>
+                          <button type="button" class="col-md-3" *ngIf="checkaddress()==false">Đặt hàng
+                          </button>
                           <button type="button" class="col-md-3" data-dismiss="modal" data-toggle="modal"
-                                  data-target="#popupOrderSucessfull" (click)="addNewOrder()">Đặt hàng
+                                  data-target="#popupOrderSucessfull" (click)="addNewOrder()" *ngIf="checkaddress()==true">Đặt hàng
                           </button>
                         </div>
                       </div>
@@ -212,70 +198,7 @@
     </div>
   </div>
 </div>
-<!--edit1-->
-<div class="modal fade bd-example-modal-lg" id="popupedit1" tabindex="-1"
-     role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cập nhật địa chỉ thanh toán </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:450px; overflow: scroll ">
 
-        <div class="col">
-          <div class="row row-50">
-
-            <div class="col-md-6">
-              <label>Số điện thoai*</label>
-              <input type="tel" placeholder="Số điện thoai"
-                     [(ngModel)]="address.phoneaddress">
-            </div>
-
-            <div class="col-md-6">
-              <label>Số nhà*</label>
-              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-            </div>
-
-            <div class="col-md-6">
-              <label>Đường*</label>
-              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
-            </div>
-
-            <div class="col-md-6">
-              <label>Tỉnh/Thành phố*</label>
-              <input type="text" placeholder="Tỉnh/Thành phố"
-                     [(ngModel)]="address.province">
-            </div>
-
-
-            <div class="col-md-6">
-              <label>Quận/Huyện*</label>
-              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
-            </div>
-
-            <div class="col-md-6">
-              <label>Xã/Phường</label>
-              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-          </button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal"
-                  (click)="putAddress()">Save
-            changes
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
 
 
 <!--edit2-->
@@ -292,40 +215,45 @@
       <div class="modal-body" style="height:450px; overflow: scroll ">
 
         <div class="col">
-          <div class="row row-50">
-
+          <div class="row">
+            <div class="col-md-6">
+              <label>Người nhận*</label>
+              <input class="form-control" type="text" placeholder="Người nhận" [(ngModel)]="model.name">
+            </div>
             <div class="col-md-6">
               <label>Số điện thoai*</label>
-              <input type="tel" placeholder="Số điện thoai"
-                     [(ngModel)]="address.phoneaddress">
+              <input class="form-control" type="tel" placeholder="Số điện thoai" [(ngModel)]="model.phoneup">
             </div>
 
-            <div class="col-md-6">
-              <label>Số nhà*</label>
-              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-            </div>
-
-            <div class="col-md-6">
-              <label>Đường*</label>
-              <input type="text" placeholder="Đường" [(ngModel)]="address.street">
-            </div>
 
             <div class="col-md-6">
               <label>Tỉnh/Thành phố*</label>
-              <input type="text" placeholder="Tỉnh/Thành phố"
-                     [(ngModel)]="address.province">
+              <select class="form-control" [(ngModel)]="model.province" (change)="loadDistricts(model.province)">
+                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
+              </select>
             </div>
 
 
             <div class="col-md-6">
               <label>Quận/Huyện*</label>
-              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+              <select class="form-control" [(ngModel)]="model.district_code" (change)="loadWards(model.district_code)">
+                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
+              </select>
             </div>
 
             <div class="col-md-6">
               <label>Xã/Phường</label>
-              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+              <select  class="form-control" [(ngModel)]="model.wards">
+                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
+              </select>
+
             </div>
+
+            <div class="col-md-12">
+              <label>Địa chỉ cụ thể*</label>
+              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể" [(ngModel)]="address.addressDetails">
+            </div>
+
           </div>
         </div>
         <div class="modal-footer">
@@ -409,69 +337,7 @@
 
 </div>
 
-<!--add2-->
-<div class="modal fade bd-example-modal-lg" id="popupAdd" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:450px;">
 
-        <div class="col">
-          <div class="row row-50">
-
-            <div class="col-md-6">
-              <label>Số điện thoai*</label>
-              <input type="text" placeholder="Số điện thoai"
-                     [(ngModel)]="address.phoneaddress">
-            </div>
-
-            <div class="col-md-6">
-              <label>Số nhà*</label>
-              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-            </div>
-
-            <div class="col-md-6">
-              <label>Đường*</label>
-              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
-            </div>
-
-            <div class="col-md-6">
-              <label>Tỉnh/Thành phố*</label>
-              <input type="text" placeholder="Tỉnh/Thành phố"
-                     [(ngModel)]="address.province">
-            </div>
-
-
-            <div class="col-md-6">
-              <label>Quận/Huyện*</label>
-              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
-            </div>
-
-            <div class="col-md-6">
-              <label>Xã/Phường</label>
-              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
-                  data-target="#poppupAddress">Close
-          </button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal"
-                  (click)="putAddress()">Lưu lại địa chỉ
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
 
 <!--order successfull-->
 <div class="modal fade bd-example-modal-lg" id="popupOrderSucessfull" tabindex="-1" role="dialog"

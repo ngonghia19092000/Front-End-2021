@@ -14,6 +14,9 @@ import {Order} from "../../models/order";
 import {MyAccountComponent} from "../my-account/my-account.component";
 import {User} from "../../models/user";
 import {Discount} from "../../models/discount";
+import {Provinces} from "../../models/provinces";
+import {Districts} from "../../models/districts";
+import {Wards} from "../../models/wards";
 
 @Component({
   selector: 'app-cart',
@@ -23,16 +26,23 @@ import {Discount} from "../../models/discount";
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   listOrder: Order[] = [];
-btn:boolean=false;
+  btn: boolean = false;
   paymentAddress: string | any;
   shippingAddress: string | any;
   address_check: boolean = false;
   address_check1: boolean = false;
-  user:User|any;
-  address: any = {};
-  userInfo:User|any;
-  code:any;
-  addressSuccess:any;
+  user: User | any;
+
+  userInfo: User | any;
+  code: any;
+  addressSuccess: any;
+  model: any = {};
+  address: any = {phone: '', province: '', districts: '', wards: '', addressDetails: '',name:''};
+  province: Provinces[] = [];
+  listdistricts: Districts[] = [];
+  districts: Districts[] = [];
+  wards: Wards[] = [];
+  listWards: Wards[] = [];
   constructor(
     private msg: MessengerService,
     private cartService: CartService,
@@ -46,7 +56,8 @@ btn:boolean=false;
   ngOnInit() {
     this.loadCartItems();
     this.getPrice();
-    this.user=this.userservice.userValue;
+    this.user = this.userservice.userValue;
+    this.loadAddressVietNam();
   }
 
 
@@ -94,8 +105,8 @@ btn:boolean=false;
 
   deleteCartItem(id: number) {
     if (this.cartService.getUserName() != '') {
-      for(let i of this.cartItems){
-        if(i.product.id == id)
+      for (let i of this.cartItems) {
+        if (i.product.id == id)
           this.cartService.deleteItem(i.id).subscribe((s) => {
             window.alert("Đã Xóa.")
             this.loadCartItems();
@@ -122,14 +133,14 @@ btn:boolean=false;
   addNewOrder() {
     this.getOrder();
     let check = false;
-    this.code = Math.floor(Math.random() * 999999).toString()
+    this.code = (Math.floor(Math.random() * 899999)+100000).toString()
     for (let x of this.listOrder) {
       if (this.code != x.code) {
         check = true;
       }
     }
-    if (!check||this.listOrder.length==0) {
-      let item = new Order(this.cartService.getUserName(), new Discount("",1), "Chờ xác nhận", this.cartItems,this.code,this.paymentAddress,this.shippingAddress);
+    if (!check || this.listOrder.length == 0) {
+      let item = new Order(this.cartService.getUserName(), new Discount("", 1), "Chờ xác nhận", this.cartItems, this.code, this.shippingAddress);
       if (this.cartService.getUserName() != '') {
         if (this.cartItems.length != 0) {
           this.order.addNewOrder(item).subscribe(() => console.log('add New Order'));
@@ -144,7 +155,8 @@ btn:boolean=false;
       }
     }
   }
-  checkout(){
+
+  checkout() {
 
   }
 
@@ -152,8 +164,8 @@ btn:boolean=false;
     let price = 0;
     for (const item of this.cartItems) {
       price += item.qty * item.product.price
-      if(price>0){
-        this.btn =true;
+      if (price > 0) {
+        this.btn = true;
       }
     }
     return price;
@@ -161,42 +173,117 @@ btn:boolean=false;
   }
 
   shipCost() {
-   return this.cartItems.length* 30000
+    return this.cartItems.length * 30000
   }
 
   getAddress() {
-      this.paymentAddress = this.user.paymentAddress;
-      this.shippingAddress = this.user.shippingAddress;
-      if (this.paymentAddress.province != undefined) {
-        this.address_check = true;
-      }
-      if (this.shippingAddress.province != undefined) {
-        this.address_check1 = true;
-      }
-      this.addressSuccess= ' '+this.paymentAddress.apartment + ', ' + this.paymentAddress.street+', '
-    +  this.paymentAddress.wards + ', ' + this.paymentAddress.district + ', ' + this.paymentAddress.province;
+
+    this.shippingAddress = this.user.shippingAddress;
+
+    if (this.shippingAddress.province != undefined) {
+      this.address_check1 = true;
+    }
+    this.addressSuccess = ' ' + this.shippingAddress.name + ', ' + this.shippingAddress.phone + ', '
+      + this.shippingAddress.wards + ', ' + this.shippingAddress.districts + ', ' + this.shippingAddress.province;
 
 
   }
+
   loadUser() {
     this.userservice.addDataLocalStorage(this.userInfo);
     location.reload();
   }
-  putAddress() {
-    if (this.address.value != '') {
-      this.userservice.putPaymentAddress(this.address).subscribe((data) => {
-        this.userInfo = data;
-        this.loadUser();
-      })
-    }
-  }
-
   putAddress1() {
+
     if (this.address.value != '') {
+      this.address.phone = this.model.phoneup;
+      this.address.province = this.findNameProvince(this.model.province)
+      this.address.districts = this.findNameDistricts(this.model.district_code);
+      this.address.wards = this.findNameWards(this.model.wards);
+      this.address.name=this.model.name;
       this.userservice.putShippingAddress(this.address).subscribe((data) => {
         this.userInfo = data;
         this.loadUser();
       })
     }
+  }
+  loadAddressVietNam() {
+    this.getAddress();
+    this.loadProvince();
+    this.loadDistricts(1)
+    this.loadWards(1);
+    this.model.province = 1;
+    this.model.district_code = 1;
+    this.model.wards = 1
+  }
+
+  loadProvince() {
+    this.userservice.getProvince().subscribe((data) => {
+      this.province = data;
+    })
+  }
+
+  loadDistricts(code: any) {
+    this.listdistricts = []
+    this.userservice.getDistricts().subscribe((data) => {
+      this.districts = data;
+      for (let districtsKey of this.districts) {
+        if (districtsKey.province_code == code) {
+          this.listdistricts.push(districtsKey);
+
+        }
+      }
+    })
+  }
+
+  loadWards(code: any) {
+    this.listWards = []
+    this.userservice.getWards().subscribe((data) => {
+      this.wards = data;
+      for (let item of this.wards) {
+        if (item.district_code == code) {
+          this.listWards.push(item);
+
+        }
+      }
+    })
+  }
+
+  findNameDistricts(code: any) {
+    let name = '';
+    for (const item of this.listdistricts) {
+      if (item.code == code) {
+        name = item.name
+      }
+    }
+    return name;
+  }
+
+  findNameProvince(code: any) {
+    let name = '';
+    for (const item of this.province) {
+      if (item.code == code) {
+        name = item.name
+      }
+    }
+    return name;
+  }
+
+  findNameWards(code: any) {
+    let name = '';
+    for (const item of this.listWards) {
+      if (item.code == code) {
+        name = item.name
+      }
+    }
+    return name;
+  }
+
+  checkaddress(){
+    if(this.shippingAddress.name==undefined||this.shippingAddress.phone==undefined||this.shippingAddress.wards==undefined||
+    this.shippingAddress.districts==undefined||this.shippingAddress.province==undefined){
+      return false;
+    }else
+      return true;
   }
 }

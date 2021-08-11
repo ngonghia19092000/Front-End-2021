@@ -2605,9 +2605,80 @@
         "province": "HCM",
         "wards": "P3"
       }
+    },
+    {
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "phone": "0399491909",
+      "username": "admin1",
+      "id": 2,
+      "password": "1909e10adc3949ba59abbe56e057f20f883e1909",
+      "fullname": "Ngô Minh Nghĩa",
+      "listVoucher": [],
+      "shippingAddress": {
+        "phone": "01234548645",
+        "province": "Tỉnh Cao Bằng",
+        "districts": "Thành phố Cao Bằng",
+        "wards": "Phường Sông Hiến",
+        "addressDetails": "123",
+        "name": "Ngô Minh Nghĩa"
+      }
+    },
+    {
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "phone": "0399491909",
+      "username": "admin134",
+      "id": 3,
+      "password": "1909e10adc3949ba59abbe56e057f20f883e1909",
+      "fullname": "Ngô Minh Nghĩa",
+      "listVoucher": [],
+      "shippingAddress": {
+        "phone": "0399491909",
+        "province": "Tỉnh Lâm Đồng",
+        "districts": "Huyện Lâm Hà",
+        "wards": "Xã Đạ Đờn",
+        "addressDetails": "123456",
+        "name": "Ngô Minh NGHĨA"
+      }
+    },
+    {
+      "email": "18130151@st.hcmuaf.edu.vn",
+      "phone": "0399491909",
+      "username": "ngonghia1909",
+      "id": 4,
+      "password": "1909e10adc3949ba59abbe56e057f20f883e1909",
+      "fullname": "Ngô Minh Nghĩa",
+      "listVoucher": [],
+      "shippingAddress": ""
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "qty": 3,
+      "product": {
+        "id": 2,
+        "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+        "img": "assets/img/KYT-Venom-6-247x247.jpg",
+        "price": 1990000,
+        "pricesale": 1890000,
+        "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+        "manufaturer": "ROYAL",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "3/4"
+      },
+      "userName": "admin1",
+      "id": 1
+    }
+  ],
   "orders": [
     {
       "code": "848931",
@@ -2654,6 +2725,226 @@
         "wards": "P3"
       },
       "id": 1
+    },
+    {
+      "code": "778484",
+      "id": 2,
+      "userName": "admin1",
+      "discount": {
+        "codeDiscount": "",
+        "rate": 1
+      },
+      "status": "Đã hủy",
+      "cartItem": [
+        {
+          "id": 1,
+          "product": {
+            "id": 2,
+            "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+            "img": "assets/img/KYT-Venom-6-247x247.jpg",
+            "price": 1990000,
+            "pricesale": 1890000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "qty": 3,
+          "userName": "admin1"
+        }
+      ]
+    },
+    {
+      "code": "780045",
+      "id": 3,
+      "userName": "admin1",
+      "discount": {
+        "codeDiscount": "",
+        "rate": 1
+      },
+      "status": "Đã hủy",
+      "cartItem": [
+        {
+          "id": 1,
+          "product": {
+            "id": 1,
+            "productname": "MŨ 3/4 ROYAL M134C",
+            "img": "assets/img/Mu-royal-M134C-2-247x247.jpg",
+            "price": 480000,
+            "pricesale": 450000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "qty": 3,
+          "userName": "admin1"
+        }
+      ],
+      "shippingAddress": {
+        "province": "Thành phố Hà Nội",
+        "districts": "Quận Ba Đình",
+        "wards": "Phường Phúc Xá",
+        "addressDetails": ""
+      }
+    },
+    {
+      "code": "967466",
+      "id": 4,
+      "userName": "admin1",
+      "discount": {
+        "codeDiscount": "",
+        "rate": 1
+      },
+      "status": "Đã hủy",
+      "cartItem": [
+        {
+          "qty": 1,
+          "product": {
+            "id": 2,
+            "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+            "img": "assets/img/KYT-Venom-6-247x247.jpg",
+            "price": 1990000,
+            "pricesale": 1890000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "userName": "admin1",
+          "id": 1
+        }
+      ],
+      "shippingAddress": {
+        "phone": "0399491909",
+        "province": "Thành phố Hà Nội",
+        "districts": "Quận Ba Đình",
+        "wards": "Phường Phúc Xá",
+        "addressDetails": "123",
+        "name": "Ngô Nghĩa"
+      }
+    },
+    {
+      "userName": "admin1",
+      "discount": {
+        "codeDiscount": "",
+        "rate": 1
+      },
+      "status": "Chờ xác nhận",
+      "cartItem": [
+        {
+          "qty": 3,
+          "product": {
+            "id": 2,
+            "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+            "img": "assets/img/KYT-Venom-6-247x247.jpg",
+            "price": 1990000,
+            "pricesale": 1890000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "userName": "admin1",
+          "id": 1
+        }
+      ],
+      "code": "45811",
+      "shippingAddress": {
+        "phone": "0399491909",
+        "province": "Thành phố Hà Nội",
+        "districts": "Quận Ba Đình",
+        "wards": "Phường Phúc Xá",
+        "addressDetails": "123",
+        "name": "Ngô Nghĩa"
+      },
+      "id": 5
+    },
+    {
+      "userName": "ngonghia1909",
+      "discount": {
+        "codeDiscount": "",
+        "rate": 1
+      },
+      "status": "Chờ xác nhận",
+      "cartItem": [
+        {
+          "qty": 3,
+          "product": {
+            "id": 2,
+            "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+            "img": "assets/img/KYT-Venom-6-247x247.jpg",
+            "price": 1990000,
+            "pricesale": 1890000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "userName": "ngonghia1909",
+          "id": 2
+        }
+      ],
+      "code": "353739",
+      "shippingAddress": {
+        "phone": "1232131",
+        "province": "Thành phố Hà Nội",
+        "districts": "Quận Ba Đình",
+        "wards": "Phường Phúc Xá",
+        "addressDetails": "12313",
+        "name": "012345"
+      },
+      "id": 6
     }
   ]
 }

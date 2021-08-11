@@ -7,6 +7,9 @@ import {Product} from "../models/product";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
 import {Md5} from "ts-md5";
+import {Provinces} from "../models/provinces";
+import {Districts} from "../models/districts";
+import {Wards} from "../models/wards";
 
 
 @Injectable({
@@ -74,8 +77,7 @@ export class UserService {
         password: this.userValue.password,
         fullname: this.userValue.fullname,
         listVoucher: this.userValue.listVoucher,
-        paymentAddress: this.userValue.paymentAddress,
-        shippingAddress: this.userValue.paymentAddress
+        shippingAddress: this.userValue.shippingAddress
       });
 
   }
@@ -91,25 +93,9 @@ export class UserService {
         password: data,
         fullname: this.userValue.fullname,
         listVoucher: this.userValue.listVoucher,
-        paymentAddress: this.userValue.paymentAddress,
-        shippingAddress: this.userValue.paymentAddress
-      });
-
-  }
-  putPaymentAddress(data: any): Observable<any> {
-    return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
-      {
-        email: this.userValue.email,
-        phone: this.userValue.phone,
-        address: this.userValue.adress,
-        username: this.userValue.username,
-        id: this.userValue.id,
-        password: this.userValue.password,
-        fullname: this.userValue.fullname,
-        listVoucher: this.userValue.listVoucher,
-        paymentAddress: data,
         shippingAddress: this.userValue.shippingAddress
       });
+
   }
   putShippingAddress(data: any): Observable<any> {
     return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
@@ -122,8 +108,17 @@ export class UserService {
         password: this.userValue.password,
         fullname: this.userValue.fullname,
         listVoucher: this.userValue.listVoucher,
-        paymentAddress: this.userValue.paymentAddress,
         shippingAddress: data
       });
+  }
+
+  getProvince():Observable<Provinces[]>{
+    return this.http.get<Provinces[]>('https://provinces.open-api.vn/api/p/')
+  }
+  getDistricts():Observable<Districts[]>{
+    return  this.http.get<Districts[]>('https://provinces.open-api.vn/api/d/')
+  }
+  getWards():Observable<Wards[]>{
+    return this.http.get<Wards[]>('https://provinces.open-api.vn/api/w/')
   }
 }

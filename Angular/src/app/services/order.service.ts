@@ -32,7 +32,7 @@ export class OrderService {
   updateOrder(order:Order,id:any):Observable<any>{
     return this.http.put(orderUrl+'/'+id+'?userName='+this.getUserName(),{code:order.code,
       userName:order.userName,discount:order.discount,status:order.status,cartItem:order.cartItem,
-      paymentAddress:order.paymentAddress,shippingAddress:order.shippingAddress,id:id
+     shippingAddress:order.shippingAddress,id:id
     });
   }
 
