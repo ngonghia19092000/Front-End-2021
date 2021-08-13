@@ -5,8 +5,7 @@
         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
             class="fa fa-user"></i>Thông tin tài khoản</a>
-          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"
-             (click)="fillOrderStatus()"><i
+          <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
             class="fa fa-shopping-bag"></i>Đơn hàng</a>
           <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i
             class="fa fa-credit-card"></i>Hình thức thanh toán</a>
@@ -333,7 +332,6 @@
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
                           <p class="price">{{totalPrice(i1.cartItem, i1.discount.rate)|currency:'VND'}} </p>
-
                         </div>
                       </div>
                     </div>
@@ -433,7 +431,6 @@
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
                           <p class="price">{{totalPrice(i2.cartItem, i2.discount.rate)|currency:'VND'}}</p>
-                          <button class="btn" (click)="deleteOrder(i2.id)">Hủy</button>
                         </div>
                       </div>
                     </div>
@@ -532,7 +529,6 @@
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
                           <p class="price">{{totalPrice(i3.cartItem, i3.discount.rate)|currency:"VND"}}</p>
-                          <button class="btn" (click)="deleteOrder(i3.id)">Hủy</button>
                         </div>
                       </div>
                     </div>
@@ -562,7 +558,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
-                                <div class="modal-body" style="height:450px; overflow: scroll ">
+                                <div class="modal-body" style="height:450px; overflow-y: scroll ">
                                   <table class="table">
                                     <thead class="thead-dark">
                                     <tr>
@@ -629,6 +625,7 @@
                       <div class="content-2">
                         <p> Tổng số tiền |</p>
                         <p class="price">{{totalPrice(x.cartItem, x.discount.rate)|currency:'VND'}}</p>
+                        <button class="btn" *ngIf="orderStatus == 'Chờ xác nhận'" (click)="deleteOrder(x.id)">Hủy</button>
                       </div>
                     </div>
                   </div>

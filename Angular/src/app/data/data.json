@@ -2585,89 +2585,26 @@
   ],
   "users": [
     {
-      "email": "thebao2590@gmail.com",
+      "email": "th@gmail.com",
       "phone": "0326141575",
       "username": "baokaka",
       "id": 1,
       "password": "1909c4ca4238a0b923820dcc509a6f75849b1909",
-      "fullname": "Phạm Thế Bảo",
-      "listVoucher": [
-        {
-          "codeDiscount": "232314",
-          "rate": 0.05
-        }
-      ],
-      "paymentAddress": {
-        "phoneaddress": "0326141575",
-        "apartment": "231",
-        "street": "32",
-        "district": "Q3",
-        "province": "HCM",
-        "wards": "P3"
-      }
-    },
-    {
-      "email": "18130151@st.hcmuaf.edu.vn",
-      "phone": "0399491909",
-      "username": "admin1",
-      "id": 2,
-      "password": "1909e10adc3949ba59abbe56e057f20f883e1909",
-      "fullname": "Ngô Minh Nghĩa",
+      "fullname": "baokaka",
       "listVoucher": [],
       "shippingAddress": [
         {
           "id": 1,
-          "name": "Ngô Minh NGHĨA",
-          "province": "Thành phố Hà Nội",
-          "districts": "Quận Ba Đình",
-          "wards": "Phường Phúc Xá",
-          "phonenumber": "0399491909",
-          "addressDetails": "123"
-        },
-        {
-          "id": 2,
-          "name": "qeqw",
-          "province": "Thành phố Hà Nội",
-          "districts": "Quận Ba Đình",
-          "wards": "Phường Phúc Xá",
-          "phonenumber": "2214",
-          "addressDetails": "12323"
-        }
-      ]
-    },
-    {
-      "email": "18130151@st.hcmuaf.edu.vn",
-      "phone": "01699491909",
-      "username": "admin12",
-      "id": 3,
-      "password": "1909e10adc3949ba59abbe56e057f20f883e1909",
-      "fullname": "Ngô Minh Nghĩa",
-      "listVoucher": [],
-      "shippingAddress": [
-        {
-          "id": 1,
-          "name": "Ngô Minh Nghĩa",
-          "province": "Tỉnh Lâm Đồng",
-          "districts": "Huyện Lâm Hà",
-          "wards": "Xã Đạ Đờn",
-          "phonenumber": "0399491909",
-          "addressDetails": "12312"
-        },
-        {
-          "id": 2,
-          "name": "á",
-          "province": "Thành phố Hà Nội",
-          "districts": "Quận Ba Đình",
-          "wards": "Phường Phúc Xá",
-          "phonenumber": "ád",
-          "addressDetails": "áds"
+          "name": "Bao",
+          "province": "Tỉnh Kiên Giang",
+          "districts": "Huyện Hòn Đất",
+          "wards": "Xã Mỹ Hiệp Sơn",
+          "phonenumber": "0326141575",
+          "addressDetails": "asda"
         }
       ]
     }
   ],
-  "cart": [
-  ],
-  "orders": [
-
-  ]
+  "cart": [],
+  "orders": []
 }

@@ -41,6 +41,7 @@ export class MyAccountComponent implements OnInit {
 
 
   //lọc và chia order theo trạng thái
+  countFillStatus:any;
   orderStatus: string = '';
   orderStatus_1: Order[] = [];//cho xac nhan
   orderStatus_2: Order[] = [];//dang giao
@@ -61,13 +62,13 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.userValue;
     this.getOrder();
-    this.fillOrderStatus();
     this.loadAddressVietNam();
   }
 
   update() {
     setInterval(() => {
       this.user = this.userService.userValue;
+      this.fillOrderStatus();
     });
   }
 
@@ -209,11 +210,11 @@ export class MyAccountComponent implements OnInit {
   deleteOrder(id: any) {
     for (let item of this.listOrder) {
       if (item.id == id) {
+        this.fillOrderStatus();
         this.orderService.updateOrderStatus(item).subscribe();
       }
     }
     this.getOrder();
-    this.fillOrderStatus();
   }
 
 //check list địa chỉ
