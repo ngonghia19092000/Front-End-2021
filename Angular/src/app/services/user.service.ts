@@ -10,6 +10,7 @@ import {Md5} from "ts-md5";
 import {Provinces} from "../models/provinces";
 import {Districts} from "../models/districts";
 import {Wards} from "../models/wards";
+import {AddressItem} from "../models/address-item";
 
 
 @Injectable({
@@ -120,5 +121,20 @@ export class UserService {
   }
   getWards():Observable<Wards[]>{
     return this.http.get<Wards[]>('https://provinces.open-api.vn/api/w/')
+  }
+  addNewAddress(data:AddressItem[]):Observable<any>{
+    return this.http.put(userUrl + '/' + this.userValue.id + '?username=' + this.userValue.username,
+      {
+        email: this.userValue.email,
+        phone: this.userValue.phone,
+        address: this.userValue.adress,
+        username: this.userValue.username,
+        id: this.userValue.id,
+        password: this.userValue.password,
+        fullname: this.userValue.fullname,
+        listVoucher: this.userValue.listVoucher,
+        shippingAddress: data
+      });
+
   }
 }

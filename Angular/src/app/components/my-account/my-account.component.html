@@ -219,12 +219,12 @@
                               <p>Địa chỉ:</p>
                             </div>
                             <div class="ct-2">
-                              <p>Baokaka</p>
+                              <p>{{i.addressShip.name}}</p>
                               <!--                              <p>{{i.shippingAddress.phone}}</p>-->
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
+                              <p>{{i.addressShip.phonenumber}}</p>
+                              <p>{{i.addressShip.wards}}</p>
+                              <p>{{i.addressShip.districts}}</p>
+                              <p>{{i.addressShip.province}}</p>
                             </div>
                           </div>
                         </div>
@@ -320,12 +320,12 @@
                               <p>Địa chỉ:</p>
                             </div>
                             <div class="ct-2">
-                              <p>Baokaka</p>
-                              <!--                              <p>{{i1.shippingAddress.phone}}</p>-->
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
+                              <p>{{i1.addressShip.name}}</p>
+                              <!--                              <p>{{i.shippingAddress.phone}}</p>-->
+                              <p>{{i1.addressShip.phonenumber}}</p>
+                              <p>{{i1.addressShip.wards}}</p>
+                              <p>{{i1.addressShip.districts}}</p>
+                              <p>{{i1.addressShip.province}}</p>
                             </div>
                           </div>
                         </div>
@@ -420,12 +420,12 @@
                               <p>Địa chỉ:</p>
                             </div>
                             <div class="ct-2">
-                              <p>Baokaka</p>
-                              <p>0326141575</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
-                              <p>GT KG</p>
+                              <p>{{i2.addressShip.name}}</p>
+                              <!--                              <p>{{i.shippingAddress.phone}}</p>-->
+                              <p>{{i2.addressShip.phonenumber}}</p>
+                              <p>{{i2.addressShip.wards}}</p>
+                              <p>{{i2.addressShip.districts}}</p>
+                              <p>{{i2.addressShip.province}}</p>
                             </div>
                           </div>
                         </div>
@@ -520,11 +520,11 @@
                               <p>Địa chỉ:</p>
                             </div>
                             <div class="ct-2">
-                              <p>{{shippingAddress.name}}</p>
-                              <p>{{shippingAddress.phone}}</p>
-                              <p>{{this.shippingAddress.wards}}</p>
-                              <p>{{this.shippingAddress.districts}}</p>
-                              <p> {{this.shippingAddress.province}}</p>
+                              <p>{{i3.addressShip.name}}</p>
+                              <p>{{i3.addressShip.phonenumber}}</p>
+                              <p>{{i3.addressShip.wards}}</p>
+                              <p>{{i3.addressShip.districts}}</p>
+                              <p> {{i3.addressShip.province}}</p>
                             </div>
                           </div>
                         </div>
@@ -616,12 +616,12 @@
                             <p>Địa chỉ:</p>
                           </div>
                           <div class="ct-2">
-                            <p>Bảo kaka</p>
-                            <p></p>
-                            <p>GT KG</p>
-                            <p>GT KG</p>
-                            <p>GT KG</p>
-                            <p>GT KG</p>
+                            <p>{{x.addressShip.name}}</p>
+                            <p>{{x.addressShip.phonenumber}}</p>
+                            <p>{{x.addressShip.wards}}</p>
+                            <p>{{x.addressShip.districts}}</p>
+                            <p>{{x.addressShip.province}}</p>
+
                           </div>
                         </div>
                       </div>
@@ -656,49 +656,55 @@
           <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
             <div style="height: auto">
               <h3 style="float: left;width: 70%">Thông tin địa chỉ</h3>
-             <button type="button" class="btn" style="width: 30%" data-toggle="modal" data-target="#poppupAdd4"><i
-              class="fas fa-plus" ></i> Thêm địa chỉ</button>
+              <button type="button" class="btn" style="width: 30%" data-toggle="modal" data-target="#poppupAdd4"><i
+                class="fas fa-plus"></i> Thêm địa chỉ
+              </button>
             </div>
-            <div class="row"style="width:100%">
-              <div class="col-md-12" *ngIf="address_check1==true">
-                <hr>
-                <div style="float: left;width:80%">
+            <div class="row" style="width:100%">
+              <div class="col-md-12" *ngFor="let item of shippingAddress">
+                <div class="col-md-12" *ngIf="address_check1==true">
+
+
+                  <hr style="display: block">
+                  <div style="float: left;width:80%">
 
                     <div style="width: 20%;float: left; text-align: right; margin-right: 2%">
+
                       <p>Người nhận: </p>
                       <p>Số điện thoại: </p>
                       <p>Địa chỉ: </p>
                       <p>Địa chỉ cụ thể: </p>
                     </div>
+
                     <div style="width: 78%;float: right; text-align: left;font-weight: bold">
 
-                      <p>{{shippingAddress.name}}</p>
-                      <p> {{shippingAddress.phone}}</p>
-                      <p>{{shippingAddress.wards + ', ' + shippingAddress.districts + ', ' + shippingAddress.province}}</p>
-                      <p>{{' ' + shippingAddress.addressDetails}}</p>
+                      <p>{{item.name}}</p>
+                      <p> {{item.phonenumber}}</p>
+                      <p>{{item.wards + ', ' + item.districts + ', ' + item.province}}</p>
+                      <p>{{' ' + item.addressDetails}}</p>
                     </div>
 
 
-
+                  </div>
+                  <div style="float: right;width:20%">
+                    <button type="button" style="margin: 0 auto ; width:50%;height: 50%" class="btn" data-toggle="modal"
+                            data-target="#poppupAdd3" (click)="taget=item.id">
+                      Sửa
+                    </button>
+                    <br>
+                    <br>
+                    <button type="button" style="margin:0 auto;width: 50%;height: 50%" class="btn"
+                            (click)="deleteAddress(item.id)">Xóa
+                    </button>
+                  </div>
                 </div>
-                <div style="float: right;width:20%">
-                  <button type="button" style="margin: 0 auto ; width:50%;height: 50%" class="btn" data-toggle="modal"
-                          data-target="#poppupAdd3">
-                    Sửa
-                  </button>
-                  <br>
-                  <br>
-                  <button type="button" style="margin:0 auto;width: 50%;height: 50%" class="btn" (click)="deleteAddress()">Xóa</button>
-                </div>
-
-
-
               </div>
               <div class="col-md-12" *ngIf="address_check1==false" style="width: 100%;height:300px">
 
-               <hr>
+                <hr>
 
-                <p style="font-size: 25px;color: rgba(32,22,0,0.82);margin-top:10%;text-align: center" >Bạn chưa có địa chỉ</p>
+                <p style="font-size: 25px;color: rgba(32,22,0,0.82);margin-top:10%;text-align: center">Bạn chưa có địa
+                  chỉ</p>
                 <!-- Button trigger modal -->
                 <!-- Modal -->
 
@@ -733,7 +739,7 @@
         <div class="col">
           <div class="row">
             <div class="col-md-6">
-              <label>Người nhân*</label>
+              <label>Người nhận*</label>
               <input class="form-control" type="tel" placeholder="Người nhận"
                      [(ngModel)]="model.name">
             </div>
@@ -744,7 +750,7 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Tỉnh/Thành phố*</label>
               <select class="form-control" [(ngModel)]="model.province"
                       (change)="loadDistricts(model.province)">
@@ -753,7 +759,7 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Quận/Huyện*</label>
               <select class="form-control" [(ngModel)]="model.district_code"
                       (change)="loadWards(model.district_code)">
@@ -761,78 +767,7 @@
               </select>
             </div>
 
-            <div class="col-md-6">
-              <label>Xã/Phường</label>
-              <select class="form-control" [(ngModel)]="model.wards">
-                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
-              </select>
-
-            </div>
-
-            <div class="col-md-12">
-              <label>Địa chỉ cụ thể*</label>
-              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
-                     [(ngModel)]="address.addressDetails">
-            </div>
-
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
-            Save changes
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-<div class="modal fade bd-example-modal-lg" id="poppupAdd4" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Thêm địa chỉ thanh toán </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:450px; overflow: scroll ">
-
-        <div class="col">
-          <div class="row">
-            <div class="col-md-6">
-              <label>Người nhận*</label>
-              <input class="form-control" type="tel" placeholder="Số điện thoai"
-                     [(ngModel)]="model.name">
-            </div>
-            <div class="col-md-6">
-              <label>Số điện thoai*</label>
-              <input class="form-control" type="tel" placeholder="Số điện thoai"
-                     [(ngModel)]="model.phoneup">
-            </div>
-
-
-            <div class="col-md-6">
-              <label>Tỉnh/Thành phố*</label>
-              <select class="form-control" [(ngModel)]="model.province"
-                      (change)="loadDistricts(model.province)">
-                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
-              </select>
-            </div>
-
-
-            <div class="col-md-6">
-              <label>Quận/Huyện*</label>
-              <select class="form-control" [(ngModel)]="model.district_code"
-                      (change)="loadWards(model.district_code)">
-                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
-              </select>
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Xã/Phường</label>
               <select class="form-control" [(ngModel)]="model.wards">
                 <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
@@ -851,8 +786,79 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="putAddress1()">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateAddress(taget)">
             Lưu thay đổi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal fade bd-example-modal-lg" id="poppupAdd4" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm địa chỉ giao hàng </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:450px; overflow: scroll ">
+
+        <div class="col">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Người nhận*</label>
+              <input class="form-control" type="tel" placeholder="Tên người nhận"
+                     [(ngModel)]="model.name">
+            </div>
+            <div class="col-md-6">
+              <label>Số điện thoai*</label>
+              <input class="form-control" type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="model.phoneup">
+            </div>
+
+
+            <div class="col-md-4">
+              <label>Tỉnh/Thành phố*</label>
+              <select class="form-control" [(ngModel)]="model.province"
+                      (change)="loadDistricts(model.province)">
+                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
+              </select>
+            </div>
+
+
+            <div class="col-md-4">
+              <label>Quận/Huyện*</label>
+              <select class="form-control" [(ngModel)]="model.district_code"
+                      (change)="loadWards(model.district_code)">
+                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label>Xã/Phường</label>
+              <select class="form-control" [(ngModel)]="model.wards">
+                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
+              </select>
+
+            </div>
+
+            <div class="col-md-12">
+              <label>Địa chỉ cụ thể*</label>
+              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
+                     [(ngModel)]="address.addressDetails">
+            </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addNewAddress()">
+            Thêm địa chỉ
           </button>
         </div>
       </div>

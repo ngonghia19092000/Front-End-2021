@@ -143,30 +143,33 @@
                                   style="width: 30px;height: 30px;text-align: center">X
                           </button>
                         </div>
-                        <div class="modal-body" style="height:450px; width: 100% ">
+                        <p data-toggle="modal"
+                           data-target="#poppupAdd1" class="add-new"> Thêm địa chỉ mới</p>
+                        <div class="modal-body" style="height:450px; width: 100% ;overflow: scroll">
                           <div class="row">
-                            <div class="col-md-6" *ngIf="address_check1==true">
-                              <h5>Địa chỉ giao hàng</h5>
-                              <h6>Người nhận: {{shippingAddress.name}}</h6>
-                              <h6>SĐT: {{shippingAddress.phone}}</h6>
-                              <h6>{{shippingAddress.wards + ', ' + shippingAddress.districts + ', ' + shippingAddress.province}}</h6>
-                              <h6>Địa chỉ cụ thể: {{' '+shippingAddress.addressDetails}}</h6>
-                              <button type="button" class="btn" data-toggle="modal" data-target="#popupEdit2">
-                                Sửa
-                              </button>
+                            <div class="col-md-12 address" *ngFor="let address of shippingAddress" style="display: flex;" >
+                             <input type="radio" class="option-input radio" [value]="address.id" style="width: 5%;float: left;margin-bottom: 1%;" [(ngModel)]="model.address1">
+                              <div class="nn" style="float: left;width:75%">
+                                <p>Người nhận: <span>{{address.name}}</span></p>
+                                  <p>Số điện thoại: <span>{{address.phonenumber}}</span></p>
+                                  <p> Địa chỉ: <span>{{address.wards + ', ' + address.districts + ', ' + address.province}}</span></p>
+                                  <p> Địa chỉ cụ thể:<span> {{' ' + address.addressDetails}}</span></p>
+                              </div>
+                              <div style="float: right;width:20%;text-align: center">
+                                <button type="button" style=";margin-bottom: 40%;width:50%;height: auto" class="btn" data-toggle="modal"
+                                        data-target="#poppupAdd3"  (click)="taget=address.id">
+                                  Sửa
+                                </button>
+                              </div>
                             </div>
+
                             <div class="col-md-6" *ngIf="address_check1==false">
                               <h5>Địa chỉ giao hàng</h5>
                               <p>Nhấn "Thêm" để thêm địa chỉ giao hàng</p>
                               <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-primary" data-toggle="modal"
-                                      data-target="#poppupAdd1">
-                                Thêm
-                              </button>
-
-
                             </div>
                           </div>
+
                           <br>
                           <p style="color: red">* Lưu ý kiểm tra địa chỉ giao hàng và thông tin
                             người gửi trước khi thanh toán. </p>
@@ -182,7 +185,7 @@
                           <button type="button" class="col-md-3" *ngIf="checkaddress()==false">Đặt hàng
                           </button>
                           <button type="button" class="col-md-3" data-dismiss="modal" data-toggle="modal"
-                                  data-target="#popupOrderSucessfull" (click)="addNewOrder()" *ngIf="checkaddress()==true">Đặt hàng
+                                  data-target="#popupOrderSucessfull" (click)="addNewOrder(model.address1)" *ngIf="checkaddress()==true">Đặt hàng
                           </button>
                         </div>
                       </div>
@@ -201,8 +204,7 @@
 
 
 
-<!--edit2-->
-<div class="modal fade bd-example-modal-lg" id="popupEdit2" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg" id="poppupAdd3" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
@@ -218,32 +220,36 @@
           <div class="row">
             <div class="col-md-6">
               <label>Người nhận*</label>
-              <input class="form-control" type="text" placeholder="Người nhận" [(ngModel)]="model.name">
+              <input class="form-control" type="tel" placeholder="Người nhận"
+                     [(ngModel)]="model.name">
             </div>
             <div class="col-md-6">
               <label>Số điện thoai*</label>
-              <input class="form-control" type="tel" placeholder="Số điện thoai" [(ngModel)]="model.phoneup">
+              <input class="form-control" type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="model.phoneup">
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Tỉnh/Thành phố*</label>
-              <select class="form-control" [(ngModel)]="model.province" (change)="loadDistricts(model.province)">
+              <select class="form-control" [(ngModel)]="model.province"
+                      (change)="loadDistricts(model.province)">
                 <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
               </select>
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Quận/Huyện*</label>
-              <select class="form-control" [(ngModel)]="model.district_code" (change)="loadWards(model.district_code)">
+              <select class="form-control" [(ngModel)]="model.district_code"
+                      (change)="loadWards(model.district_code)">
                 <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
               </select>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Xã/Phường</label>
-              <select  class="form-control" [(ngModel)]="model.wards">
+              <select class="form-control" [(ngModel)]="model.wards">
                 <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
               </select>
 
@@ -251,18 +257,17 @@
 
             <div class="col-md-12">
               <label>Địa chỉ cụ thể*</label>
-              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể" [(ngModel)]="address.addressDetails">
+              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
+                     [(ngModel)]="address.addressDetails">
             </div>
+
 
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
-                  data-target="#poppupAddress">Close
-          </button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal"
-                  (click)="putAddress1()" data-toggle="modal" data-target="#poppupAddress">
-            Lưu lại địa chỉ
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateAddress(taget)">
+            Lưu thay đổi
           </button>
         </div>
       </div>
@@ -270,8 +275,6 @@
   </div>
 
 </div>
-
-
 <!--add1-->
 <div class="modal fade bd-example-modal-lg" id="poppupAdd1" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -286,49 +289,57 @@
       <div class="modal-body" style="height:450px; overflow: scroll ">
 
         <div class="col">
-          <div class="row row-50">
-
+          <div class="row">
+            <div class="col-md-6">
+              <label>Người nhận*</label>
+              <input class="form-control" type="tel" placeholder="Tên người nhận"
+                     [(ngModel)]="model.name">
+            </div>
             <div class="col-md-6">
               <label>Số điện thoai*</label>
-              <input type="text" placeholder="Số điện thoai"
-                     [(ngModel)]="address.phoneaddress">
+              <input class="form-control" type="tel" placeholder="Số điện thoai"
+                     [(ngModel)]="model.phoneup">
             </div>
 
-            <div class="col-md-6">
-              <label>Số nhà*</label>
-              <input type="text" placeholder="Số nhà" [(ngModel)]="address.apartment">
-            </div>
 
-            <div class="col-md-6">
-              <label>Đường*</label>
-              <input type="email" placeholder="Đường" [(ngModel)]="address.street">
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Tỉnh/Thành phố*</label>
-              <input type="text" placeholder="Tỉnh/Thành phố"
-                     [(ngModel)]="address.province">
+              <select class="form-control" [(ngModel)]="model.province"
+                      (change)="loadDistricts(model.province)">
+                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
+              </select>
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Quận/Huyện*</label>
-              <input type="text" placeholder="Quận/Huyện" [(ngModel)]="address.district">
+              <select class="form-control" [(ngModel)]="model.district_code"
+                      (change)="loadWards(model.district_code)">
+                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
+              </select>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Xã/Phường</label>
-              <input type="text" placeholder="Xã/Phường" [(ngModel)]="address.wards">
+              <select class="form-control" [(ngModel)]="model.wards">
+                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
+              </select>
+
             </div>
+
+            <div class="col-md-12">
+              <label>Địa chỉ cụ thể*</label>
+              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
+                     [(ngModel)]="address.addressDetails">
+            </div>
+
+
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-          </button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
-                  data-target="#poppupAddress"
-                  (click)="putAddress1()">
-            Lưu lại địa chỉ
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addNewAddress()">
+            Thêm địa chỉ
           </button>
         </div>
       </div>
@@ -370,7 +381,7 @@
       </div>
 
       <button type="button" class="btn" style="width: 50%; margin:0 auto;margin-bottom: 20px;border-color: #201600"
-              data-dismiss="modal">Close
+              data-dismiss="modal">Đóng
       </button>
 
 

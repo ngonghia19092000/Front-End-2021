@@ -17,6 +17,7 @@ import {Discount} from "../../models/discount";
 import {Provinces} from "../../models/provinces";
 import {Districts} from "../../models/districts";
 import {Wards} from "../../models/wards";
+import {AddressItem} from "../../models/address-item";
 
 @Component({
   selector: 'app-cart',
@@ -28,21 +29,21 @@ export class CartComponent implements OnInit {
   listOrder: Order[] = [];
   btn: boolean = false;
   paymentAddress: string | any;
-  shippingAddress: string | any;
-  address_check: boolean = false;
+  shippingAddress:AddressItem[] =[];
   address_check1: boolean = false;
   user: User | any;
-
   userInfo: User | any;
   code: any;
   addressSuccess: any;
   model: any = {};
-  address: any = {phone: '', province: '', districts: '', wards: '', addressDetails: '',name:''};
+  address: any = {phone: '', province: '', districts: '', wards: '', addressDetails: '', name: ''};
   province: Provinces[] = [];
   listdistricts: Districts[] = [];
   districts: Districts[] = [];
   wards: Wards[] = [];
   listWards: Wards[] = [];
+  taget:number|any;
+
   constructor(
     private msg: MessengerService,
     private cartService: CartService,
@@ -50,6 +51,7 @@ export class CartComponent implements OnInit {
     private userservice: UserService,
     private order: OrderService,
   ) {
+    this.update();
   }
 
 
@@ -58,6 +60,7 @@ export class CartComponent implements OnInit {
     this.getPrice();
     this.user = this.userservice.userValue;
     this.loadAddressVietNam();
+
   }
 
 
@@ -130,23 +133,30 @@ export class CartComponent implements OnInit {
     this.order.getOrder().subscribe((t) => this.listOrder = t);
   }
 
-  addNewOrder() {
+  addNewOrder(id:any) {
     this.getOrder();
+    let dataAddress:AddressItem|any;
     let check = false;
-    this.code = (Math.floor(Math.random() * 899999)+100000).toString()
+    this.code = (Math.floor(Math.random() * 899999) + 100000).toString()
     for (let x of this.listOrder) {
       if (this.code != x.code) {
         check = true;
       }
     }
+
     if (!check || this.listOrder.length == 0) {
-      let item = new Order(this.cartService.getUserName(), new Discount("", 1), "Chờ xác nhận", this.cartItems, this.code, this.shippingAddress);
+      for (let item of this.shippingAddress) {
+        if(item.id==id){
+          dataAddress=item;
+        }
+      }
+      let item = new Order(this.cartService.getUserName(), new Discount("", 1), "Chờ xác nhận", this.cartItems, this.code,dataAddress );
       if (this.cartService.getUserName() != '') {
         if (this.cartItems.length != 0) {
           this.order.addNewOrder(item).subscribe(() => console.log('add New Order'));
           this.clearCart();
           this.loadCartItems();
-
+          this.addressSuccess= ''+dataAddress.wards+', '+dataAddress.districts+', '+dataAddress.province;
         } else {
           console.log('Hãy chọn sản phẩm.');
         }
@@ -177,35 +187,49 @@ export class CartComponent implements OnInit {
   }
 
   getAddress() {
-
     this.shippingAddress = this.user.shippingAddress;
-
-    if (this.shippingAddress.province != undefined) {
+    if (this.shippingAddress.length !=0) {
       this.address_check1 = true;
     }
-    this.addressSuccess = ' ' + this.shippingAddress.name + ', ' + this.shippingAddress.phone + ', '
-      + this.shippingAddress.wards + ', ' + this.shippingAddress.districts + ', ' + this.shippingAddress.province;
-
-
   }
-
   loadUser() {
     this.userservice.addDataLocalStorage(this.userInfo);
-    location.reload();
   }
-  putAddress1() {
 
-    if (this.address.value != '') {
-      this.address.phone = this.model.phoneup;
-      this.address.province = this.findNameProvince(this.model.province)
-      this.address.districts = this.findNameDistricts(this.model.district_code);
-      this.address.wards = this.findNameWards(this.model.wards);
-      this.address.name=this.model.name;
-      this.userservice.putShippingAddress(this.address).subscribe((data) => {
-        this.userInfo = data;
-        this.loadUser();
-      })
+  // thêm địa chỉ mới
+  addNewAddress() {
+    let address = new AddressItem((this.shippingAddress.length + 1), this.model.name, this.findNameProvince(this.model.province),
+      this.findNameDistricts(this.model.district_code), this.findNameWards(this.model.wards), this.model.phoneup, this.address.addressDetails)
+    this.shippingAddress.push(address)
+    this.userservice.addNewAddress(this.shippingAddress).subscribe((data) => {
+      this.userInfo = data
+      this.loadUser();
+      if (this.shippingAddress.length == 1) {
+        window.location.reload();
+      }
+    })
+  }
+
+//cập nhật địa chỉ
+  updateAddress(taget: any) {
+    let address = new AddressItem((taget), this.model.name, this.findNameProvince(this.model.province),
+      this.findNameDistricts(this.model.district_code), this.findNameWards(this.model.wards), this.model.phoneup, this.address.addressDetails)
+    for (let shippingAddressKey of this.shippingAddress) {
+      if (shippingAddressKey.id == taget) {
+        let index = this.shippingAddress.indexOf(shippingAddressKey)
+        this.shippingAddress.splice(index, 1);
+        this.shippingAddress.splice(index, 0, address);
+
+        this.userservice.addNewAddress(this.shippingAddress).subscribe((data) => {
+
+          this.userInfo = data
+          this.loadUser();
+
+        })
+      }
+
     }
+
   }
   loadAddressVietNam() {
     this.getAddress();
@@ -215,14 +239,13 @@ export class CartComponent implements OnInit {
     this.model.province = 1;
     this.model.district_code = 1;
     this.model.wards = 1
+    this.model.address1=0;
   }
-
   loadProvince() {
     this.userservice.getProvince().subscribe((data) => {
       this.province = data;
     })
   }
-
   loadDistricts(code: any) {
     this.listdistricts = []
     this.userservice.getDistricts().subscribe((data) => {
@@ -235,7 +258,6 @@ export class CartComponent implements OnInit {
       }
     })
   }
-
   loadWards(code: any) {
     this.listWards = []
     this.userservice.getWards().subscribe((data) => {
@@ -248,7 +270,6 @@ export class CartComponent implements OnInit {
       }
     })
   }
-
   findNameDistricts(code: any) {
     let name = '';
     for (const item of this.listdistricts) {
@@ -258,7 +279,6 @@ export class CartComponent implements OnInit {
     }
     return name;
   }
-
   findNameProvince(code: any) {
     let name = '';
     for (const item of this.province) {
@@ -268,7 +288,6 @@ export class CartComponent implements OnInit {
     }
     return name;
   }
-
   findNameWards(code: any) {
     let name = '';
     for (const item of this.listWards) {
@@ -278,12 +297,16 @@ export class CartComponent implements OnInit {
     }
     return name;
   }
-
-  checkaddress(){
-    if(this.shippingAddress.name==undefined||this.shippingAddress.phone==undefined||this.shippingAddress.wards==undefined||
-    this.shippingAddress.districts==undefined||this.shippingAddress.province==undefined){
+  checkaddress() {
+    if (this.shippingAddress.length == 0||this.model.address1==0) {
       return false;
-    }else
+    } else
       return true;
+  }
+
+  update() {
+    setInterval(() => {
+      this.user = this.userservice.userValue;
+    });
   }
 }

@@ -11,6 +11,7 @@ import {StatusPipe} from "../../services/filter/status.pipe";
 import {Provinces} from "../../models/provinces";
 import {Districts} from "../../models/districts";
 import {Wards} from "../../models/wards";
+import {AddressItem} from "../../models/address-item";
 
 @Component({
   selector: 'app-my-account',
@@ -28,10 +29,10 @@ export class MyAccountComponent implements OnInit {
   isChange: boolean = false;
   taget: CartItem[] | any;
   paymentAddress: string | any;
-  shippingAddress: []| any;
+  shippingAddress: AddressItem[] = [];
   address_check: boolean = false;
   address_check1: boolean = false;
-  address: any = {phone: '', province: '', districts: '', wards: '', addressDetails: '',name:''};
+  address: any = {phone: '', province: '', districts: '', wards: '', addressDetails: '', name: ''};
   province: Provinces[] = [];
   listdistricts: Districts[] = [];
   districts: Districts[] = [];
@@ -40,11 +41,11 @@ export class MyAccountComponent implements OnInit {
 
 
   //lọc và chia order theo trạng thái
-  orderStatus:string = '';
-  orderStatus_1:Order[]=[];//cho xac nhan
-  orderStatus_2:Order[]=[];//dang giao
-  orderStatus_3:Order[]=[];//da giao
-  orderStatus_4:Order[]=[];//da huy
+  orderStatus: string = '';
+  orderStatus_1: Order[] = [];//cho xac nhan
+  orderStatus_2: Order[] = [];//dang giao
+  orderStatus_3: Order[] = [];//da giao
+  orderStatus_4: Order[] = [];//da huy
 
 
   constructor(private userService: UserService,
@@ -53,6 +54,7 @@ export class MyAccountComponent implements OnInit {
               private formBuilder: FormBuilder,
               private orderService: OrderService,
   ) {
+    this.update();
 
   }
 
@@ -63,6 +65,12 @@ export class MyAccountComponent implements OnInit {
     this.loadAddressVietNam();
   }
 
+  update() {
+    setInterval(() => {
+      this.user = this.userService.userValue;
+    });
+  }
+
   logout() {
     this.userService.logout();
     this.router.navigate(['/'])
@@ -70,7 +78,7 @@ export class MyAccountComponent implements OnInit {
 
   loadUser() {
     this.userService.addDataLocalStorage(this.userInfo)
-    location.reload();
+
   }
 
   updateInfo() {
@@ -161,7 +169,7 @@ export class MyAccountComponent implements OnInit {
       let item: any;
       for (let i of this.listOrder) {
         if (i.id == id) {
-          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code,i.shippingAddress);
+          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code, i.addressShip);
         }
       }
       this.getOrder();
@@ -180,11 +188,11 @@ export class MyAccountComponent implements OnInit {
   }
 
   pluss(id: any) {
-      for (let i = 0; i < this.taget.length; i++) {
-        if (this.taget[i].id == id) {
-          this.isChange = true;
-          this.taget[i].qty++;
-        }
+    for (let i = 0; i < this.taget.length; i++) {
+      if (this.taget[i].id == id) {
+        this.isChange = true;
+        this.taget[i].qty++;
+      }
     }
   }
 
@@ -200,7 +208,7 @@ export class MyAccountComponent implements OnInit {
 
   deleteOrder(id: any) {
     for (let item of this.listOrder) {
-      if(item.id == id){
+      if (item.id == id) {
         this.orderService.updateOrderStatus(item).subscribe();
       }
     }
@@ -208,30 +216,15 @@ export class MyAccountComponent implements OnInit {
     this.fillOrderStatus();
   }
 
-
+//check list địa chỉ
   loadAddress() {
     this.shippingAddress = this.user.shippingAddress;
-    if (this.shippingAddress.province != undefined) {
+    if (this.shippingAddress.length != 0) {
       this.address_check1 = true;
     }
-
   }
 
-  putAddress1() {
-
-    if (this.address.value != '') {
-      this.address.phone = this.model.phoneup;
-      this.address.province = this.findNameProvince(this.model.province)
-      this.address.districts = this.findNameDistricts(this.model.district_code);
-      this.address.wards = this.findNameWards(this.model.wards);
-      this.address.name=this.model.name;
-      this.userService.putShippingAddress(this.address).subscribe((data) => {
-        this.userInfo = data;
-        this.loadUser();
-      })
-    }
-  }
-  loadAddressVietNam(){
+  loadAddressVietNam() {
     this.loadAddress();
     this.loadProvince();
     this.loadDistricts(1)
@@ -240,6 +233,8 @@ export class MyAccountComponent implements OnInit {
     this.model.district_code = 1;
     this.model.wards = 1
   }
+
+  // load dữ liệu tỉnh thành
   loadProvince() {
     this.userService.getProvince().subscribe((data) => {
       this.province = data;
@@ -272,6 +267,7 @@ export class MyAccountComponent implements OnInit {
     })
   }
 
+//tìm quận huyện
   findNameDistricts(code: any) {
     let name = '';
     for (const item of this.listdistricts) {
@@ -282,6 +278,7 @@ export class MyAccountComponent implements OnInit {
     return name;
   }
 
+//tìm tỉnh thành
   findNameProvince(code: any) {
     let name = '';
     for (const item of this.province) {
@@ -292,6 +289,7 @@ export class MyAccountComponent implements OnInit {
     return name;
   }
 
+//tìm phường xã
   findNameWards(code: any) {
     let name = '';
     for (const item of this.listWards) {
@@ -304,10 +302,10 @@ export class MyAccountComponent implements OnInit {
 
   //loc order theo trạng thái
   public fillOrderStatus() {
-    this.orderStatus_1=[];//cho xac nhan
-    this.orderStatus_2=[];//dang giao
-    this.orderStatus_3=[];//da giao
-    this.orderStatus_4=[];//da huy
+    this.orderStatus_1 = [];//cho xac nhan
+    this.orderStatus_2 = [];//dang giao
+    this.orderStatus_3 = [];//da giao
+    this.orderStatus_4 = [];//da huy
 
     for (const item of this.listOrder) {
       if (item.status == 'Chờ xác nhận') {
@@ -323,24 +321,69 @@ export class MyAccountComponent implements OnInit {
   }
 
   //tổng tiền cho đơn hàng
-  totalPrice(cart:CartItem[],discount:number){
-    let total:number = 0;
-      for(let i of cart){
-        total = total + (i.qty*i.product.pricesale);
-      }
-      return total * discount;
+  totalPrice(cart: CartItem[], discount: number) {
+    let total: number = 0;
+    for (let i of cart) {
+      total = total + (i.qty * i.product.pricesale);
+    }
+    return total * discount;
 
   }
 
-deleteAddress(){
-    this.shippingAddress='';
-    this.userService.putShippingAddress(this.shippingAddress).subscribe((data)=>{
-      this.userInfo=data;
+// thêm địa chỉ mới
+  addNewAddress() {
+    let address = new AddressItem((this.shippingAddress.length + 1), this.model.name, this.findNameProvince(this.model.province),
+      this.findNameDistricts(this.model.district_code), this.findNameWards(this.model.wards), this.model.phoneup, this.address.addressDetails)
+    this.shippingAddress.push(address)
+    this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {
+
+      this.userInfo = data
       this.loadUser();
+      if (this.shippingAddress.length == 1) {
+        window.location.reload();
+      }
     })
+  }
 
+//xóa địa chỉ tại vị trí index
+  deleteAddress(taget: any) {
+    for (let shippingAddressKey of this.shippingAddress) {
+      if (shippingAddressKey.id == taget) {
+        let index = this.shippingAddress.indexOf(shippingAddressKey)
+        this.shippingAddress.splice(index, 1);
+        this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {
+          this.userInfo = data
+          this.loadUser();
+          if (this.shippingAddress.length == 0) {
+            window.location.reload();
+          }
+        })
+      }
 
-}
+    }
+
+  }
+
+//cập nhật địa chỉ
+  updateAddress(taget: any) {
+    let address = new AddressItem((taget), this.model.name, this.findNameProvince(this.model.province),
+      this.findNameDistricts(this.model.district_code), this.findNameWards(this.model.wards), this.model.phoneup, this.address.addressDetails)
+    for (let shippingAddressKey of this.shippingAddress) {
+      if (shippingAddressKey.id == taget) {
+        let index = this.shippingAddress.indexOf(shippingAddressKey)
+        this.shippingAddress.splice(index, 1);
+        this.shippingAddress.splice(index, 0, address);
+
+        this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {
+
+          this.userInfo = data
+          this.loadUser();
+
+        })
+      }
+
+    }
+  }
 }
 
 
