@@ -61,137 +61,9 @@
                 </div>
                 <div class="cart-btn">
                   <button>Update Cart</button>
-                  <button type="button" *ngIf="cartItems.length!=0" data-toggle="modal" data-target="#poppupCheckOut">
+                  <button type="button" routerLink="/checkout" (click)="checkOut()">
                     Thanh toán
                   </button>
-                  <button type="button" *ngIf="cartItems.length==0">
-                    Thanh toán
-                  </button>
-
-                  <!--popup thanh toan-->
-                  <div class="modal fade bd-example-modal-lg" id="poppupCheckOut" tabindex="-1" role="dialog"
-                       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Thông tin đơn hàng </h5>
-                          <button type="button" data-dismiss="modal" aria-label="Close"
-                                  style="width: 30px;height: 30px;text-align: center">X
-                          </button>
-                        </div>
-                        <div class="modal-body" style="height:450px; width: 100%;overflow: scroll ">
-                          <table class="table table-bordered">
-                            <thead class="thead-dark">
-                            <tr>
-                              <th scope="col">Sản phẩm</th>
-                              <th scope="col">Số lượng</th>
-                              <th scope="col">Giá</th>
-                              <th scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody *ngFor="let it of cartItems">
-                            <tr>
-                              <td>
-                                <div class="img">
-                                  <img src="{{it.product.img}}" alt="Image">
-                                  <p>{{it.product.productname}}</p>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="qtys">
-                                  <button class="btn-minus" (click)="clickMinus(it.product.id)" style="margin: 0"><i class="fa fa-minus"></i>
-                                  </button>
-                                  <input type="text" value="{{it.qty}}">
-                                  <button class="btn-plus" (click)="clickPluss(it.product.id)"><i class="fa fa-plus"></i>
-                                  </button>
-                                </div>
-                              </td>
-                              <td>{{it.product.pricesale * it.qty|currency:'VND'}}</td>
-                              <td class="order">
-                                <button (click)="deleteCartItem(it.id)"><i class="fa fa-trash"></i></button>
-                              </td>
-                            </tr>
-                            </tbody>
-                          </table>
-                          <br>
-                          <br>
-                          <div class="cart-content">
-
-                            <p>Tổng<span>{{getPrice()|currency:'VND'}}</span></p>
-                            <p>Phí vận chuyển<span>{{shipCost()|currency:'VND'}}</span></p>
-                            <h2>Tổng tiền<span>{{getPrice() + shipCost()|currency:'VND'}}</span></h2>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="col-md-3" data-dismiss="modal">Quay lại</button>
-                          <button type="button" class="col-md-3" data-dismiss="modal" (click)="getAddress()"
-                                  data-toggle="modal" data-target="#poppupAddress">Tiếp tục
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--end-->
-
-                  <div class="modal fade bd-example-modal-lg" id="poppupAddress" tabindex="-1" role="dialog"
-                       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Xác nhận địa chỉ </h5>
-                          <button type="button" data-dismiss="modal" aria-label="Close"
-                                  style="width: 30px;height: 30px;text-align: center">X
-                          </button>
-                        </div>
-                        <p data-toggle="modal"
-                           data-target="#poppupAdd1" class="add-new"> Thêm địa chỉ mới</p>
-                        <div class="modal-body" style="height:450px; width: 100% ;overflow-y: scroll">
-                          <div class="row">
-                            <div class="col-md-12 address" *ngFor="let address of shippingAddress" style="display: flex;" >
-                             <input type="radio" class="option-input radio" [value]="address.id" style="width: 5%;float: left;margin-bottom: 1%;" [(ngModel)]="model.address1">
-                              <div class="nn" style="float: left;width:75%">
-                                <p>Người nhận: <span>{{address.name}}</span></p>
-                                  <p>Số điện thoại: <span>{{address.phonenumber}}</span></p>
-                                  <p> Địa chỉ: <span>{{address.wards + ', ' + address.districts + ', ' + address.province}}</span></p>
-                                  <p> Địa chỉ cụ thể:<span> {{' ' + address.addressDetails}}</span></p>
-                              </div>
-                              <div style="float: right;width:20%;text-align: center">
-                                <button type="button" style=";margin-bottom: 40%;width:50%;height: auto" class="btn" data-toggle="modal"
-                                        data-target="#poppupAdd3"  (click)="taget=address.id">
-                                  Sửa
-                                </button>
-                              </div>
-                            </div>
-
-                            <div class="col-md-6" *ngIf="address_check1==false">
-                              <h5>Địa chỉ giao hàng</h5>
-                              <p>Nhấn "Thêm" để thêm địa chỉ giao hàng</p>
-                              <!-- Button trigger modal -->
-                            </div>
-                          </div>
-
-                          <br>
-                          <p style="color: red">* Lưu ý kiểm tra địa chỉ giao hàng và thông tin
-                            người gửi trước khi thanh toán. </p>
-                          <p style="color: #359bfa">* Nếu các thông tin đều chính xác thì nhấn nút "Đặt hàng" để đặt
-                            hàng </p>
-
-                        </div>
-
-                        <div class="modal-footer">
-                          <button type="button" class="col-md-3" data-toggle="modal" data-target="#poppupCheckOut"
-                                  data-dismiss="modal">Quay lại
-                          </button>
-                          <button type="button" class="col-md-3" *ngIf="checkaddress()==false">Đặt hàng
-                          </button>
-                          <button type="button" class="col-md-3" data-dismiss="modal" data-toggle="modal"
-                                  data-target="#popupOrderSucessfull" (click)="addNewOrder(model.address1)" *ngIf="checkaddress()==true">Đặt hàng
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
               </div>
             </div>
@@ -276,7 +148,7 @@
 
 </div>
 <!--add1-->
-<div class="modal fade bd-example-modal-lg" id="poppupAdd1" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg" id="addaddress" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">

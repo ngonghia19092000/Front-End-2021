@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from "../../models/product";
+
 import {MessengerService} from "../../services/messenger.service";
 import {CartService} from "../../services/cart.service";
 import {CartItem} from "../../models/cart-item";
-import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
-import {Subscription} from "rxjs";
+
 import {Router} from "@angular/router";
-import value from "*.json";
+
 import {UserService} from "../../services/user.service";
-import {windowWhen} from "rxjs/operators";
+
 import {OrderService} from "../../services/order.service";
 import {Order} from "../../models/order";
-import {MyAccountComponent} from "../my-account/my-account.component";
+
 import {User} from "../../models/user";
 import {Discount} from "../../models/discount";
 import {Provinces} from "../../models/provinces";
 import {Districts} from "../../models/districts";
 import {Wards} from "../../models/wards";
 import {AddressItem} from "../../models/address-item";
+import {CheckoutService} from "../../services/checkout.service";
 
 @Component({
   selector: 'app-cart',
@@ -50,6 +50,7 @@ export class CartComponent implements OnInit {
     private route: Router,
     private userservice: UserService,
     private order: OrderService,
+    private checkoutService:CheckoutService
   ) {
     this.update();
   }
@@ -308,5 +309,11 @@ export class CartComponent implements OnInit {
     setInterval(() => {
       this.user = this.userservice.userValue;
     });
+  }
+
+  //lấy list sản phẩm truyền vào checkout
+  checkOut(){
+    this.checkoutService.addListCartToOrder(this.cartItems);
+    this.clearCart();
   }
 }

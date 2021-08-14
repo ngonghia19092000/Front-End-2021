@@ -1,0 +1,232 @@
+
+<div class="breadcrumb-wrap">
+  <div class="container-fluid">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/products">Products</a></li>
+      <li class="breadcrumb-item active">Checkout</li>
+    </ul>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Checkout Start -->
+<div class="checkout">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="checkout-inner">
+          <div class="chose-address">
+            <div class="title">
+              <h4>Địa chỉ nhận hàng</h4>
+              <button type="button" data-toggle="modal" data-target="#changaddress">
+                Thay đổi
+              </button>
+              <!--popup doi dia chi-->
+              <div class="modal fade bd-example-modal-lg" id="changaddress" tabindex="-1" role="dialog"
+                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Chọn địa chỉ nhận hàng</h5>
+                      <button type="button" data-dismiss="modal" aria-label="Close"
+                              style="width: 30px;height: 30px;text-align: center">X
+                      </button>
+                    </div>
+                    <div class="modal-body" style="height:450px; width: 100%">
+                      <div class="new-address">
+                        <p>
+                          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Tạo địa chỉ
+                          </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                          <div class="card card-body">
+                            <div class="col">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <label>Người nhận*</label>
+                                  <input class="form-control" type="tel" placeholder="Tên người nhận">
+                                </div>
+                                <div class="col-md-6">
+                                  <label>Số điện thoai*</label>
+                                  <input class="form-control" type="tel" placeholder="Số điện thoai"
+                                  >
+                                </div>
+
+
+                                <div class="col-md-4">
+                                  <label>Tỉnh/Thành phố*</label>
+                                  <select class="form-control">
+                                    <option></option>
+                                  </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Quận/Huyện*</label>
+                                  <select class="form-control">
+                                    <option></option>
+                                  </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Xã/Phường</label>
+                                  <select class="form-control">
+                                    <option></option>
+                                  </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                  <label>Địa chỉ cụ thể*</label>
+                                  <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể">
+                                </div>
+
+                                <button style="margin: auto;background-color: #00AEC9;color: white" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                  Xác nhận
+                                </button>
+
+                              </div>
+
+                            </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 30px;font-size: 15px">
+                          <input type="radio" style="margin-right: 10px"><a><strong>Bảo - 03266141575</strong> Giang Thành Kiên Giang</a>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="col-md-3" data-dismiss="modal">Quay lại</button>
+                      <button type="button" class="col-md-3" data-dismiss="modal">Hoàn Thành
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p><strong>Bảo kaka - 0326141575  </strong> ktx khu b</p>
+          </div>
+
+          <div class="list-pro">
+            <h4>Sản phẩm</h4>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-dark" *ngIf="listItem.length > 0">
+                <tr>
+                  <th>Sản phẩm</th>
+                  <th>Đơn giá</th>
+                  <th>Số lượng</th>
+                  <th>Thành tiền</th>
+                  <th>Xóa</th>
+                </tr>
+                </thead>
+                <tbody class="align-middle" *ngFor="let item of listItem">
+                <tr>
+                  <td>
+                    <div class="img">
+                      <a><img src="{{item.product.img}}" alt="Image"></a>
+                      <p>{{item.product.productname}}</p>
+                    </div>
+                  </td>
+                  <td>{{item.product.pricesale|currency:'VND'}}</td>
+                  <td>
+                    <div class="qty">
+                      <button class="btn-minus" (click)="minusQty(item.product.id)"><i class="fa fa-minus"></i></button>
+                      <input type="text" value="{{item.qty}}">
+                      <button class="btn-plus" (click)="plussQty(item.product.id)"><i class="fa fa-plus"></i></button>
+                    </div>
+                  </td>
+                  <td>{{item.product.pricesale * item.qty |currency:"VND"}}</td>
+                  <td><button (click)="deleteItem(item.product.id)"><i class="fa fa-trash"></i></button></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="voucher">
+            <div class="t-voucher">
+              <h4>Mã giảm giá</h4>
+              <button type="button" data-toggle="modal" data-target="#voucher" class="v-btn">
+                Chọn mã giảm giá
+              </button>
+              <!--popup doi dia chi-->
+              <div class="modal fade" id="voucher" tabindex="-1" role="dialog"
+                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Chọn mã giảm giá</h5>
+                      <button type="button" data-dismiss="modal" aria-label="Close"
+                              style="width: 30px;height: 30px;text-align: center">X
+                      </button>
+                    </div>
+                    <div class="modal-body" style="height:450px; width: 100%">
+                      <div style="display: flex;align-items: center">
+                        <input type="radio" style="margin-right:10px "><p style="margin: 0"><strong>Code: </strong>#90809090<strong style="margin-left: 30px;">Rate :</strong>15%</p>
+                      </div>
+
+                      <div style="display: flex;align-items: center">
+                        <input type="radio" style="margin-right:10px "><p style="margin: 0"><strong>Code: </strong>#90809090<strong style="margin-left: 30px;">Rate :</strong>15%</p>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="col-md-3" data-dismiss="modal">Quay lại</button>
+                      <button type="button" class="col-md-3" data-dismiss="modal">Hoàn Thành
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="v-discount"><strong>Code: </strong>#90809090<strong style="margin-left: 30px;">Rate :</strong>15%</p>
+          </div>
+
+          <div class="payment-method">
+            <div class="p-title">
+              <h5>Phương thức thanh toán</h5>
+            </div>
+            <div class="p-content">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Cod
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Credit cart
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="cart-total">
+            <div class="c-content-1">
+              <p>Tổng tiền hàng</p>
+              <p>Phí vận chuyển</p>
+              <p>Tổng thanh toán</p>
+            </div>
+            <div class="c-content-2">
+              <p>0</p>
+              <p>0</p>
+              <p class="total-price">123123120</p>
+            </div>
+          </div>
+          <div class="checkout-footer">
+            <p>Nhấn đặt hàng đồng nghĩa với việc bạn đồng ý tuân theo điều khoản của chúng tôi.</p>
+            <button class="btn-checkout">Đặt hàng</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

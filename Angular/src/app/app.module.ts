@@ -20,6 +20,7 @@ import { CategoryfilterPipe } from './services/filter/categoryfilter.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StatusPipe } from './services/filter/status.pipe';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 
@@ -59,9 +60,14 @@ const appRoutes : Routes =[
     component:RegisterComponent
   },
   {
+    path:"checkout",
+    component:CheckoutComponent
+  },
+  {
     path:"**",
     component:PageNotFoundComponent
-  },
+  }
+
 
 
 
@@ -86,6 +92,7 @@ const appRoutes : Routes =[
     RegisterComponent,
     PageNotFoundComponent,
     StatusPipe,
+    CheckoutComponent,
 
 
   ],
