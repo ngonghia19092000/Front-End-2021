@@ -61,7 +61,7 @@
                 <div class="action">
                   <a class="btn" (click)="add(product)"><i class="fa fa-shopping-cart" ></i>Add to Cart</a>
 <!--                  (click)="addToCart(product)"-->
-                  <a class="btn" ><i class="fa fa-shopping-bag"></i>Buy Now</a>
+                  <a class="btn"  routerLink="/checkout" routerLinkActive="active" (click)="buynow(product)"><i class="fa fa-shopping-bag"></i>Mua ngay</a>
                 </div>
               </div>
             </div>

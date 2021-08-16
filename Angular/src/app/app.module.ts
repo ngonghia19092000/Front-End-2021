@@ -103,7 +103,7 @@ const appRoutes : Routes =[
     Ng2SearchPipeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
 
 
   ],

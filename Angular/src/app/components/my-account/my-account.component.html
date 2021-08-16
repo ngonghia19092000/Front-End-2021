@@ -230,7 +230,7 @@
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i.cartItem, i.discount.rate)|currency:'VND'}} </p>
+                          <p class="price">{{i.priceOrder |currency:'VND'}} </p>
                           <button class="btn" (click)="deleteOrder(i.id)">Hủy</button>
                         </div>
                       </div>
@@ -251,7 +251,7 @@
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i1.code}}</h5>
                             <p *ngIf="i1.discount.codeDiscount==''">Mã giảm giá : Không</p>
-                            <p *ngIf="i1.discount.codeDiscount!=''">Mã giảm giá :{{i1.discount}}</p>
+                            <p *ngIf="i1.discount.codeDiscount!=''">Mã giảm giá :{{i1.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupq"
                                                       (click)="taget = i1.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupq" tabindex="-1" role="dialog"
@@ -331,7 +331,7 @@
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i1.cartItem, i1.discount.rate)|currency:'VND'}} </p>
+                          <p class="price">{{i1.priceOrder|currency:'VND'}} </p>
                         </div>
                       </div>
                     </div>
@@ -351,7 +351,7 @@
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i2.code}}</h5>
                             <p *ngIf="i2.discount.codeDiscount==''">Mã giảm giá : Không</p>
-                            <p *ngIf="i2.discount.codeDiscount!=''">Mã giảm giá :{{i2.discount}}</p>
+                            <p *ngIf="i2.discount.codeDiscount!=''">Mã giảm giá :{{i2.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupe"
                                                       (click)="taget = i2.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupe" tabindex="-1" role="dialog"
@@ -430,7 +430,7 @@
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i2.cartItem, i2.discount.rate)|currency:'VND'}}</p>
+                          <p class="price">{{i2.priceOrder|currency:'VND'}}</p>
                         </div>
                       </div>
                     </div>
@@ -450,7 +450,7 @@
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i3.code}}</h5>
                             <p *ngIf="i3.discount.codeDiscount==''">Mã giảm giá :Không</p>
-                            <p *ngIf="i3.discount.codeDiscount!=''">Mã giảm giá :{{i3.discount}}</p>
+                            <p *ngIf="i3.discount.codeDiscount!=''">Mã giảm giá :{{i3.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupw"
                                                       (click)="taget = i3.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupw" tabindex="-1" role="dialog"
@@ -528,7 +528,7 @@
                         <hr>
                         <div class="content-2">
                           <p> Tổng số tiền |</p>
-                          <p class="price">{{totalPrice(i3.cartItem, i3.discount.rate)|currency:"VND"}}</p>
+                          <p class="price">{{i3.priceOrder|currency:"VND"}}</p>
                         </div>
                       </div>
                     </div>
@@ -624,7 +624,7 @@
                       <hr>
                       <div class="content-2">
                         <p> Tổng số tiền |</p>
-                        <p class="price">{{totalPrice(x.cartItem, x.discount.rate)|currency:'VND'}}</p>
+                        <p class="price">{{x.priceOrder|currency:'VND'}}</p>
                         <button class="btn" *ngIf="orderStatus == 'Chờ xác nhận'" (click)="deleteOrder(x.id)">Hủy</button>
                       </div>
                     </div>

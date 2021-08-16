@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
+import {Discount} from "../../models/discount";
 
 
 
@@ -117,12 +118,19 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
+    let discountNewUser = new Discount('NEWACCOUNT', 15, 1);
+    let discount1 = new Discount('LTFRONTEND', 10, 2);
+    let discount2 = new Discount('NBSTORE', 15, 2);
+    let listDiscount: Discount[] = [];
+    listDiscount.push(discountNewUser);
+    listDiscount.push(discount1);
+    listDiscount.push(discount2);
     this.newUser.username=this.registerForm.value.username;
     this.newUser.email=this.registerForm.value.email;
     this.newUser.fullname=this.registerForm.value.fullname;
     this.newUser.phone=this.registerForm.value.phone;
     this.newUser.address=this.registerForm.value.address;
+    this.newUser.listVoucher=listDiscount;
     this.newUser.password='1909'+this.api.encryptMd5(this.registerForm.value.password)+'1909';
     this.api.registerUser(this.newUser).subscribe((result) => {
       // console.warn("result",result)

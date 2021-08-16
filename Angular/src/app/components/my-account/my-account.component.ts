@@ -170,7 +170,7 @@ export class MyAccountComponent implements OnInit {
       let item: any;
       for (let i of this.listOrder) {
         if (i.id == id) {
-          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code, i.addressShip);
+          item = new Order(i.userName, i.discount, i.status, i.cartItem, i.code, i.addressShip,i.priceOrder);
         }
       }
       this.getOrder();
@@ -333,7 +333,21 @@ export class MyAccountComponent implements OnInit {
 
 // thêm địa chỉ mới
   addNewAddress() {
-    let address = new AddressItem((this.shippingAddress.length + 1), this.model.name, this.findNameProvince(this.model.province),
+    let id=0;
+
+    if(this.shippingAddress.length==0){
+      id =1;
+    }else {
+    id= this.shippingAddress[this.shippingAddress.length-1].id+1
+       for (let shippingAddress1 of this.shippingAddress) {
+        if(shippingAddress1.id==id){
+          id=this.shippingAddress[this.shippingAddress.length-1].id+2;
+          break;
+        }
+      }
+
+    }
+    let address = new AddressItem((id), this.model.name, this.findNameProvince(this.model.province),
       this.findNameDistricts(this.model.district_code), this.findNameWards(this.model.wards), this.model.phoneup, this.address.addressDetails)
     this.shippingAddress.push(address)
     this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {

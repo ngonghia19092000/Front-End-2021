@@ -1,4 +1,5 @@
-
+<div *ngIf="this.user!=null">
+<div class="container-fluid" *ngIf="listItem.length != 0" >
 <div class="breadcrumb-wrap">
   <div class="container-fluid">
     <ul class="breadcrumb">
@@ -33,65 +34,73 @@
                               style="width: 30px;height: 30px;text-align: center">X
                       </button>
                     </div>
-                    <div class="modal-body" style="height:450px; width: 100%">
+                    <div class="modal-body" style="height:450px; width: 100%; overflow:scroll;">
                       <div class="new-address">
                         <p>
                           <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Tạo địa chỉ
+                           Thêm địa chỉ mới
                           </button>
                         </p>
-                        <div class="collapse" id="collapseExample">
+                        <div class="collapse" id="collapseExample" style="margin-bottom: 25px" >
                           <div class="card card-body">
                             <div class="col">
                               <div class="row">
                                 <div class="col-md-6">
                                   <label>Người nhận*</label>
-                                  <input class="form-control" type="tel" placeholder="Tên người nhận">
+                                  <input class="form-control" type="tel" placeholder="Người nhận"
+                                         [(ngModel)]="model.name">
                                 </div>
                                 <div class="col-md-6">
                                   <label>Số điện thoai*</label>
                                   <input class="form-control" type="tel" placeholder="Số điện thoai"
-                                  >
+                                         [(ngModel)]="model.phoneup">
                                 </div>
 
 
                                 <div class="col-md-4">
                                   <label>Tỉnh/Thành phố*</label>
-                                  <select class="form-control">
-                                    <option></option>
+                                  <select class="form-control" [(ngModel)]="model.province"
+                                          (change)="loadDistricts(model.province)">
+                                    <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
                                   </select>
                                 </div>
 
+
                                 <div class="col-md-4">
                                   <label>Quận/Huyện*</label>
-                                  <select class="form-control">
-                                    <option></option>
+                                  <select class="form-control" [(ngModel)]="model.district_code"
+                                          (change)="loadWards(model.district_code)">
+                                    <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
                                   </select>
                                 </div>
 
                                 <div class="col-md-4">
                                   <label>Xã/Phường</label>
-                                  <select class="form-control">
-                                    <option></option>
+                                  <select class="form-control" [(ngModel)]="model.wards">
+                                    <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
                                   </select>
+
                                 </div>
 
                                 <div class="col-md-12">
                                   <label>Địa chỉ cụ thể*</label>
-                                  <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể">
+                                  <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
+                                         [(ngModel)]="address.addressDetails">
                                 </div>
 
-                                <button style="margin: auto;background-color: #00AEC9;color: white" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                  Xác nhận
-                                </button>
 
                               </div>
+                              <button class="btn" style="width: 20% ;float: right" (click)="addNewAddress()" aria-expanded="false"  class="btn btn-outline-danger"
+                                      data-toggle="collapse" data-target="#collapseExample">Xác nhận</button>
+                            </div>
+                            </div>
 
-                            </div>
-                            </div>
                         </div>
-                        <div style="margin-left: 30px;font-size: 15px">
-                          <input type="radio" style="margin-right: 10px"><a><strong>Bảo - 03266141575</strong> Giang Thành Kiên Giang</a>
+
+                        <div style="margin-left: 30px;font-size: 18px;" >
+                       <div  *ngFor="let add of shippingAddress"><input type="radio" class="radio" [value]="add.id" [(ngModel)]="model.address1" style="margin-right: 10px">
+                         <strong>{{add.name+' - '+ add.phonenumber+' '}}</strong> {{add.wards+', '+add.districts+', '+add.province}}
+                       </div>
                         </div>
 
 
@@ -100,14 +109,16 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="col-md-3" data-dismiss="modal">Quay lại</button>
-                      <button type="button" class="col-md-3" data-dismiss="modal">Hoàn Thành
+                      <button type="button" class="col-md-3" data-dismiss="modal" (click)="selectAddress(model.address1)">Hoàn Thành
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <p><strong>Bảo kaka - 0326141575  </strong> ktx khu b</p>
+            <p *ngIf="getAddress()==true"><strong>{{selectAddress(model.address1).name+'-'+selectAddress(model.address1).phonenumber+ ' |'}}
+            </strong> {{selectAddress(model.address1).wards+', '+selectAddress(model.address1).districts+', '+selectAddress(model.address1).province}}</p>
+            <p *ngIf="getAddress()==false"> Bạn chưa có địa chỉ giao hàng</p>
           </div>
 
           <div class="list-pro">
@@ -164,26 +175,27 @@
                               style="width: 30px;height: 30px;text-align: center">X
                       </button>
                     </div>
-                    <div class="modal-body" style="height:450px; width: 100%">
-                      <div style="display: flex;align-items: center">
-                        <input type="radio" style="margin-right:10px "><p style="margin: 0"><strong>Code: </strong>#90809090<strong style="margin-left: 30px;">Rate :</strong>15%</p>
+                    <div class="modal-body" style="height:450px; width: 100%" >
+                      <div style="display: flex;align-items: center" *ngFor="let discount of listDiscount">
+                        <input type="radio"  style="margin-right:10px " [value]="discount.codeDiscount" [(ngModel)]="model.discount" >
+                        <p style="margin: 0"><strong>Mã: </strong>{{discount.codeDiscount}}<strong style="margin-left: 30px;">Rate :</strong>{{discount.rate}}%</p>
                       </div>
 
-                      <div style="display: flex;align-items: center">
-                        <input type="radio" style="margin-right:10px "><p style="margin: 0"><strong>Code: </strong>#90809090<strong style="margin-left: 30px;">Rate :</strong>15%</p>
-                      </div>
+
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="col-md-3" data-dismiss="modal">Quay lại</button>
-                      <button type="button" class="col-md-3" data-dismiss="modal">Hoàn Thành
+                      <button type="button" class="col-md-3 btn" data-dismiss="modal">Quay lại</button>
+                      <button type="button" class="col-md-3 btn" data-dismiss="modal">Hoàn Thành
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <p class="v-discount"><strong>Code: </strong>#90809090<strong style="margin-left: 30px;">Rate :</strong>15%</p>
+            <p class="v-discount" *ngIf="listDiscount.length==0"><strong>Bạn đã hết mã giảm giá </strong>
+            <p class="v-discount" *ngIf="listDiscount.length!=0"><strong>Code: </strong>#{{getDiscount(model.discount).codeDiscount}}<strong style="margin-left: 30px;">Rate :</strong>{{getDiscount(model.discount).rate}}%</p>
+
           </div>
 
           <div class="payment-method">
@@ -208,18 +220,20 @@
           <div class="cart-total">
             <div class="c-content-1">
               <p>Tổng tiền hàng</p>
+              <p>Mã giảm giá:({{getDiscount(model.discount).codeDiscount}})</p>
               <p>Phí vận chuyển</p>
               <p>Tổng thanh toán</p>
             </div>
             <div class="c-content-2">
-              <p>0</p>
-              <p>0</p>
-              <p class="total-price">123123120</p>
+              <p>{{getPrice()|currency:'VND'}}</p>
+              <p>{{0-applyVoucher(getDiscount(model.discount).codeDiscount)|currency:'VND'}}</p>
+              <p>{{shipCost()|currency:'VND'}}</p>
+              <p class="total-price">{{getPrice()+shipCost()-applyVoucher(getDiscount(model.discount).codeDiscount)|currency:'VND'}}</p>
             </div>
           </div>
           <div class="checkout-footer">
             <p>Nhấn đặt hàng đồng nghĩa với việc bạn đồng ý tuân theo điều khoản của chúng tôi.</p>
-            <button class="btn-checkout">Đặt hàng</button>
+            <button class="btn-checkout" (click)="addNewOrder()">Đặt hàng</button>
           </div>
 
         </div>
@@ -228,5 +242,20 @@
     </div>
   </div>
 </div>
+</div>
+<div class="container-fluid" *ngIf="listItem.length == 0" style="text-align: center;height: 300px">
+  <div style="margin-top:30px">
 
-
+    <i class="fal fa-shopping-cart" style="color: gray;font-size: 100px;margin-bottom: 20px"></i>
+    <p>Vui lòng chọn sản phẩn trong giỏ hàng để tiến hành thanh toán</p>
+    <button routerLink="/cart" class="btn">Quay lại giỏ hàng</button>
+  </div>
+</div>
+</div>
+<div  *ngIf="user == null" style="text-align: center;height: 300px">
+  <div style="margin-top:30px">
+    <i class="fa fa-user" style="color: gray;font-size: 100px;margin-bottom: 20px"></i>
+    <h1>Bạn chưa đăng nhập</h1>
+    <button routerLink="/login" class="btn">Đăng nhập</button>
+  </div>
+</div>

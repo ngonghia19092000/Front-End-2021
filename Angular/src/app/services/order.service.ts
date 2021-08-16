@@ -32,14 +32,18 @@ export class OrderService {
   updateOrder(order:Order,id:any):Observable<any>{
     return this.http.put(orderUrl+'/'+id+'?userName='+this.getUserName(),{code:order.code,
       userName:order.userName,discount:order.discount,status:order.status,cartItem:order.cartItem,
-      addressShip:order.addressShip,id:id
+      addressShip:order.addressShip,id:id,priceOrder:order.priceOrder
     });
   }
 
   updateOrderStatus(order:any):Observable<any>{
     return this.http.put(orderUrl+'/'+order.id,{
       code:order.code,id:order.id,userName:order.userName,discount:order.discount,status:'Đã hủy',
-      cartItem:order.cartItem,paymentAddress:order.paymentAddress,addressShip:order.addressShip});
+      cartItem:order.cartItem,paymentAddress:order.paymentAddress,addressShip:order.addressShip,
+      priceOrder:order.priceOrder
+    });
   }
+
+
 
 }

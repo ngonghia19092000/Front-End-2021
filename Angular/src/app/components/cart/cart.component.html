@@ -13,9 +13,22 @@
               </a>
             </div>
             <div class="center" *ngIf="cartItems.length > 0">
+              <h4>Sản phẩm</h4>
               <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                  <th> </th>
+                  <th>Sản phẩm</th>
+                  <th>Đơn giá</th>
+                  <th>Số lượng</th>
+                  <th>Thành tiền</th>
+                  <th>Xóa</th>
+                </tr>
+                </thead>
                 <tbody class="align-middle" *ngFor="let item of cartItems">
                 <tr>
+                  <td><input type="checkbox"  class="check"  (change)="addSp($event,item.id)"  >
+                  </td>
                   <td>
                     <div class="img">
                       <img alt="Image" src="{{item.product.img}}">
@@ -46,12 +59,6 @@
         <div class="cart-page-inner">
           <div class="row">
             <div class="col-md-12">
-              <div class="coupon">
-                <input type="text" placeholder="Coupon Code">
-                <button>Apply Code</button>
-              </div>
-            </div>
-            <div class="col-md-12">
               <div class="cart-summary">
                 <div class="cart-content">
                   <h1>Cart Summary</h1>
@@ -61,7 +68,8 @@
                 </div>
                 <div class="cart-btn">
                   <button>Update Cart</button>
-                  <button type="button" routerLink="/checkout" (click)="checkOut()">
+                  <button type="button" *ngIf="this.array.length==0" (click)="alert()">Thanh toán</button>
+                  <button type="button" routerLink="/checkout" *ngIf="this.array.length!=0" (click)="checkOut()">
                     Thanh toán
                   </button>
                 </div>
@@ -76,187 +84,7 @@
 
 
 
-<div class="modal fade bd-example-modal-lg" id="poppupAdd3" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cập nhật địa chỉ giao hàng </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:450px; overflow-y: scroll ">
 
-        <div class="col">
-          <div class="row">
-            <div class="col-md-6">
-              <label>Người nhận*</label>
-              <input class="form-control" type="tel" placeholder="Người nhận"
-                     [(ngModel)]="model.name">
-            </div>
-            <div class="col-md-6">
-              <label>Số điện thoai*</label>
-              <input class="form-control" type="tel" placeholder="Số điện thoai"
-                     [(ngModel)]="model.phoneup">
-            </div>
-
-
-            <div class="col-md-4">
-              <label>Tỉnh/Thành phố*</label>
-              <select class="form-control" [(ngModel)]="model.province"
-                      (change)="loadDistricts(model.province)">
-                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
-              </select>
-            </div>
-
-
-            <div class="col-md-4">
-              <label>Quận/Huyện*</label>
-              <select class="form-control" [(ngModel)]="model.district_code"
-                      (change)="loadWards(model.district_code)">
-                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
-              </select>
-            </div>
-
-            <div class="col-md-4">
-              <label>Xã/Phường</label>
-              <select class="form-control" [(ngModel)]="model.wards">
-                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
-              </select>
-
-            </div>
-
-            <div class="col-md-12">
-              <label>Địa chỉ cụ thể*</label>
-              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
-                     [(ngModel)]="address.addressDetails">
-            </div>
-
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateAddress(taget)">
-            Lưu thay đổi
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-<!--add1-->
-<div class="modal fade bd-example-modal-lg" id="addaddress" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Thêm địa chỉ giao hàng </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:450px; overflow-y: scroll ">
-
-        <div class="col">
-          <div class="row">
-            <div class="col-md-6">
-              <label>Người nhận*</label>
-              <input class="form-control" type="tel" placeholder="Tên người nhận"
-                     [(ngModel)]="model.name">
-            </div>
-            <div class="col-md-6">
-              <label>Số điện thoai*</label>
-              <input class="form-control" type="tel" placeholder="Số điện thoai"
-                     [(ngModel)]="model.phoneup">
-            </div>
-
-
-            <div class="col-md-4">
-              <label>Tỉnh/Thành phố*</label>
-              <select class="form-control" [(ngModel)]="model.province"
-                      (change)="loadDistricts(model.province)">
-                <option *ngFor="let item of province" [value]="item.code">{{item.name}}</option>
-              </select>
-            </div>
-
-
-            <div class="col-md-4">
-              <label>Quận/Huyện*</label>
-              <select class="form-control" [(ngModel)]="model.district_code"
-                      (change)="loadWards(model.district_code)">
-                <option *ngFor="let item of listdistricts" [value]="item.code">{{item.name}}</option>
-              </select>
-            </div>
-
-            <div class="col-md-4">
-              <label>Xã/Phường</label>
-              <select class="form-control" [(ngModel)]="model.wards">
-                <option *ngFor="let item of listWards" [value]="item.code">{{item.name}}</option>
-              </select>
-
-            </div>
-
-            <div class="col-md-12">
-              <label>Địa chỉ cụ thể*</label>
-              <input class="form-control" type="text" placeholder="Nhập địa chỉ cụ thể"
-                     [(ngModel)]="address.addressDetails">
-            </div>
-
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addNewAddress()">
-            Thêm địa chỉ
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-
-<!--order successfull-->
-<div class="modal fade bd-example-modal-lg" id="popupOrderSucessfull" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document" >
-    <div class="modal-content" >
-      <div class="modal-header">
-        <h5 class="modal-title">Đặt hàng thành công </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="height:450px;width: 100%; margin: 0 auto ;background-color: rgba(120,234,234,0.52);display: block ">
-        <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="a" height="120"
-             style="display: block;margin: 0 auto; border: 0px;"/>
-        <h2>Cảm ơn bạn đã đặt hàng</h2>
-        <h2>Mã đơn hàng {{' #' + code}}</h2>
-
-        <div class="cart-content">
-          <h5>Tổng: <span>{{getPrice()|currency:'VND'}}</span></h5>
-          <h5>Phí vận chuyển: <span>{{shipCost()|currency:'VND'}}</span></h5>
-          <h5>Tổng tiền: <span>{{getPrice() + shipCost()|currency:'VND'}}</span></h5>
-          <h5>Địa chỉ giao hàng: {{addressSuccess}}
-          </h5>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" style="width: 30%;border-color: #201600;margin: auto;margin-top: 10px;margin-bottom: 10px"
-                data-dismiss="modal">Đóng
-        </button>
-      </div>
-    </div>
-  </div>
-
-</div>
 
 
 <!-- Cart End -->

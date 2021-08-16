@@ -10,14 +10,15 @@ export class Order{
   id:number|any;
   code:string;
   addressShip:AddressItem;
+priceOrder:number;
 
-
-  constructor(userName: string, discount: Discount, status: string, cartItem: CartItem[], code: string, addressShip: AddressItem) {
+  constructor(userName: string, discount: Discount, status: string, cartItem: CartItem[], code: string, addressShip: AddressItem,priceOrder:number) {
     this.userName = userName;
     this.discount = discount;
     this.status = status;
     this.cartItem = cartItem;
     this.code = code;
     this.addressShip = addressShip;
+    this.priceOrder= priceOrder
   }
 }

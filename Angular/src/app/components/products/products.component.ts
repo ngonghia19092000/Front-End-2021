@@ -7,6 +7,8 @@ import {MessengerService} from "../../services/messenger.service";
 import {CartService} from "../../services/cart.service";
 import {listProducts} from "../../models/listproduct";
 import {CartItem} from "../../models/cart-item";
+import {UserService} from "../../services/user.service";
+import {CheckoutService} from "../../services/checkout.service";
 
 @Component({
   selector: 'app-products',
@@ -14,20 +16,23 @@ import {CartItem} from "../../models/cart-item";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  productList:Product[]=[];
+  productList: Product[] = [];
   searchedKeyword: string = "";
-  totalLength:any;
-  page:number = 1;
-  @Input()productAddtoCart: Product|any;
+  totalLength: any;
+  page: number = 1;
+  @Input() productAddtoCart: Product | any;
 
-  constructor(private productService:ProductService,
-   private msg:MessengerService,
-   private cartService:CartService) {}
-  pricefill:number = 0;
-  categoryfill:string = "";
-  cartItem:CartItem[]=[];
+  constructor(private productService: ProductService,
+              private userservice: UserService,
+              private cartService: CartService,
+              private checkoutservice: CheckoutService) {
+  }
 
-  itemTaget:any;
+  pricefill: number = 0;
+  categoryfill: string = "";
+  cartItem: CartItem[] = [];
+
+  itemTaget: any;
 
 
   ngOnInit() {
@@ -35,105 +40,120 @@ export class ProductsComponent implements OnInit {
     this.update();
     this.getCart();
   }
-  getAllProduct(){
+
+  getAllProduct() {
     this.productService.getProducts().subscribe((products) => {
       this.productList = products;
     });
   }
 
-  update(){
-    setInterval(()=>{
-      if(this.categoryfill != ''){
+  update() {
+    setInterval(() => {
+      if (this.categoryfill != '') {
         this.totalLength = CategoryfilterPipe.length;
-      }
-      else {
+      } else {
         this.totalLength = this.productList.length;
       }
 
     });
   }
 
-  getCart(){
+  getCart() {
     this.cartService.getUserName();
-    this.cartService.getAllCartItems( this.cartService.getUserName()).subscribe((t)=>{
+    this.cartService.getAllCartItems(this.cartService.getUserName()).subscribe((t) => {
       this.cartItem = t;
     })
   }
 
-  sortByPriceT(){
+  sortByPriceT() {
     console.log('sort');
-    this.productList.sort((a, b) =>{
+    this.productList.sort((a, b) => {
       // @ts-ignore
-      if (a.pricesale < b.pricesale){
+      if (a.pricesale < b.pricesale) {
         return 1;
       }
       // @ts-ignore
-      if (a.pricesale > b.pricesale){
+      if (a.pricesale > b.pricesale) {
         return -1;
       }
       return 0
     });
   }
 
-  sortByPriceG(){
+  sortByPriceG() {
     console.log('sort');
-    this.productList.sort((a, b) =>{
+    this.productList.sort((a, b) => {
       // @ts-ignore
-      if (a.pricesale > b.pricesale){
+      if (a.pricesale > b.pricesale) {
         return 1;
       }
       // @ts-ignore
-      if (a.pricesale < b.pricesale){
+      if (a.pricesale < b.pricesale) {
         return -1;
       }
       return 0
     });
   }
 
-  public add(id:number){
+  public add(id: number) {
     this.getCart();
-    if(this.cartService.getUserName()!=''){
+    if (this.cartService.getUserName() != '') {
       this.AddToCart(id);
       console.log('login.....');
-    }
-    else {
+    } else {
       console.log('unlogin.....');
-      let it:any;
+      let it: any;
       for (let i of this.productList) {
-        if(i.id == id){
-          it = new CartItem(i,1,'');
+        if (i.id == id) {
+          it = new CartItem(i, 1, '');
         }
       }
       this.cartService.addToCart(it);
     }
   }
 
-public AddToCart(productid:number){
-  let it:any;
-  let check = false;
-   for (let i of this.productList) {
-     if(i.id == productid){
-       it = new CartItem(i,1,this.cartService.getUserName());
-     }
-   }
+  public AddToCart(productid: number) {
+    let it: any;
+    let check = false;
+    for (let i of this.productList) {
+      if (i.id == productid) {
+        it = new CartItem(i, 1, this.cartService.getUserName());
+      }
+    }
 
-  for (let item of this.cartItem) {
-    if(productid == item.product.id){
-      it = item;
-      this.cartService.updateQtyOfCartItem(it).subscribe();
+    for (let item of this.cartItem) {
+      if (productid == item.product.id) {
+        it = item;
+        this.cartService.updateQtyOfCartItem(it).subscribe();
+        this.getCart();
+        check = true;
+        break;
+      }
+    }
+
+    if (check == false) {
+      this.cartService.addProductToCart(it).subscribe(() => console.log(it.product.productname));
       this.getCart();
-      check = true;
-      break;
     }
   }
 
-  if(check == false){
-    this.cartService.addProductToCart(it).subscribe(()=>console.log(it.product.productname));
-    this.getCart();
+
+  buynow(id: any) {
+    for (let productListElement of this.productList) {
+      if (id == productListElement.id) {
+        let item = new CartItem(productListElement, 1, this.getUserName());
+        let array=[];
+        array.push(item)
+        this.checkoutservice.addListCartToOrder(array)
+      }
+    }
+
   }
- }
 
-
-
-
+  getUserName() {
+    if (this.userservice.userValue) {
+      return this.userservice.userValue.username;
+    } else
+      return '';
+  }
 }
