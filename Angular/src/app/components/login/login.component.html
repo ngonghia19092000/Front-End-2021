@@ -9,7 +9,7 @@
       <form class="login100-form validate-form" #loginForm="ngForm" (ngSubmit)="loginForm.valid && loginAccount()">
 
 					<span class="login100-form-title">
-						Member Login
+						Đăng nhập
 					</span>
 
         <div class="wrap-input100 validate-input" >
@@ -32,20 +32,19 @@
         <div class="container-login100-form-btn">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           <button class="login100-form-btn" [disabled]="loginForm.invalid" >
-            Login
+            Đăng nhập
           </button>
         </div>
 
         <div class="text-center p-t-12">
           <a class="txt1" href="#">
-            Forgot
-            Password?
+          Quên mật khẩu?
           </a>
         </div>
 
         <div class="text-center p-t-136">
           <a routerLink="/register" class="txt2" routerLinkActive="active">
-            Create your Account
+            Đăng ký tài khoản mới
             <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
           </a>
         </div>
