@@ -2765,6 +2765,58 @@
       "id": 9
     }
   ],
-  "orders":[]
-
+  "orders": [
+    {
+      "userName": "admin1",
+      "discount": {
+        "codeDiscount": "NEWACCOUNT",
+        "rate": 15,
+        "qty": 1
+      },
+      "status": "Chờ xác nhận",
+      "cartItem": [
+        {
+          "qty": 1,
+          "product": {
+            "id": 2,
+            "productname": "MŨ 3/4 KYT VENOM ESPARGARO",
+            "img": "assets/img/KYT-Venom-6-247x247.jpg",
+            "price": 1990000,
+            "pricesale": 1890000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "userName": "admin1",
+          "id": 10
+        }
+      ],
+      "code": "418715",
+      "addressShip": {
+        "id": 1,
+        "name": "Nghĩa",
+        "province": "Tỉnh Lâm Đồng",
+        "districts": "Huyện Lâm Hà",
+        "wards": "Xã Đạ Đờn",
+        "phonenumber": "0399491909",
+        "addressDetails": "Thôn 5, Xóm Bến Tre"
+      },
+      "priceOrder": 1721500,
+      "id": 1
+    }
+  ],
+  "review": [
+   
+  ]
 }
