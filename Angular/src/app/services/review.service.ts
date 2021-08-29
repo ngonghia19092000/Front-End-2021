@@ -24,4 +24,7 @@ export class ReviewService {
   getReviewWithProduct(id:any):Observable<Review>{
     return this.http.get<Review>(reviewUrl+'?product_id='+id);
   }
+  getAllReviewProduct():Observable<Review>{
+    return this.http.get<Review>(reviewUrl);
+  }
 }

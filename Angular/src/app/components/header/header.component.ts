@@ -15,7 +15,7 @@ import {CartComponent} from "../cart/cart.component";
 export class HeaderComponent implements OnInit {
   public user: User | undefined;
   usernamee: any = '';
-  lengthCart: number | any;
+  lengthCart: number =0;
   cart: CartItem[] = []
 
   constructor(private userApi: UserService,
@@ -26,26 +26,20 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadcart();
-
+this.getlengthcarrt();
   }
 
-  loadcart() {
-    if (this.cartService.getUserName() == '') {
-      this.lengthCart = this.cartService.getItemsOff().length;
-    } else {
-      let cart: any[] = []
-      this.cartService.getAllCartLength(this.cartService.getUserName()).subscribe((data) => {
-        cart = data;
-        this.lengthCart = cart.length
-      })
-    }
-  }
 
+getlengthcarrt(){
+    this.cartService.getListCart().subscribe((data)=>{
+      this.cart=data;
+      this.lengthCart=this.cart.length;
+    })
+}
   update() {
     setInterval(() => {
       this.user = this.userApi.userValue;
-      this.loadcart();
+      this.getlengthcarrt();
     }, 500);
 
   }

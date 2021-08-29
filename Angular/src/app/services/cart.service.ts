@@ -9,8 +9,6 @@ import {UserService} from "./user.service";
   providedIn: 'root'
 })
 export class CartService {
-  lenghtCart: number = 0;
-   check1:boolean = false;
   list: CartItem[] = [];
   result:any=[];
   constructor(private http: HttpClient, private userService: UserService) {
@@ -28,12 +26,6 @@ export class CartService {
     // TODO: Mapping the obtained result to our CartItem props. (pipe() and map())
     return this.http.get<CartItem[]>(cartUrl + '?userName=' + username);
   }
-  getAllCartLength(username:any):Observable<any> {
-
- return   this.http.get<CartItem[]>(cartUrl + '?userName=' + username);
-
-  }
-
   addProductToCart(cartItem: any): Observable<any> {
     return this.http.post(cartUrl, cartItem);
   }
@@ -57,6 +49,7 @@ export class CartService {
   //khi chưa đăng nhập
   cartItem: CartItem | any;
   items: CartItem[] = [];
+  listItem:CartItem[]=[];
 
   getAllProWithCart(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(cartUrl);
@@ -82,12 +75,7 @@ export class CartService {
   getItemsOff() {
     return this.items;
   }
-  getCartOn(){
-    this.getAllCartItems(this.getUserName()).subscribe((data)=>{
-      this.result= data
-    })
-    return this.result
-  }
+
 
 //xoa toan bo
   clearCart() {
@@ -122,6 +110,14 @@ export class CartService {
     }
   }
 
+
+  addListCart(list:CartItem[]){
+    return this.listItem = list;
+  }
+
+  getListCart():Observable<any>{
+    return of(this.listItem);
+  }
 }
 
 

@@ -46,8 +46,7 @@ export class CartComponent implements OnInit {
   taget: number | any;
   array: CartItem[] = [];
   selectt: boolean = false;
-  _fb: FormGroup | any;
-
+public lengthCartItem:number=0;
   constructor(
     private msg: MessengerService,
     private cartService: CartService,
@@ -58,6 +57,7 @@ export class CartComponent implements OnInit {
 
   ) {
     this.update();
+
   }
 
 
@@ -67,7 +67,6 @@ export class CartComponent implements OnInit {
     this.user = this.userservice.userValue;
     this.model.sp = 0;
 
-
   }
 
   loadCartItems() {
@@ -75,10 +74,13 @@ export class CartComponent implements OnInit {
     if (this.userservice.userValue) {
       this.cartService.getAllCartItems(this.userservice.userValue.username).subscribe((up) => {
         this.cartItems = up
+        this.cartService.addListCart(this.cartItems);
       });
     } else {
       this.cartItems = this.cartService.getItemsOff();
+      this.cartService.addListCart(this.cartItems);
     }
+
   }
 
 
@@ -159,7 +161,6 @@ export class CartComponent implements OnInit {
 
   loadUser() {
     this.userservice.addDataLocalStorage(this.userInfo);
-
   }
 
 

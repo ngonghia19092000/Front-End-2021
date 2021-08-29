@@ -27,11 +27,7 @@
               <div class="product-content">
                 <div class="title"><h2>{{product.productname}}</h2></div>
                 <div class="ratting">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
+                  <i class="fas fa-star" style="color: #ffdd1e;" *ngFor="let i of returnArray(avgStart(0))" > </i>
                 </div>
                 <div class="price">
                   <h4>Price:</h4>
@@ -294,9 +290,6 @@
                       </div>
                     </div>
                     <div class="row form">
-                      <div class="col-sm-6">
-                        <input type="text" placeholder="Tên của bạn" [(ngModel)]="review.name">
-                      </div>
                       <div class="col-sm-12">
                         <textarea placeholder="Đánh giá sản phẩm" [(ngModel)]="review.content"></textarea>
                       </div>
@@ -583,9 +576,6 @@
                       </div>
                     </div>
                     <div class="row form">
-                      <div class="col-sm-6">
-                        <input type="text" placeholder="Tên của bạn" [(ngModel)]="review.name">
-                      </div>
                       <div class="col-sm-12">
                         <textarea placeholder="Đánh giá sản phẩm" [(ngModel)]="review.content"></textarea>
                       </div>

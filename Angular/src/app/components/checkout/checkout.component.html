@@ -193,8 +193,9 @@
                 </div>
               </div>
             </div>
-            <p class="v-discount" *ngIf="listDiscount.length==0"><strong>Bạn đã hết mã giảm giá </strong>
-            <p class="v-discount" *ngIf="listDiscount.length!=0"><strong>Code: </strong>#{{getDiscount(model.discount).codeDiscount}}<strong style="margin-left: 30px;">Rate :</strong>{{getDiscount(model.discount).rate}}%</p>
+            <p class="v-discount" *ngIf="listDiscount.length==0"><strong>Bạn đã hết mã giảm giá </strong></p>
+            <p class="v-discount" *ngIf="listDiscount.length!=0&&getDiscount(model.discount)!=0"><strong>Code: </strong>#{{getDiscount(model.discount).codeDiscount}}<strong style="margin-left: 30px;">Rate :</strong>{{getDiscount(model.discount).rate}}%</p>
+            <p class="v-discount" *ngIf="listDiscount.length!=0&&getDiscount(model.discount)==0"><strong>Hãy chọn mã giảm giá </strong></p>
 
           </div>
 
@@ -220,20 +221,21 @@
           <div class="cart-total">
             <div class="c-content-1">
               <p>Tổng tiền hàng</p>
-              <p>Mã giảm giá:({{getDiscount(model.discount).codeDiscount}})</p>
+              <p *ngIf="getDiscount(model.discount)==0">Mã giảm giá:(Không)</p>
+              <p *ngIf="getDiscount(model.discount)!=0">Mã giảm giá:({{getDiscount(model.discount).codeDiscount}})</p>
               <p>Phí vận chuyển</p>
               <p>Tổng thanh toán</p>
             </div>
             <div class="c-content-2">
               <p>{{getPrice()|currency:'VND'}}</p>
-              <p>{{0-applyVoucher(getDiscount(model.discount).codeDiscount)|currency:'VND'}}</p>
+              <p >{{0-applyVoucher(getDiscount(model.discount).codeDiscount)|currency:'VND'}}</p>
               <p>{{shipCost()|currency:'VND'}}</p>
               <p class="total-price">{{getPrice()+shipCost()-applyVoucher(getDiscount(model.discount).codeDiscount)|currency:'VND'}}</p>
             </div>
           </div>
           <div class="checkout-footer">
             <p>Nhấn đặt hàng đồng nghĩa với việc bạn đồng ý tuân theo điều khoản của chúng tôi.</p>
-            <button class="btn-checkout" (click)="addNewOrder()">Đặt hàng</button>
+            <button class="btn-checkout" (click)="confirmAddNewOrder()">Đặt hàng</button>
           </div>
 
         </div>

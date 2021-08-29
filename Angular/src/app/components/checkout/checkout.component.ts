@@ -233,7 +233,7 @@ export class CheckoutComponent implements OnInit {
   getDiscount(discount: any) {
     let a: Discount | any;
     if (discount == 1) {
-      a = this.listDiscount[0];
+      a = 0;
     }
 
     for (let item of this.listDiscount) {
@@ -302,6 +302,26 @@ export class CheckoutComponent implements OnInit {
     this.orderService.getOrder().subscribe((t) => this.listOrder = t);
   }
 
+
+  confirmAddNewOrder(){
+    Swal.fire({
+      title: 'Xác nhận đặt hàng?',
+      text: "Đồng ý và tiếp tục đặt hàng",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText:'Hủy',
+      confirmButtonText: 'Đặt hàng'
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.addNewOrder();
+
+      }
+    })
+
+  }
   addNewOrder() {
     this.getOrder();
     let dataAddress: AddressItem | any;
@@ -314,31 +334,31 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (!check || this.listOrder.length == 0) {
-      let item = new Order(this.user.username, this.getDiscount(this.model.discount), "Chờ xác nhận", this.listItem, code, this.selectAddress(this.model.address1), this.totalPrice());
+
+      let item = new Order(this.user.username, this.checkdiscount(this.getDiscount(this.model.discount)), "Chờ xác nhận", this.listItem, code, this.selectAddress(this.model.address1), this.totalPrice());
       if (this.user.username != '') {
         if (this.listItem.length != 0) {
           this.orderService.addNewOrder(item).subscribe(() => console.log('add New Order'));
           this.deleteCart(this.listItem);
           Swal.fire({
-            title: 'Đặt hàng thành công',
+            title: 'Đơn hàng #'+code +' đã được tạo thành công',
+            text: "Cảm ơn bạn đã đặt hàng",
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#3de5cb',
+            confirmButtonText: 'Tiếp tục mua sắm',
+            cancelButtonText:'Đơn hàng của tôi'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['cart'])
+            }
+            if(result.isDismissed){
 
-         html:'<div class="cart-content" style="float: left">' +
-           ' <h3>Đơn hàng: #<span>              '+code+'</span></h3>\n' +
-           ' <p>Tổng: <span>              '+this.getPrice()+'đ</span></p>\n' +
-           ' <p>Phí vận chuyển: <span>'+this.shipCost()+'đ</span></p>\n' +
-           ' <p>Tổng tiền: <span>'+this.totalPrice()+'đ</span></p>\n' +
-           '<p>Địa chỉ giao hàng: <span>'+this.selectAddress(this.model.address1).wards+', '+this.selectAddress(this.model.address1).districts+', '+this.selectAddress(this.model.address1).province+'</span></p></div>',
-            width: 600,
-            padding: '3em',
-            background: '#fff url(/images/trees.png)',
-            backdrop: `
-    rgba(0,0,123,0.4)
-    url("/images/nyan-cat.gif")
-    left top
-    no-repeat
-  `
+              this.router.navigate(['my-account/'+ this.userService.encryptMd5(this.user.username)+''])
+            }
           })
-          this.router.navigate(['cart'])
+
         } else {
           console.log('Hãy chọn sản phẩm.');
         }
@@ -346,8 +366,18 @@ export class CheckoutComponent implements OnInit {
         console.log('Bạn hãy đăng nhập.');
       }
     }
-  }
 
+  }
+ checkdiscount(discountvalue:any ){
+    let b:any ;
+    if(discountvalue==0){
+      b='';
+    }
+    if(discountvalue!=0){
+      b=discountvalue
+    }
+    return b;
+ }
   deleteCart(arr: any) {
     for (let j = 0; j < arr.length; j++) {
       this.checkout.deleteCartItem(arr[j].id).subscribe(data => {

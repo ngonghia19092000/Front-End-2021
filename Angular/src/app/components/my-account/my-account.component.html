@@ -150,8 +150,8 @@
                         <div class="content-1">
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i.code}}</h5>
-                            <p *ngIf="i.discount.codeDiscount==''">Mã giảm giá: Không</p>
-                            <p *ngIf="i.discount.codeDiscount !=''">Mã giảm giá: {{i.discount.codeDiscount}}</p>
+                            <p *ngIf="i.discount.codeDiscount==null">Mã giảm giá: Không</p>
+                            <p *ngIf="i.discount.codeDiscount !=null">Mã giảm giá: {{i.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppup"
                                                       (click)="taget = i.cartItem;"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppup" tabindex="-1" role="dialog"
@@ -250,8 +250,8 @@
                         <div class="content-1">
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i1.code}}</h5>
-                            <p *ngIf="i1.discount.codeDiscount==''">Mã giảm giá : Không</p>
-                            <p *ngIf="i1.discount.codeDiscount!=''">Mã giảm giá :{{i1.discount.codeDiscount}}</p>
+                            <p *ngIf="i1.discount.codeDiscount==null">Mã giảm giá : Không</p>
+                            <p *ngIf="i1.discount.codeDiscount!=null">Mã giảm giá :{{i1.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupq"
                                                       (click)="taget = i1.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupq" tabindex="-1" role="dialog"
@@ -350,8 +350,8 @@
                         <div class="content-1">
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i2.code}}</h5>
-                            <p *ngIf="i2.discount.codeDiscount==''">Mã giảm giá : Không</p>
-                            <p *ngIf="i2.discount.codeDiscount!=''">Mã giảm giá :{{i2.discount.codeDiscount}}</p>
+                            <p *ngIf="i2.discount.codeDiscount==null">Mã giảm giá : Không</p>
+                            <p *ngIf="i2.discount.codeDiscount!=null">Mã giảm giá :{{i2.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupe"
                                                       (click)="taget = i2.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupe" tabindex="-1" role="dialog"
@@ -449,8 +449,8 @@
                         <div class="content-1">
                           <div class="infor">
                             <h5>Mã đơn hàng : #{{i3.code}}</h5>
-                            <p *ngIf="i3.discount.codeDiscount==''">Mã giảm giá :Không</p>
-                            <p *ngIf="i3.discount.codeDiscount!=''">Mã giảm giá :{{i3.discount.codeDiscount}}</p>
+                            <p *ngIf="i3.discount.codeDiscount==null">Mã giảm giá :Không</p>
+                            <p *ngIf="i3.discount.codeDiscount!=null">Mã giảm giá :{{i3.discount.codeDiscount}}</p>
                             <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupw"
                                                       (click)="taget = i3.cartItem"> Xem chi tiết</a></p>
                             <div class="modal fade bd-example-modal-lg" id="poppupw" tabindex="-1" role="dialog"
@@ -544,8 +544,8 @@
                       <div class="content-1">
                         <div class="infor">
                           <h5>Mã đơn hàng : #{{x.code}}</h5>
-                          <p *ngIf="x.discount.codeDiscount == ''">Mã giảm giá: Không</p>
-                          <p *ngIf="x.discount.codeDiscount != ''">Mã giảm giá: {{x.discount.codeDiscount}}</p>
+                          <p *ngIf="x.discount.codeDiscount == null">Mã giảm giá: Không</p>
+                          <p *ngIf="x.discount.codeDiscount != null">Mã giảm giá: {{x.discount.codeDiscount}}</p>
                           <p>Danh sách sản phẩm :<a data-toggle="modal" data-target="#poppupx"
                                                     (click)="taget = x.cartItem"> Xem chi tiết</a></p>
                           <div class="modal fade bd-example-modal-lg" id="poppupx" tabindex="-1" role="dialog"

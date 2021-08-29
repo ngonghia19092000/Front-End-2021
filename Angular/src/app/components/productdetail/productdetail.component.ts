@@ -165,12 +165,11 @@ user:User|any;
   createReview(productId:any){
     let now = new Date();
     let jstoday = formatDate(now, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
-    let review =new Review(this.review.content,this.userservice.userValue.username,this.start,productId,jstoday,this.review.name)
+    let review =new Review(this.review.content,this.userservice.userValue.username,this.start,productId,jstoday,this.userservice.userValue.fullname)
     this.reviewService.createReview(review).subscribe((data)=>{
 this.alert('Cảm ơn bạn đã đánh giá','success');
-
     });
-    location.reload();
+
   }
   // updateRuntime() {
   //   setInterval(() => {
