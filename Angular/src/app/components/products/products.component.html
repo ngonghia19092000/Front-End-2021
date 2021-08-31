@@ -82,13 +82,15 @@
                   <img src="{{product.img}}" alt="Product Image">
                 </a>
                 <div class="product-action">
-                  <a (click)="add(product.id)"><i class="fa fa-cart-plus" ></i></a>
+                  <a (click)="add(product.id)"><i class="fas fa-cart-plus" ></i></a>
                   <a routerLink="/productdetail/{{product.id}}"><i class="fa fa-search"></i></a>
                 </div>
               </div>
               <div class="product-price">
                 <h3>{{product.pricesale|currency:'VND'}}<span></span></h3>
-                <a class="btn" routerLink="/checkout" routerLinkActive="active" (click)="buynow(product.id)"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                <a class="btn" routerLink="/checkout" routerLinkActive="active" (click)="buynow(product.id)" *ngIf="getUserName()!=''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                <a class="btn"  (click)="alert('Vui lòng đăng nhập tài khoản','info')" *ngIf="getUserName()==''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+
               </div>
             </div>
           </div>

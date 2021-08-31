@@ -38,14 +38,14 @@
                   <td>{{item.product.price|currency:'VND'}}</td>
                   <td>
                     <div class="qty">
-                      <button class="btn-minus" (click)="clickMinus(item.product.id)"><i class="fa fa-minus"></i></button>
+                      <button class="btn-minus" (click)="clickMinus(item.product.id)"><i class="fas fa-minus"></i></button>
                       <input type="text" value="{{item.qty}}">
-                      <button class="btn-plus" (click)="clickPluss(item.product.id)"><i class="fa fa-plus"></i></button>
+                      <button class="btn-plus" (click)="clickPluss(item.product.id)"><i class="fas fa-plus"></i></button>
                     </div>
                   </td>
                   <td>{{item.product.price * (item.qty) |currency:'VND'}} </td>
                   <td>
-                    <button (click)="deleteCartItem(item.product.id)"><i class="fa fa-trash"></i></button>
+                    <button (click)="deleteCartItem(item.product.id)"><i class="fas fa-trash"></i></button>
                   </td>
                 </tr>
                 </tbody>

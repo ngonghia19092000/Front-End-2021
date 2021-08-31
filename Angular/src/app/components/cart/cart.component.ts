@@ -132,7 +132,13 @@ public lengthCartItem:number=0;
       }
     } else {
       this.cartService.deleteItemOfOff(id);
-      window.alert("xóa sp từ cart off");
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Đã xóa sản phẩm',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.loadCartItems();
     }
 

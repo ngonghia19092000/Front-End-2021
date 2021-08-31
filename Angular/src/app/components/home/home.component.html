@@ -1,16 +1,14 @@
-
-
 <!-- Category Start-->
 <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item" data-interval="3000">
-      <img src="assets/img/cover-fb.png"  class="d-block w-100" alt="...">
+      <img src="assets/img/cover-fb.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item active"  data-interval="3000">
-      <img src="assets/img/banner1.jpg"   class="d-block w-100" alt="...">
+    <div class="carousel-item active" data-interval="3000">
+      <img src="assets/img/banner1.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item" data-interval="3000">
-      <img src="assets/img/BANNER-Chinh-website-1-scaled.jpg"    class="d-block w-100" alt="...">
+      <img src="assets/img/BANNER-Chinh-website-1-scaled.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
@@ -42,122 +40,121 @@
 <!-- Featured Product Start -->
 <div class="featured-product product">
   <div class="container-fluid">
-    <div class="section-header">
-      <h1>Sản phẩm nổi bật</h1>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Sản phẩm <b>nổi bật</b></h2>
+          <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+
+                  <div class="col-lg-3 " *ngFor="let item of listproduct1">
+                    <div class="product-item" *ngIf="item!=null">
+                      <div class="product-title">
+                        <a routerLink="/productdetail/{{item.product.id}}">{{item.product.productname}}</a>
+                        <div class="ratting">
+                          <i class="fas fa-star" *ngFor="let i of returnArray(avgStart(0,item.product.id))" > </i>
+                        </div>
+                      </div>
+                      <div class="product-image">
+                        <a href="" class="img-box">
+                          <img src="{{item.product.img}}" alt="Product Image">
+                        </a>
+                        <div class="product-action">
+                          <a class="btn" (click)="add(item.product.id)"><i class="fas fa-cart-plus"></i></a>
+                          <a routerLink="/productdetail/{{item.product.id}}"><i class="fa fa-search"></i></a>
+                        </div>
+                      </div>
+                      <div class="product-price">
+                        <h3>{{item.product.price|currency:'VND'}}</h3>
+                        <a class="btn" routerLink="/checkout" routerLinkActive="active" (click)="buynow(item.product.id)" *ngIf="getUser()!=''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                        <a class="btn" (click)="alert('Vui lòng đăng nhập tài khoản','info')" *ngIf="getUser()==''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  <div class="col-lg-3 " *ngFor="let item of listproduct2">
+                    <div class="product-item" *ngIf="item!=null">
+                      <div class="product-title">
+                        <a routerLink="/productdetail/{{item.product.id}}">{{item.product.productname}}</a>
+                        <div class="ratting">
+                          <i class="fas fa-star" *ngFor="let i of returnArray(avgStart(0,item.product.id))" > </i>
+                        </div>
+                      </div>
+                      <div class="product-image">
+                        <a href="" class="img-box">
+                          <img src="{{item.product.img}}" alt="Product Image">
+                        </a>
+                        <div class="product-action">
+                          <a class="btn" (click)="add(item.product.id)"><i class="fas fa-cart-plus"></i></a>
+                          <a routerLink="/productdetail/{{item.product.id}}"><i class="fa fa-search"></i></a>
+                        </div>
+                      </div>
+                      <div class="product-price">
+                        <h3>{{item.product.price|currency:'VND'}}</h3>
+                        <a class="btn" routerLink="/checkout" routerLinkActive="active" (click)="buynow(item.product.id)" *ngIf="getUser()!=''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                        <a class="btn" (click)="alert('Vui lòng đăng nhập tài khoản','info')" *ngIf="getUser()==''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  <div class="col-lg-3 " *ngFor="let item of listproduct3">
+                    <div class="product-item" *ngIf="item!=null">
+                      <div class="product-title">
+                        <a routerLink="/productdetail/{{item.product.id}}">{{item.product.productname}}</a>
+                        <div class="ratting">
+                          <i class="fas fa-star" *ngFor="let i of returnArray(avgStart(0,item.product.id))" > </i>
+                        </div>
+                      </div>
+                      <div class="product-image">
+                        <a href="" class="img-box">
+                          <img src="{{item.product.img}}" alt="Product Image">
+                        </a>
+                        <div class="product-action">
+                          <a class="btn" (click)="add(item.product.id)"><i class="fas fa-cart-plus"></i></a>
+                          <a routerLink="/productdetail/{{item.product.id}}"><i class="fa fa-search"></i></a>
+                        </div>
+                      </div>
+                      <div class="product-price">
+                        <h3>{{item.product.price|currency:'VND'}}</h3>
+                        <a class="btn" routerLink="/checkout" routerLinkActive="active" (click)="buynow(item.product.id)" *ngIf="getUser()!=''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                        <a class="btn" (click)="alert('Vui lòng đăng nhập tài khoản','info')" *ngIf="getUser()==''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" href="#myCarousel" id="pre" data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" id="nex" data-slide="next">
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row align-items-center product-slider product-slider-4">
-      <div class="col-lg-3">
-        <div class="product-item">
-          <div class="product-title">
-            <a href="#">Product Name</a>
-            <div class="ratting">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-          </div>
-          <div class="product-image">
-            <a href="">
-              <img src="assets/img/product-1.jpg" alt="Product Image">
-            </a>
-            <div class="product-action">
-              <a href="#"><i class="fa fa-cart-plus"></i></a>
-              <a href="#"><i class="fa fa-search"></i></a>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3><span>$</span>99</h3>
-            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="product-item">
-          <div class="product-title">
-            <a href="#">Product Name</a>
-            <div class="ratting">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-          </div>
-          <div class="product-image">
-            <a href="">
-              <img src="assets/img/product-2.jpg" alt="Product Image">
-            </a>
-            <div class="product-action">
-              <a href="#"><i class="fa fa-cart-plus"></i></a>
-              <a href="#"><i class="fa fa-search"></i></a>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3><span>$</span>99</h3>
-            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="product-item">
-          <div class="product-title">
-            <a href="#">Product Name</a>
-            <div class="ratting">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-          </div>
-          <div class="product-image">
-            <a href="">
-              <img src="assets/img/product-3.jpg" alt="Product Image">
-            </a>
-            <div class="product-action">
-              <a href="#"><i class="fa fa-cart-plus"></i></a>
-              <a href="#"><i class="fa fa-search"></i></a>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3><span>$</span>99</h3>
-            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="product-item">
-          <div class="product-title">
-            <a href="#">Product Name</a>
-            <div class="ratting">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-          </div>
-          <div class="product-image">
-            <a href="">
-              <img src="assets/img/product-4.jpg" alt="Product Image">
-            </a>
-            <div class="product-action">
-              <a href="#"><i class="fa fa-cart-plus"></i></a>
-              <a href="#"><i class="fa fa-search"></i></a>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3><span>$</span>99</h3>
-            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </div>
 <!-- Featured Product End -->
-
 
 
