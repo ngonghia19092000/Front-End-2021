@@ -165,6 +165,7 @@ export class HomeComponent implements OnInit {
     this.cartService.getUserName();
     this.cartService.getAllCartItems(this.cartService.getUserName()).subscribe((t) => {
       this.cartItem = t;
+      this.cartService.addListCart(this.cartItem)
     })
   }
 
@@ -219,7 +220,6 @@ export class HomeComponent implements OnInit {
     if (check == false) {
       this.cartService.addProductToCart(it).subscribe(() => console.log(it.product.productname));
       this.getCart();
-      this.cartService.addListCart(this.cartItem)
 
     }
   }

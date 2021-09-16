@@ -9,6 +9,7 @@ import {CartService} from "../../services/cart.service";
 import {CartItem} from "../../models/cart-item";
 import {Product} from "../../models/product";
 import {cartUrl} from "../../../config/api";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -78,11 +79,13 @@ return this.listcartData;
       if (this.model.userName === i.username) {
         if ('1909' + this.api.encryptMd5(<string>this.model.password) + '1909' === i.password) {
           this.api.login = true;
+          this.alert('Đăng nhập thành công','success',1000)
           this.api.addDataLocalStorage(i); this.router.navigate([this.returnUrl]);
           this.putAllCartItemToUser(this.model.userName);
+
           break;
         } else {
-          window.alert("Sai mật khẩu hoặc tài khoản.")
+         this.alert('Tài khoản hoặc mật khẩu không chính xác','warning',1500)
         }
       }
     }
@@ -127,6 +130,14 @@ return this.listcartData;
   }
 
 
-
+  alert(mess: any, type: any,time:any) {
+    Swal.fire({
+      position: 'top',
+      icon: type,
+      title: mess,
+      showConfirmButton: false,
+      timer: time
+    })
+  }
 
 }

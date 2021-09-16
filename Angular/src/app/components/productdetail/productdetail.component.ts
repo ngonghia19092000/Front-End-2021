@@ -60,7 +60,8 @@ user:User|any;
   update() {
     this.cartSer.getUserName();
     this.cartSer.getAllCartItems(this.cartSer.getUserName()).subscribe((up) => {
-      this.cartItem = up
+      this.cartItem = up;
+      this.cartSer.addListCart(this.cartItem);
     });
   }
 

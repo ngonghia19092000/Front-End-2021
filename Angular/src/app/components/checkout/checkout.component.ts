@@ -111,6 +111,7 @@ export class CheckoutComponent implements OnInit {
     this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {
       this.userInfo = data
       this.loadUser();
+      this.alert('Thêm địa chỉ mới thành công', 'success')
       if (this.shippingAddress.length == 1) {
         window.location.reload();
       }
@@ -127,9 +128,9 @@ export class CheckoutComponent implements OnInit {
         this.shippingAddress.splice(index, 1);
         this.shippingAddress.splice(index, 0, address);
         this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {
-
           this.userInfo = data
           this.loadUser();
+          this.alert('Cập nhật địa chỉ thành công','success')
 
         })
       }
@@ -386,7 +387,15 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-
+  alert(mess: any, type: any) {
+    Swal.fire({
+      position: 'top',
+      icon: type,
+      title: mess,
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
 }
 
 

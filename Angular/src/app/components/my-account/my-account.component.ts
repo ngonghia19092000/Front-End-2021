@@ -12,6 +12,7 @@ import {Provinces} from "../../models/provinces";
 import {Districts} from "../../models/districts";
 import {Wards} from "../../models/wards";
 import {AddressItem} from "../../models/address-item";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-my-account',
@@ -111,22 +112,26 @@ export class MyAccountComponent implements OnInit {
       || (this.model.phoneup == '' && this.model.email == '' && this.model.address == '')) {
       this.userService.updateInfoAccount(this.userService.userValue).subscribe((data) => {
         this.userInfo = data;
+
         this.loadUser();
-        console.log('OK!')
+        this.alert('Đã cập nhật dữ liệu','info')
+        console.log(this.model)
       })
     } else {
 
       this.model.phone = this.model.phoneup;
-
       this.userService.updateInfoAccount(this.model).subscribe((data) => {
         this.userInfo = data;
         this.loadUser();
+        this.alert('Đã thay đổi thông tin','success')
         this.model.phoneup = '';
         this.model.email = '';
         this.model.address = '';
         console.log('loading...');
+        console.log(this.model)
       })
     }
+
   }
 
   changePass() {
@@ -138,24 +143,43 @@ export class MyAccountComponent implements OnInit {
     } else {
       check = false;
       mess += ('(Password does not match)')
+      this.alert('Mật khẩu mới không trùng khớp','warning')
     }
     if (this.model.password != undefined && (this.model.password.length >= 6 && this.model.password.length <= 18)) {
       lenght = true;
     } else {
       lenght = false;
       mess += (' (New password is more than 6 characters and less than 18 characters) ')
+      this.alert('Mật khẩu dài hơn 6 ký tự','warning')
     }
     if ('1909' + this.userService.encryptMd5(this.model.currentPass) + '1909' == this.user.password && check == true && lenght == true) {
       this.userService.changePassword('1909' + this.userService.encryptMd5(this.model.password) + '1909').subscribe((data) => {
         mess = (' (Change password successful)');
-        window.alert('Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại tài khoản!');
-        this.userService.logout();
-        this.router.navigate(['login'])
+        this.alert('Thay đổi mật khẩu thành công. \n Vui lòng đăng nhập lại tài khoản!','success')
+        Swal.fire({
+          title: 'Thay đổi mật khẩu thành công.',
+          text: "Vui lòng đăng nhập lại tài khoản!",
+          icon: 'success',
+          confirmButtonColor: '#2ce1e9',
+
+          confirmButtonText: 'Đồng ý',
+
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.userService.logout();
+            this.router.navigate(['login'])
+          }
+
+        })
+
       })
-    } else {
+    }
+    else if ('1909' + this.userService.encryptMd5(this.model.currentPass) + '1909' != this.user.password ) {
+      this.alert('Mật khẩu cũ không chính xác','warning')
       mess += ' (Old password is incorrect)'
     }
-    console.log(mess + ' check:' + check + ' lenght:' + lenght)
+
+    console.log(mess)
 
   }
 
@@ -212,6 +236,7 @@ export class MyAccountComponent implements OnInit {
       if (item.id == id) {
         this.fillOrderStatus();
         this.orderService.updateOrderStatus(item).subscribe();
+        this.alert('Đã hủy đơn hàng','success')
       }
     }
     this.getOrder();
@@ -354,6 +379,7 @@ export class MyAccountComponent implements OnInit {
 
       this.userInfo = data
       this.loadUser();
+      this.alert('Thêm địa chỉ mới thành công','success')
       if (this.shippingAddress.length == 1) {
         window.location.reload();
       }
@@ -369,6 +395,7 @@ export class MyAccountComponent implements OnInit {
         this.userService.addNewAddress(this.shippingAddress).subscribe((data) => {
           this.userInfo = data
           this.loadUser();
+          this.alert('Đã xóa địa chỉ','success')
           if (this.shippingAddress.length == 0) {
             window.location.reload();
           }
@@ -393,11 +420,21 @@ export class MyAccountComponent implements OnInit {
 
           this.userInfo = data
           this.loadUser();
+          this.alert('Cập nhật địa chỉ thành công','success')
 
         })
       }
 
     }
+  }
+  alert(mess: any, type: any) {
+    Swal.fire({
+      position: 'top',
+      icon: type,
+      title: mess,
+      showConfirmButton: false,
+      timer: 3000
+    })
   }
 }
 

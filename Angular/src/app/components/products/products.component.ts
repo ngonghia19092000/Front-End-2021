@@ -67,6 +67,7 @@ export class ProductsComponent implements OnInit {
     this.cartService.getUserName();
     this.cartService.getAllCartItems(this.cartService.getUserName()).subscribe((t) => {
       this.cartItem = t;
+      this.cartService.addListCart(this.cartItem);
     })
   }
 
@@ -182,11 +183,9 @@ export class ProductsComponent implements OnInit {
     if (this.userservice.userValue) {
       this.cartService.getAllCartItems(this.userservice.userValue.username).subscribe((up) => {
         this.cartItem = up
-        this.cartService.addListCart(this.cartItem);
       });
     } else {
       this.cartItem = this.cartService.getItemsOff();
-      this.cartService.addListCart(this.cartItem);
     }
 
   }
