@@ -136,7 +136,6 @@
                         <h3>{{item.product.price|currency:'VND'}}</h3>
                         <a class="btn" routerLink="/checkout" routerLinkActive="active" (click)="buynow(item.product.id)" *ngIf="getUser()!=''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                         <a class="btn" (click)="alert('Vui lòng đăng nhập tài khoản','info')" *ngIf="getUser()==''"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
-
                       </div>
                     </div>
                   </div>
