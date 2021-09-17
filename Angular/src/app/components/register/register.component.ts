@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {Discount} from "../../models/discount";
+import Swal from "sweetalert2";
 
 
 
@@ -134,7 +135,7 @@ export class RegisterComponent implements OnInit {
     this.newUser.password='1909'+this.api.encryptMd5(this.registerForm.value.password)+'1909';
     this.api.registerUser(this.newUser).subscribe((result) => {
       // console.warn("result",result)
-      window.alert("Đăng ký tài khoản thành công")
+      this.alert1('Đăng ký tài khoản thành công','success')
       this.router.navigate(['login'])
     })
   }
@@ -149,6 +150,15 @@ export class RegisterComponent implements OnInit {
       return true;
     }
     ;
+  }
+  alert1(mess: any, type: any) {
+    Swal.fire({
+      position: 'top',
+      icon: type,
+      title: mess,
+      showConfirmButton: false,
+      timer: 3000
+    })
   }
 
 }
