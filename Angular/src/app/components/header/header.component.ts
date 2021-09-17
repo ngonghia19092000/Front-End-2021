@@ -31,10 +31,15 @@ this.getlengthcarrt();
 
 
 getlengthcarrt(){
-    this.cartService.getListCart().subscribe((data)=>{
-      this.cart=data;
-      this.lengthCart=this.cart.length;
-    })
+    if(this.cartService.getUserName()==''){
+      this.lengthCart= this.cartService.getItemsOff().length
+    }else {
+      this.cartService.getListCart().subscribe((data)=>{
+        this.cart=data;
+        this.lengthCart=this.cart.length;
+      })
+    }
+
 }
   update() {
     setInterval(() => {

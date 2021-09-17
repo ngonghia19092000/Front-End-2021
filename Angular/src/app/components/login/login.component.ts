@@ -132,7 +132,7 @@ return this.listcartData;
 
   alert(mess: any, type: any,time:any) {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: type,
       title: mess,
       showConfirmButton: false,

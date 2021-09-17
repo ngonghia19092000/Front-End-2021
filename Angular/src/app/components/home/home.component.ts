@@ -188,11 +188,11 @@ export class HomeComponent implements OnInit {
 
   alert(mess: any, type: any) {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: type,
       title: mess,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1000
     })
   }
 

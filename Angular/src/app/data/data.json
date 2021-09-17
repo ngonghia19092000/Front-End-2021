@@ -2684,22 +2684,13 @@
       ],
       "shippingAddress": [
         {
-          "id": 2,
-          "name": "Nghĩa",
-          "province": "Tỉnh Lâm Đồng",
-          "districts": "Huyện Lâm Hà",
-          "wards": "Xã Đạ Đờn",
-          "phonenumber": "01234548645",
-          "addressDetails": "Cầu Đạ Đờn"
-        },
-        {
           "id": 3,
-          "name": "Ngô Nghĩa",
-          "province": "Tỉnh Thái Nguyên",
-          "districts": "Huyện Phú Lương",
-          "wards": "Xã Yên Ninh",
-          "phonenumber": "0123123456",
-          "addressDetails": "123"
+          "name": "Nghĩa",
+          "province": "Tỉnh Bến Tre",
+          "districts": "Huyện Chợ Lách",
+          "wards": "Xã Vĩnh Thành",
+          "phonenumber": "0399491909",
+          "addressDetails": "Phú Sơn"
         }
       ]
     }
@@ -2808,11 +2799,11 @@
       "id": 18
     },
     {
-      "id": 25,
+      "qty": 1,
       "product": {
-        "id": 24,
-        "productname": "MŨ ROYAL M139 KÍNH ÂM TEM VÀNG BÓNG",
-        "img": "assets/img/Royal-M139-Tem-3-247x247.jpg",
+        "id": 21,
+        "productname": "MŨ ROYAL M139 KÍNH ÂM TEM V10 TRẮNG",
+        "img": "assets/img/Royal-M139-Tem-25-247x247.jpg",
         "price": 685000,
         "pricesale": 540000,
         "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
@@ -2830,41 +2821,15 @@
         ],
         "category": "3/4"
       },
-      "qty": 1,
-      "userName": "admin"
-    },
-    {
-      "qty": 1,
-      "product": {
-        "id": 36,
-        "productname": "MŨ NỬA ĐẦU BULLDOG GANG ĐỒNG XƯỚC",
-        "img": "assets/img/bulldog-gang-8-247x247.jpg",
-        "price": 300000,
-        "pricesale": 250000,
-        "description": "Mũ bảo hiểm 1/2 Bulldog Gang là sự kết hợp giữa những đường nét cổ điển và hiện đại. Với ngôn ngữ thiết kế đậm chất ấy, Bulldog Gang mang lại sự gọn gàng, thoải mái và tiện lợi nhưng vẫn đảm bảo tính an toàn cho những người dùng thường xuyên di chuyển trong khu vực nội thành.",
-        "manufaturer": "BULLDOG",
-        "listsize": [
-          "S",
-          "M",
-          "L"
-        ],
-        "listcolor": [
-          "Black",
-          "White",
-          "Gray",
-          "Red"
-        ],
-        "category": "1/2"
-      },
       "userName": "admin",
-      "id": 26
+      "id": 32
     },
     {
       "qty": 1,
       "product": {
-        "id": 19,
-        "productname": "MŨ ROYAL M139 KÍNH ÂM TEM BOOM BANG",
-        "img": "assets/img/Royal-M139-Tem-55-247x247.jpg",
+        "id": 18,
+        "productname": "MŨ ROYAL M 139 KÍNH ÂM VÂN CARBON",
+        "img": "assets/img/Royal-M139-Tron-23-247x247.jpg",
         "price": 1600000,
         "pricesale": 1300000,
         "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
@@ -2883,10 +2848,62 @@
         "category": "3/4"
       },
       "userName": "admin",
-      "id": 27
+      "id": 33
     },
     {
       "qty": 1,
+      "product": {
+        "id": 34,
+        "productname": "MŨ 3/4 ZEUS 613B SAMURAI TRẮNG GẮN CẰM",
+        "img": "assets/img/Zeus-613B-4-247x247_2.jpg",
+        "price": 1600000,
+        "pricesale": 1300000,
+        "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+        "manufaturer": "Chuẩn DOT, ECE 22.05",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "3/4"
+      },
+      "userName": "admin",
+      "id": 34
+    },
+    {
+      "qty": 1,
+      "product": {
+        "id": 126,
+        "productname": "MŨ NỬA ĐẦU BULLDOG PUG VÀNG BÓNG",
+        "img": "assets/img/Bulldog-bug-2-247x247.jpg",
+        "price": 300000,
+        "pricesale": 250000,
+        "description": "Với những ai thường xuyên di chuyển trong khu vực nội thành và đang tìm cho mình chiếc mũ bảo hiểm với thiết kế cá tính, thanh thoát và gọn gàng nhưng vẫn đảm bảo an toàn thì mũ bảo hiểm 1/2 Bulldog Pug chính là ứng cử viên sáng giá.",
+        "manufaturer": "BULLDOG",
+        "listsize": [
+          "S",
+          "M",
+          "L"
+        ],
+        "listcolor": [
+          "Black",
+          "White",
+          "Gray",
+          "Red"
+        ],
+        "category": "1/2"
+      },
+      "userName": "admin",
+      "id": 35
+    },
+    {
+      "qty": 2,
       "product": {
         "id": 1,
         "productname": "MŨ 3/4 ROYAL M134C",
@@ -2909,7 +2926,7 @@
         "category": "3/4"
       },
       "userName": "admin",
-      "id": 28
+      "id": 36
     }
   ],
   "orders": [
@@ -3317,6 +3334,50 @@
       },
       "priceOrder": 1390000,
       "id": 7
+    },
+    {
+      "userName": "admin",
+      "discount": "",
+      "status": "Chờ xác nhận",
+      "cartItem": [
+        {
+          "qty": 1,
+          "product": {
+            "id": 1,
+            "productname": "MŨ 3/4 ROYAL M134C",
+            "img": "assets/img/Mu-royal-M134C-2-247x247.jpg",
+            "price": 480000,
+            "pricesale": 450000,
+            "description": "Là thương hiệu sản xuất mũ bảo hiểm 3/4 với thiết kế độc đáo có mỏ phía trước như các nón fullface Dual Sport. Kiểu dáng thể thao phù hợp sử dụng di chuyển trong thành phố hoặc trên những quảng đường ngắn.",
+            "manufaturer": "ROYAL",
+            "listsize": [
+              "S",
+              "M",
+              "L"
+            ],
+            "listcolor": [
+              "Black",
+              "White",
+              "Gray",
+              "Red"
+            ],
+            "category": "3/4"
+          },
+          "userName": "admin"
+        }
+      ],
+      "code": "319415",
+      "addressShip": {
+        "id": 2,
+        "name": "Nghĩa",
+        "province": "Tỉnh Lâm Đồng",
+        "districts": "Huyện Lâm Hà",
+        "wards": "Xã Đạ Đờn",
+        "phonenumber": "01234548645",
+        "addressDetails": "Cầu Đạ Đờn"
+      },
+      "priceOrder": 510000,
+      "id": 8
     }
   ],
   "review": [

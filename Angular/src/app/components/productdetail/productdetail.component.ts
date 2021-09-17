@@ -96,7 +96,7 @@ user:User|any;
     if (this.cartSer.getUserName() != "") {
       this.putCart(product);
       Swal.fire({
-        position: 'top',
+        position: 'center',
         icon: 'success',
         title: 'Đã thêm vào giỏ hàng',
         showConfirmButton: false,
@@ -107,7 +107,7 @@ user:User|any;
       let items = new CartItem(product, this.value, '');
       this.cartSer.addToCart(items);
       Swal.fire({
-        position: 'top',
+        position: 'center',
         icon: 'success',
         title: 'Đã thêm vào giỏ hàng',
         showConfirmButton: false,
@@ -221,7 +221,7 @@ this.listRview2Item=this.listReview;
   }
   alert(mess:any,type:any) {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: type,
       title: mess,
       showConfirmButton: false,

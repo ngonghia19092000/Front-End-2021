@@ -153,7 +153,7 @@ export class RegisterComponent implements OnInit {
   }
   alert1(mess: any, type: any) {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: type,
       title: mess,
       showConfirmButton: false,

@@ -121,7 +121,7 @@ public lengthCartItem:number=0;
         if (i.product.id == id)
           this.cartService.deleteItem(i.id).subscribe((s) => {
             Swal.fire({
-              position: 'top',
+              position: 'center',
               icon: 'success',
               title: 'Đã xóa',
               showConfirmButton: false,
@@ -133,7 +133,7 @@ public lengthCartItem:number=0;
     } else {
       this.cartService.deleteItemOfOff(id);
       Swal.fire({
-        position: 'top',
+        position: 'center',
         icon: 'success',
         title: 'Đã xóa sản phẩm',
         showConfirmButton: false,
@@ -207,7 +207,7 @@ this.checkoutService.addListCartToOrder(this.array);
 
   alert() {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: 'info',
       title: 'Click chọn sản phẩm để thanh toán',
       showConfirmButton: false,

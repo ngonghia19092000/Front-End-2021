@@ -389,7 +389,7 @@ export class CheckoutComponent implements OnInit {
 
   alert(mess: any, type: any) {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: type,
       title: mess,
       showConfirmButton: false,

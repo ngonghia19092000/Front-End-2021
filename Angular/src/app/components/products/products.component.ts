@@ -60,6 +60,7 @@ export class ProductsComponent implements OnInit {
         this.totalLength = this.productList.length;
       }
 
+
     });
   }
 
@@ -122,7 +123,7 @@ export class ProductsComponent implements OnInit {
 
   alert(mess: any, type: any) {
     Swal.fire({
-      position: 'top',
+      position: 'center',
       icon: type,
       title: mess,
       showConfirmButton: false,
